@@ -1,0 +1,2 @@
+../articles/TALN/txt/taln-2013-court-007.txt
+../articles/TALN/txt/taln-2014-court-029.txt

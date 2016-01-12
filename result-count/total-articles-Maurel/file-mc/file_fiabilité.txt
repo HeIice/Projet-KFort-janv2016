@@ -1,0 +1,4 @@
+../articles/total-articles-Maurel/txt/2006-014330ar.pdf2txt
+../articles/total-articles-Maurel/txt/2012_CMLF.pdf2txt
+../articles/total-articles-Maurel/txt/2014_TALN_court_78_vfinale.pdf2txt
+../articles/total-articles-Maurel/txt/TALN_2013_ANCOR_FINAL.pdf2txt

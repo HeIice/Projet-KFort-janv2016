@@ -1,0 +1,6 @@
+new_txt/2011-Eshkol-TAL52-3.pdf2txt
+new_txt/2011-Nouvel_et_al.pdf2txt
+new_txt/2011_ESLO_TAL52-3.pdf2txt
+new_txt/2014_TALN_court_78_vfinale.pdf2txt
+new_txt/Actes_CEC-TAL2015-Maurel-only.pdf2txt
+new_txt/JLC2009.pdf2txt

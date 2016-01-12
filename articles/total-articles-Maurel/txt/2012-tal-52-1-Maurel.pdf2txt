@@ -1,0 +1,1260 @@
+ Cascades de transducteurs autour de la reconnaissance
+                 des entit´
+                          es nomm´ees
+  Denis Maurel, Nathalie Friburger, Jean-Yves Antoine, Iris Eshkol, Damien
+                                               Nouvel
+
+
+
+  To cite this version:
+ Denis Maurel, Nathalie Friburger, Jean-Yves Antoine, Iris Eshkol, Damien Nouvel. Cascades
+ de transducteurs autour de la reconnaissance des entit´es nomm´ees. Traitement Automatique
+ des Langues, ATALA, 2011, 52 (1), pp.69-96. <hal-00682805>
+
+
+
+
+                                   HAL Id: hal-00682805
+                 https://hal.archives-ouvertes.fr/hal-00682805
+                                      Submitted on 26 Mar 2012
+
+
+
+
+    HAL is a multi-disciplinary open access                L’archive ouverte pluridisciplinaire HAL, est
+archive for the deposit and dissemination of sci-      destin´ee au d´epˆot et `a la diffusion de documents
+entific research documents, whether they are pub-      scientifiques de niveau recherche, publi´es ou non,
+lished or not. The documents may come from            ´emanant des ´etablissements d’enseignement et de
+teaching and research institutions in France or        recherche fran¸cais ou ´etrangers, des laboratoires
+abroad, or from public or private research centers.    publics ou priv´es.
+Cascades de transducteurs
+autour de la reconnaissance
+des entit´es nomm´ees
+
+Denis Maurel* — Nathalie Friburger* — Jean-Yves Antoine*, *** —
+Iris Eshkol-Taravella** — Damien Nouvel*
+*
+ Universit´e Franc¸ois Rabelais Tours - Laboratoire d’informatique
+{Denis.Maurel, Jean-Yves.Antoine, Nathalie.Friburger, Damien.Nouvel}@univ-
+tours.fr
+**
+   Universit´e d’Orl´eans - Laboratoire lig´erien de linguistique
+iris.eshkol@univ-orleans.fr
+***
+    Lab-STICC CNRS
+
+
+ ´
+RESUM ´
+     E.  Cet article pr´esente tout d’abord la cascade de transducteurs CasEN pour la recon-
+naissance des entit´es nomm´ees. CasEN est implant´ee sous le logiciel CasSys de la plate-forme
+Unitex et est librement mise a` disposition des utilisateurs sous licence LGPL-LR. Apr`es une
+discussion sur la typologie des entit´es nomm´ees qu’elle utilise et une description du fonction-
+nement de la cascade, nous rapportons son e´ valuation sur le corpus Eslo 1 (corpus d’Orl´eans)
+et les performances qu’elle a montr´ees au cours de la campagne d’´evaluation Ester 2. Nous
+pr´esentons ensuite deux autres cascades qui utilisent le texte e´ tiquet´e par CasEN. La premi`ere
+ajoute des informations sur les locuteurs de l’enquˆete sociolinguistique Eslo 1 et la seconde
+met en relation des entit´es nomm´ees dans un corpus du journal Le Monde.
+ABSTRACT. This paper presents first the CasEN transducer cascade to recognize French Named
+Entities. CasEN is implemented with the CasSys software of the Unitex plateform and is put
+at user free disposal (LGPL-LR license). We discuss about Named Entity typology used and
+we describe the cascade, before reporting its evaluation from Eslo 1 corpus and evaluation
+campaign Ester 2 corpus. Second, we present two other cascades using a CasEN annotated
+text. The first cascade adds speaker information into the Eslo socio-linguitic survey and the
+second one links named entities in Le Monde newspaper corpus.
+       ´ :
+MOTS-CLES    cascades de transducteurs, Entit´es nomm´ees, CasSys, CasEN, Eslo 1, Ester 2.
+KEYWORDS:    transducer cascades, Named entities, CasSys, CasEN, Eslo 1, Ester 2.
+
+
+
+
+TAL. Volume 52 n° 1/2011, pages 69 a` 96
+70   TAL. Volume 52 n° 1/2011
+
+
+1. Introduction
+
+    Dans cet article, nous pr´esentons pr´ecis´ement un syst`eme symbolique pour la
+reconnaissance des entit´es nomm´ees, CasEN (Maurel et al., 2009). Depuis les
+conf´erences MUC (Message Understanding Conferences), la recherche des entit´es
+nomm´ees (noms propres, dates et heures, monnaies) (Chinchor, 1997) est une tˆache
+a` part enti`ere du TAL. Une introduction a` ce domaine peut eˆ tre trouv´ee dans
+(Ehrmann, 2008) et un e´ tat de l’art sur les diff´erents syst`emes de reconnaissance
+des entit´es nomm´ees se trouve dans (Nadeau et Sekine, 2009). Comme ailleurs dans
+le TAL, deux approches sont concurrentes (ou compl´ementaires dans des syst`emes
+hybrides, comme (B´echet et al., 2011)), celles centr´ees sur les donn´ees et les tech-
+niques d’apprentissage, d’une part, et celles, symboliques, a` base de r`egles, d’autre
+part. D’apr`es la campagne Ester 2, il semble que les approches symboliques sont pour
+le moment celles qui donnent les meilleurs r´esultats... surtout si on a les moyens de
+d´evelopper des ressources lexicales et syntaxiques d’envergure, ce qui e´ tait le cas pour
+les deux concurrents arriv´es premiers. Parmi les approches symboliques, plusieurs uti-
+lisent des transducteurs a` nombre fini d’´etats (Poibeau, 2003), e´ ventuellement pass´es
+en cascade (Ait-mokhtar et Chanod, 1997 ; Hobbs et al., 1997 ; Friburger, 2002 ; Bont-
+cheva et al., 2002), ce qui est la technique que nous utilisons aussi.
+    Le syst`eme CasEN est implant´e avec le programme de cr´eation de cascades de
+transducteurs a` e´ tats finis CaSys (Friburger et Maurel, 2004). CasSys est disponible
+sur la plate-forme Unitex1 (Paumier, 2003), a` partir de la version 2.1, sous licence
+LGPL 2 . La cascade CasEN est disponible sur le site des projets TAL du LI3 , sous li-
+cence LGPL-LR. La section 2 compare la typologie des noms propres que nous avons
+adopt´ee pour CasEN a` celles de Coates-Stephens (1993), de Paik et al. (1996) et de
+Tran et Maurel (2006), puis d´ecrit la cascade elle-mˆeme. Nous pr´esentons ensuite,
+dans la section 3, son e´ valuation sur le corpus Eslo 1 (corpus d’Orl´eans) et les perfor-
+mances qu’elle a montr´ees au cours de la campagne d’´evaluation Ester 24 .
+    La d´etection des entit´es nomm´ees est une e´ tape d’outillage de l’analyse qui peut
+servir a` des applications plus sp´ecifiques dans le cadre d’une d´emarche incr´ementale.
+Nous avons compl´et´e notre travail, dans un deuxi`eme temps, par de la recherche d’in-
+formation sur des corpus e´ tiquet´es par CasEN, a` l’aide de deux cascades d´edi´ees a`
+cette tˆache, d’une part, dans le cadre du projet ANR VariLing et, d’autre part, dans
+celui du projet Feder Entit´es. La section 4 d´ecrit comment l’ajout ult´erieur de cas-
+cades de transducteurs peut eˆ tre utilis´e a` des fins particuli`eres : la d´etection des entit´es
+d´enommantes r´ealis´ee sur le corpus Eslo 1 et un travail sur la caract´erisation des rela-
+tions directes entre entit´es nomm´ees d’un corpus du Monde.
+
+1. http ://www-igm.univ-mlv.fr/˜unitex/
+2. On y acc`ede par le menu Text/Apply CaSys Cascade. Il peut aussi, comme les autres pro-
+grammes Unitex, eˆ tre utilis´e en ligne de commande.
+3. http ://tln.li.univ-tours.fr/Tln CasEN.html/
+4. Pr´ecisons cependant que la cascade disponible n’est pas exactement celle utilis´ee pour la
+campagne Ester 2, des e´ volution ayant eu lieu depuis, comme cela est expliqu´e sur le site.
+                                                  Cascades autour des entit´es nomm´ees   71
+
+
+2. CasEN, une cascade de reconnaissance des entit´es nomm´ees
+
+    Avant mˆeme de concevoir une cascade de reconnaissance des entit´es nomm´ees, il
+faut d´efinir l’objet de notre recherche, c’est-`a-dire les entit´es nomm´ees que nous cher-
+chons a` e´ tiqueter. Nous ne nous attarderons pas sur la d´efinition elle-mˆeme, renvoyant
+pour cela le lecteur a` (Ehrmann, 2008). Parlons de la typologie adopt´ee, le choix de
+cette typologie pr´ec`ede et conduit bien sˆur la construction de la cascade.
+
+
+2.1. La typologie retenue
+
+    Il existe un grand nombre de typologies des entit´es nomm´ees. Pour plus d’in-
+formation, on pourra consulter (Tran, 2006). Citons tout d’abord la plus c´el`ebre,
+celle de la tˆache de reconnaissance des entit´es nomm´ees de la conf´erence MUC 7
+(Chinchor, 1997), qui comporte sept types r´epartis en trois classes :
+   1) ENAMEX (Entity names) : Persons, Locations, Organizations ;
+   2) TIMEX (Temporal expressions) : Dates, Hours ;
+   3) NUMEX (Number expressions) : Percentages values, Monetary values.
+   Cette typologie, comme la plupart, comporte deux niveaux. Citons aussi celle de
+(Coates-Stephens, 1993), qui l’a pr´ec´ed´ee : elle comporte huit types, mais un seul
+niveau hi´erarchique :
+   1) noms de personne ;
+   2) noms de lieu ;
+   3) noms d’organisation ;
+   4) noms d’origine ou gentil´es ;
+   5) noms de l´egislation ;
+   6) noms de source d’information (m´edia, journaux, etc.) ;
+   7) noms d’´ev´enement (guerres, r´evolutions, catastrophes, etc.) ;
+   8) noms d’objet (artefacts, produits, etc.).
+    Les trois premiers types sont les Enamex, les autres sont compl`etement ext´erieurs a`
+la classification de MUC 7. Des ambigu¨ıt´es surgissent : Le Monde est-il une organisa-
+tion ou une source d’information ? Cela d´ependra du contexte... De mˆeme un produit
+peut porter le nom d’une marque qui, elle-mˆeme peut eˆ tre le nom d’une entreprise,
+d’o`u une autre ambigu¨ıt´e parfois entre les types Noms d’organisation et Noms d’objet
+(Petit, 2006)...
+    A` peu pr`es au mˆeme moment que la conf´erence MUC 7, Paik et al. (1996) pro-
+posent une typologie a` deux niveaux (voir la figure 1). Plus importante, elle peux
+contenir les deux pr´ec´edentes, a` condition par exemple que les Noms de l´egislation
+et les Noms de source d’information deviennent des sous-types du type Document, et
+aussi, sans doute, qu’`a l’inverse, les types Equipment et Scientific se confondent dans
+72   TAL. Volume 52 n° 1/2011
+
+
+le type Noms d’objet.... Reste la question des e´ v´enements non trait´es, sauf a` les typer
+Miscelaneous, ce qui ne semble pas une bonne id´ee...
+
+
+
+
+Figure 1. La typologie de Paik, Liddy, Yu et McKenna
+
+       Laissons l`a comparaisons et e´ num´erations. Deux constatations sont imm´ediates :
+la possibilit´e d’imbriquer plusieurs niveaux et la pr´ecision finale attendue... Avec une
+difficult´e certaine pour le recoupement d’une typologie a` une autre... Dans le cadre du
+projet Prolex, nous avions nous aussi conc¸u une typologie (Tran et Maurel, 2006), rap-
+pel´ee dans le tableau 1, qui s’inspirait des pr´ec´edentes, mais aussi de classifications
+linguistiques, comme celle de Bauer (1985), reprise par Grass (2000). Nous avions
+soulign´e a` l’´epoque deux points importants : limiter le nombre final de types pour
+e´ viter l’encyclop´edisme et jouer sur plusieurs niveaux (et non seulement deux). En
+effet, une entit´e peut eˆ tre difficilement typ´ee Association ou Entreprise, mais peut
+eˆ tre typ´ee Groupe, ou mˆeme Anthroponyme collectif... D’autre part, les ambigu¨ıt´es
+d´ecrites ci-dessus sont en fait des ambigu¨ıt´es associables aux types et non aux en-
+tit´es nomm´ees elles-mˆemes. Par exemple, tous les toponymes sont susceptibles d’une
+interpr´etation comme anthroponyme collectif, toutes les associations ou entreprises
+peuvent eˆ tre consid´er´ees dans certains contextes comme un toponyme ou un ergo-
+nyme, etc. Le tableau 2, lui aussi extrait de (Tran et Maurel, 2006), pr´esente cette
+ambigu¨ıt´e inh´erante a` certains types. Le choix que nous avons fait d’associer a` chaque
+entit´e un type principal nous a permis de concevoir un syst`eme de reconnaissance uti-
+lisant des grammaires locales. En effet, nous verrons section 3.4 que ce choix n’a pas
+e´ t´e celui de la campagne Ester 2 et que cela nous a pos´e des probl`emes difficiles a`
+r´esoudre avec notre mod`ele.
+     Cependant la n´ecessit´e de l’´evaluation et surtout l’id´ee de faire e´ merger, au moins
+pour le franc¸ais, une typologie commune aux diff´erents laboratoires, nous ont conduits
+a` utiliser les types de la campagne Ester 2, tout en ajoutant d’autres types, afin de cou-
+vrir l’ensemble de la typologie Prolex. Les sous-types de cette typologie, repr´esent´es
+par des chaˆınes concat´en´ees s´epar´ees par des points (par exemple org.pol pour orga-
+nisation politique) ont e´ t´e e´ clat´es en une s´erie de traits pour s’adapter au formalisme
+                                                              Cascades autour des entit´es nomm´ees            73
+
+
+                                                  Nom propre
+                 Anthroponyme                     Ergonyme      Pragmonyme                 Toponyme
+  Individuel               Collectif
+                                   Groupe                                                        Territoire
+  C´el´ebrit´e      Dynastie     Association        Objet        Catastrophe     Astronyme            Pays
+  Patronyme        Ethnonyme      Ensemble         Œuvre            Fˆete          ´
+                                                                                  Edifice         R´egion
+  Pr´enom                         Entreprise       Pens´ee         Histoire      G´eonyme      Supranational
+  Pseudo-                         Institution      Produit      Manifestation    Hydronyme
+  anthroponyme                   Organisation      Vaisseau     M´et´eorologie     Ville
+                                                                                   Voie
+
+
+
+Tableau 1. La typologie primaire Prolex
+
+
+                                  Types             Types secondaires
+                                  Pays
+                                  R´egion           Anthroponyme collectif
+                                  Supranational
+                                  Territoire
+                                  Ville             Anthroponyme collectif
+                                                    Ergonyme
+                                  ´
+                                  Edifice
+                                  Voie
+                                  Fˆete             Ergonyme
+                                  Histoire
+                                  Manifestation
+                                  Association
+                                  Ensemble
+                                  Entreprise        Ergonyme
+                                  Groupement        Toponyme
+                                  Institution
+                                  Organisation
+                                  Vaisseau          Toponyme
+
+
+
+Tableau 2. La typologie secondaire Prolex
+
+
+d’Unitex (+org +pol) ; de mˆeme le nom de la balise a e´ t´e lui aussi transform´e en trait
+(+entity). Le tableau 3 pr´esente les types h´erit´es de la campagne Ester.
+      En comparant les deux typologies (Prolex et Ester), nous arrivons a` mettre en
+correspondance certains e´ l´ements, comme pr´esent´e sur le tableau 4. Il manque un
+sous-type particulier pour les dynasties (les Cap´etiens), ainsi qu’un type pour les
+e´ v´enements (event), jug´es trop difficiles a` annoter dans la campagne.
+74    TAL. Volume 52 n° 1/2011
+
+
+     Personne              humain r´eel ou fictif (+hum)
+     (+pers)               animal r´eel ou fictif (+anim)
+                           politique (+pol)
+                           militaire (+mil)
+     Fonction (+fonc)      administrative (+admi)
+                           religieuse (+rel)
+                           aristocratique (+ari)
+                           politique (+pol)
+                           e´ ducative (+edu)
+                           commerciale (+com)
+     Organisation (+org)
+                           non commerciale (+non-profit)
+                           m´edia et divertissement (+div)
+                           g´eo-socio-administrative (+gsp)
+                           g´eographique naturel (+geo)
+                           r´egion administrative (+admi)
+                           axe de circulation (+line)
+     Lieu (+loc)           construction humaine (+fac)
+                                                               adresse postale (+post)
+                           adresse
+                                                               t´el´ephone et fax (+tel)
+                           (+addr)
+                                                               adresse e´ lectronique (+elec)
+                           moyen de transport (+vehicule)
+     Production humaine    r´ecompense (+award)
+     (+prod)               œuvre artistique (+art)
+                           production documentaire (+doc)
+                                                               date absolue (+abs)
+     Date et heure         date (+date)
+                                                               date relative (+rel)
+     (+time)
+                           heure (+hour)
+                                                               aˆ ge (+age)
+                                                               dur´ee (+dur)
+                                                               temp´erature (+ temp)
+                                                               longueur (+ len)
+                           valeur physique (+phy)              surface et aire (+area)
+     Montant (+amount)
+                                                               volume (+vol)
+                                                               poids (+ wei)
+                                                               vitesse (+spd)
+                                                               autre (+other)
+                           valeur mon´etaire (+cur)
+
+
+Tableau 3. Les types h´erit´es de la campagne Ester
+
+
+    D’autre part, il nous a sembl´e e´ trange de ne pas consid´erer qu’un certain nombre
+de modifieurs de l’entit´e n’en faisait pas partie, comme par exemple les nationalit´es,
+car cela entraˆınait des incoh´erences linguistiques. D’apr`es le guide de la campagne Es-
+                                                       Cascades autour des entit´es nomm´ees   75
+
+
+                 Prolex                    Ester
+                 Anthroponyme/Individuel   +pers
+                 Personne                  +pers+hum
+                 Pseudo anthroponyme       +pers+anim / +pers
+                 Anthroponyme/Collectif    +org
+                 Association               ? +org+pol / +org+gsp
+                 Ensemble                  +org+div
+                 Entreprise                +org+com
+                 Institution               ?+org+pol / +org+edu / +org+gsp
+                 Organisation              ?+org+gsp / +org+non-profit
+                 Ergonyme                  +prod
+                 Œuvre                     +prod+art
+                 Produit                   ?+prod+award / +prod+doc / +prod+vehicule
+                 Vaisseau                  ?+prod+vehicule
+                 Toponyme                  +loc
+                 Astronyme                 +loc+geo
+                 ´
+                 Edifice                   +loc+fac
+                 G´eonyme                  +loc+geo
+                 Hydronyme                 +loc+geo
+                 Ville                     +loc+admi
+                 Voie                      +loc+line
+                 Toponyme/Territoire       +loc+admi
+
+
+Tableau 4. Correspondance Prolex-Ester
+
+
+ter 2, il fallait annoter enti`erement le pr´esident du Gabon Omar Bongo et en deux fois
+le pr´esident gabonais Omar Bongo. De mˆeme, il fallait en effet annoter uniquement :
+    – Sarkozy dans Monsieur Sarkozy ;
+    – Raymond Domenech dans l’entraˆıneur Raymond Domenech ;
+    – Nouri al-Maliki dans le chiite Nouri al-Maliki.
+    Nous avons donc ajout´e onze sous-types au type +pers +hum pour annoter
+compl`etement ces entit´es nomm´ees. L’ensemble de nos ajouts sont pr´esent´es dans le
+tableau 5. C’est cette typologie (celle d’Ester plus nos ajouts) qui est implant´ee dans
+CasEN. Le texte obtenu en sortie contient des balises Unitex, c’est-`a-dire avec des
+accolades (voir ci-dessous la section 2.2). Il est donc possible de modifier ce balisage
+pour le remplacer par un balisage XML ou pour modifier la typologie, a` condition que
+la nouvelle typologie puisse se d´eduire de la nˆotre5 .
+
+5. Sinon, il faudrait modifier la typologie sur les graphes...
+76   TAL. Volume 52 n° 1/2011
+
+
+                    +pers +hum +tit        les civilit´es
+                    +pers +hum +gent       les gentil´es et les adjectifs toponymiques
+                    +pers +hum +occ        les professions
+                    +pers +hum +sp         les sports
+                    +pers +hum +art        les artistes
+                    +pers +hum +nat        la nationalit´e
+                    +pers +hum +rel        la religion
+                    +pers +hum +pol        la politique
+                    +pers +hum +fonc       les titres professionnels
+                    +pers +hum +dynasty    les dynasties
+                    +pers +hum +ethno      les ethnonymes
+                    +event                 les e´ v´enements
+                    +event +hist           l’histoire
+                    +event +manif          les manifestations (sportives, artistiques...)
+
+
+Tableau 5. Les types ajout´es a` ceux de la campagne Ester 2
+
+
+2.2. Conception de la cascade
+
+     La reconnaissance des entit´es nomm´ees par la cascade CasEN utilise des res-
+sources lexicales et des descriptions locales de motifs, des transducteurs qui agissent
+sur le texte par des insertions, remplacements ou suppressions. La plate-forme Unitex
+permet une e´ criture et une maintenance faciles de ces transducteurs en les pr´esentant
+a` l’utilisateur sous forme de graphes. Le principe d’une cascade est de pouvoir utili-
+ser dans les descriptions suivantes les motifs d´ej`a d´etect´es ou, au contraire, d’´eviter
+un e´ tiquetage non souhait´e pour un motif d´ej`a reconnu. L’ordre de passage de ces
+transducteurs est donc un param`etre important.
+     Comme tous les programmes int´egr´es a` la plate-forme Unitex, avant de lancer
+la cascade CasEN, il faut accepter la pr´eanalyse du texte, puis appliquer les res-
+sources lexicales. Dans le cadre d’un corpus e´ crit (par exemple, un journal, comme
+a` la section 4.2), cette pr´eanalyse consiste en un d´ecoupage en phrases, celui d´ecrit
+dans (Friburger et al., 2000) et distribu´e avec Unitex ; dans le cadre d’un corpus oral
+transcrit (par exemple les corpus Eslo 1 et Ester 2, voir sections 3.1 et 3.4), cette
+pr´eanalyse suit le d´ecoupage en tours de parole, ou, plus exactement, le d´ecoupage
+cr´ee´ par les balises du logiciel utilis´e pour la transcription6 , comme le recommande
+Dister (2007). Pour les ressources lexicales, en plus du dictionnaire Delas (Courtois
+et Silberztein, 1990) distribu´e avec Unitex, la cascade utilise un graphe-dictionnaire
+des nombres e´ crits en toutes lettres, le dictionnaire Prolex-Unitex, extraits de Prolex-
+base (Tran et Maurel, 2006), qui contient des noms propres et des d´eriv´es de noms
+
+6. Nous avons e´ crit un graphe sp´ecifique pour cette pr´eanalyse : il reconnaˆıt les balises XML,
+les consid`ere comme une partie du discours sp´ecifique, de type XML, et ajoute une balise de
+segmentation Unitex, {S}.
+                                                     Cascades autour des entit´es nomm´ees     77
+
+
+propres, et un dictionnaire sp´ecifique avec des pr´enoms, des professions (Gazeau et
+Maurel, 2006), des noms d’animaux, de sports, de monnaies, etc.
+    Les graphes de CasEN sont r´epartis en cinq cat´egories :
+    – les graphes de reconnaissance qui e´ tiquettent une cat´egorie d’entit´es, leurs noms
+commencent par cette cat´egorie : timeHoraire, orgCommerceEtranger, persCoordina-
+tion, etc. Ces graphes, compil´es, forment en g´en´eral les transducteurs de la cascade et
+appellent des sous-graphes pour les contextes. Cependant, lorsque des graphes succes-
+sifs sont tellement sp´ecifiques qu’un passage en cascade est inutile, ils sont compil´es
+en un seul transducteur ; par exemple, le transducteur amount appelle presque tous les
+graphes reconnaissant les diff´erentes mesures (monnaie, temp´erature, longueur, etc.) ;
+    – les graphes outils, qui peuvent, soit eˆ tre compil´es en un transducteur de la cas-
+cade, soit constituer un sous-graphe. Leur nom commence par le mot-cl´e tool. Par
+exemple, lorsqu’on analyse un corpus du Monde d’il y a quelques ann´ees, on remarque
+que les sigles e´ taient e´ crits avec des points (C.G.T. au lieu de CGT aujourd’hui). De
+fait, le premier transducteur de la cascade, toolChercheSigleAvecPoints est un graphe
+outil localisant ce genre de sigles et le deuxi`eme transducteur de la cascade, toolSup-
+primePointDansSigle, est lui aussi un graphe outil qui normalise les sigles en utilisant
+les informations du premier transducteur ;
+    – les graphes de listes, dont le nom commence par le mot-cl´e list, qui sont en fait
+des sous-graphes. Ces listes sont souvent des listes de mots polylexicaux, r´eduites par
+la factorisation des chemins. Le troisi`eme transducteur de la cascade, timeHoraire,
+appelle par exemple le sous-graphe listMinute qui reconnaˆıt un nombre entre 0 et 59
+(en chiffres ou en lettres), suivi du mot minute, e´ ventuellement abbr´eg´e en mn ou en
+min ;
+    – les graphes de masques, dont le nom commence par le mot-cl´e pattern, qui sont
+eux aussi des sous-graphes. Ces graphes d´ecrivent des listes un peu particuli`eres,
+qui contiennent en g´en´eral des expressions r´eguli`eres utilisant des codes Unitex
+g´en´eriques ou des descriptions morphologiques. Le sous-graphe patternCR reconnaˆıt
+par exemple les chiffres romains ;
+    – les graphes e´ tiqueteurs, dont le nom commence par le mot-cl´e tag, qui sont,
+soit des listes, soit des masques, mais qui ajoutent des informations sur des e´ l´ements
+internes a` une entit´e nomm´ee. Par exemple, le sous-graphe tagParti, appel´e par le
+transducteur foncPolitique ajoute une e´ tiquette org sur la ville du maire, la r´egion du
+d´eput´e, etc. Ceci permet de modifier facilement l’´etiquetage : il suffit d’intervenir sur
+les graphes de reconnaissance et sur les graphes e´ tiqueteurs.
+    La cascade CasEN commence par les deux transducteurs outils d´ecrits ci-dessus,
+puis viennent les transducteurs time et amount. Les transducteurs suivants sont soit
+des org, soit des fonc, soit des pers. Viennent ensuite des transducteurs loc, suivis
+du transducteur prod, puis des transducteurs loc et org, eux-mˆemes suivis du trans-
+ducteur event. La cascade se termine par diff´erents transducteurs org, fonc, pers et
+loc. Cette h´et´erog´en´eit´e s’explique : des entit´es peuvent eˆ tre ambigu¨es entre elles, soit
+78   TAL. Volume 52 n° 1/2011
+
+
+enti`erement (l’entit´e est totalement ambigu¨e avec une autre), soit partiellement (l’en-
+tit´e contient des motifs qui peuvent eˆ tre d’un autre type).
+    Donnons un exemple simple de balisage : la phrase Vers le sud, une jet´ee longue de
+deux mille m`etres s’allongeait comme un bras sur la rade de Suez, extraite du corpus
+distribu´e par Unitex7 va eˆ tre transform´ee par le transducteur amount, qui appelle le
+graphe des longueurs (voir la figure 2), en Vers le sud, une jet´ee longue de {deux
+mille m`etres,.N+entity+amount+physics+length+grfamountLongueur} s’allongeait
+comme un bras sur la rade de Suez, ce qui, d’une part, e´ tiquette la s´equence deux
+mille m`etres comme une longueur et, d’autre part, la fige en une expression polylexi-
+cale. Ce balisage peut ensuite eˆ tre recherch´e dans Unitex par des masques plus ou
+moins sp´ecifiques, de <N+entity> a` <N+length>. Pour faciliter le d´ebogage, nous
+ajoutons au balisage le nom du graphe qui l’a ins´er´e (ici +grfamountLongueur).
+
+
+
+
+Figure 2. Le graphe d´ecrivant les longueurs
+
+    La cascade elle-mˆeme est constitu´ee a` partir des ˆılots de certitude (Abney, 1996)
+qu’il est possible de trouver... Par exemple, la phrase Il est arriv´e le 29 f´evrier de
+l’ann´ee 2008. peut eˆ tre reconnue par plusieurs transducteurs. Par exemple :
+    – le transducteur timeAnneesSiecle, marque l’ann´ee 2008 comme une date abso-
+lue ;
+    – le transducteur timeDateAbsolue marque la s´equence enti`ere le 29 f´evrier de
+l’ann´ee 2008 comme une date absolue ;
+7. Le Tour du monde en 80 jours, de Jules Verne.
+                                                                Cascades autour des entit´es nomm´ees                79
+
+
+   – le transducteur timeDateRelative marque le d´ebut de la s´equence le 29 f´evrier
+comme une date relative.
+    Il faut obligatoirement passer ces trois transducteurs dans l’ordre timeDateAbso-
+lue, timeAnneesSiecle et timeDateRelative.
+    Parfois, il ne s’agit pas de concurrence, mais de compl´ement. L’exemple le plus
+simple est sans doute le graphe des adresses postales qui contient des masques de per-
+sonnes (<N+pers> pour reconnaˆıtre rue du G´en´eral Leclerc) et de dates (<N+date>
+pour rue du 11 novembre 1918) : les graphes des personnes et celui des dates sont donc
+plac´es avant le graphe des adresses. De nombreuses organisations comportent aussi
+des e´ tiquettes de type personne, comme le Centre Georges Pompidou, l’hˆopital Henri
+Mondor ou... la menuiserie G´erard Dubois ! Ces organisations seront donc reconnues
+apr`es les graphes de personnes. Ainsi, nous constatons que l’ordre des graphes est
+capital, mais non trivial.
+   Pour conclure cette description de la cascade CasEN, le tableau 6 donne quelques
+exemples de reconnaissance sur un corpus du journal Le Monde.
+
+ « Au pire de la crise, {`a l’automne dernier,.entity+time+date+rel+grftimeDateRelative}, nous avons
+ d´etenu jusqu’`a 20 % de liquidit´es dans notre portefeuille », indique {{{ Denis,.N+Pr´enom} { Re-
+ macle,.N+nom},.entity+pers+hum}, {g´erant d’{Amplitude Pacifique,.entity+org+com} ,.entity+job} ,.en-
+ tity+pers+hum+grfpersPrenomNom}, une sicav de {La Poste,.entity+org+com+grforgDico}.
+ « C’est a` nos clients de d´ecider s’ils souhaitent ou non consacrer une partie de
+ leur     patrimoine    a`     l’{Asie,.entity+loc+admi+grflocPays} »,  souligne   {{Pierre,.N+Pr´enom}
+ {Ciret,.N+nom},.entity+pers+hum+grfpersPrenomNom}, de la {Compagnie financi`ere {{Edmond,.N+Pr´enom}
+ {de Rothschild,.N+nom} ,.entity+pers+hum} ,.entity+org+com+grforgCommerceGauche}.
+ Ils ne peuvent pas, en revanche, faire l’impasse sur la {Bourse de {Hongkong , .en-
+ tity+loc+admi},.entity+org+com+grforgCommerceGauche},          car     cette      place        repr´esente      pr`es
+ de la moiti´e de la capitalisation boursi`ere de la r´egion.{S} Pour sa part, {{ Pierre-
+ Alexis,.N+Pr´enom}     {    Dumont,.N+nom},.entity+pers+hum+grfpersPrenomNom},             de      {State    Street
+ Banque,.entity+org+com+grforgCommerceDroite}, s’est r´efugi´e sur le march´e australien, relativement e´ pargn´e par
+ la tourmente.
+ {Th´eaˆ tre   G´erard-Philipe,.entity+org+div+grforgDivertissementSorties},     {59,      {boulevard           Jules-
+ Guesde,.entity+loc+line}, 93000 {Saint-Denis,.entity+loc+ville},.entity+loc+addr+post+grflocAddr}.
+
+
+Tableau 6. Exemples de s´equences reconnues par CasEN sur un corpus du journal
+Le Monde
+
+
+3. Application de CasEN a` deux corpus
+
+3.1. Pr´esentation du corpus Eslo 1
+
+    Lors de la conception du syst`eme CasSys (Friburger, 2002), l’application r´ealis´ee
+portait sur la d´etection d’entit´es nomm´ees dans des textes journalistiques. L’en-
+semble de la cascade a e´ t´e repris tout d’abord pour le projet ANR Variling (Eshkol
+et al., 2010), puis dans le cadre de la campagne d’´evaluation Ester (voir section 3.4),
+qui a eu lieu au cours de ce projet. Un des points forts de notre syst`eme est sa bonne
+adaptation a` l’oral, a` des corpus diff´erents et a` des typologies diff´erentes, avec seule-
+ment quelques modifications.
+80    TAL. Volume 52 n° 1/2011
+
+
+    Le corpus sur lequel nous avons travaill´e est l’Enquˆete sociolinguistique a` Orl´eans
+(Eslo 1), qui a e´ t´e conduite en 1968 par des universitaires britanniques. Cette enquˆete
+avait une vis´ee didactique : l’enseignement du franc¸ais langue e´ trang`ere dans le
+syst`eme public d’´education anglais. Elle comprend environ deux cents interviews
+en face a` face et une gamme d’enregistrements vari´es (conversations t´el´ephoniques,
+r´eunions publiques, transactions commerciales, repas de famille, entretiens m´edico-
+p´edagogiques, etc.), soit au total 317 heures d’enregistrements, avec environ quatre
+millions et demi de mots et plusieurs centaines de locuteurs. En particulier, la tˆache
+pr´esent´ee ici permettra la mise a` disposition d’un grand corpus o`u les entit´es nomm´ees
+auront e´ t´e annot´ees.
+    Plus pr´ecis´ement, le corpus dont nous disposions correspond aux cent vingt
+premi`eres heures transcrites. Il e´ tait constitu´e de cent cinq fichiers Transcriber8 ,
+repr´esentant au total 31 004 Ko. Nous avons travaill´e sur quatre-vingt-dix-huit fichiers,
+soit 29 522 Ko, et r´eserv´e sept fichiers pour l’´evaluation, soit 1 482 Ko (4,8 %).
+    Les principales conventions de transcription sont l’absence de ponctuation et de
+majuscule en d´ebut d’´enonc´e ainsi qu’une transcription orthographique norm´ee (ma-
+juscule pour les entit´es nomm´ees, transcription des chiffres et des dates en toutes
+lettres avec les traits d’union si n´ecessaire, termes e´ pel´es not´es enti`erement en ma-
+juscules).
+    Le questionnaire de l’entretien contient tout d’abord des questions pr´eliminaires
+(Depuis combien de temps habitez-vous Orl´eans ?, Qu’est-ce qui vous a amen´e a`
+vivre a` Orl´eans ?, Est-ce que vous vous plaisez a` Orl´eans ?, etc.), puis des questions
+sur le travail et les loisirs du locuteur et des membres de sa famille, ce qui explique
+la pr´esence d’un nombre important d’entit´es nomm´ees dans le corpus. Enfin, sont
+abord´es :
+     – l’enseignement (Qu’est-ce qu’on devrait apprendre surtout aux enfants a`
+l’´ecole ?, Dans quelles mati`eres aimeriez-vous que vos enfants soient forts ?, etc.) ;
+    – la politique (Est-ce que, d’apr`es vous, on fait assez pour les habitants
+d’Orl´eans ?, Que pensez-vous des e´ v´enements de mai 68 ?, etc.) ;
+    – la langue et les habitudes culturelles (Un e´ tranger veut venir en France pour
+apprendre le franc¸ais. Dans quelle r´egion est-ce qu’il doit aller d’apr`es vous, dans
+quelle ville ?, Quelqu’un frappe a` la porte de cette pi`ece. Qu’est-ce que vous lui dites ?,
+etc.).
+
+
+     ´
+3.2. Evaluation sur le corpus Eslo 1
+
+    Comme annonc´e en section 3.1, l’´evaluation a e´ t´e r´ealis´ee sur sept fichiers Trans-
+criber, soit 1 482 Ko (4,8 % du corpus).
+
+8. http ://trans.sourceforge.net/
+                                                        Cascades autour des entit´es nomm´ees        81
+
+
+    Nous avons r´ealis´e trois e´ valuations sur le corpus en mesurant tout d’abord
+la simple d´etection des entit´es (trait +Entity), en acceptant d’´eventuelles erreurs
+de typage ou de bornage, puis la reconnaissance des entit´es typ´ees, en acceptant
+d’´eventuelles erreurs de bornage et, enfin, celle des entit´es typ´ees correctement
+born´ees.
+    Le corpus de test comprenait 1 305 entit´es ; 1 227 ont e´ t´e reconnues , 27 ont g´en´er´e
+des erreurs et 51 ont e´ t´e oubli´ees. Parmi les erreurs, citons le passage environ cinq mille
+livres euh en rayon qui a e´ t´e annot´e comme correspondant a` la monnaie anglaise... Par-
+mis les oublis, plusieurs sont dus a` la pr´esence de c´el´ebrit´es cit´ees sans leurs pr´enoms
+(Monet, Rabelais, Renoir...)9 .
+   Sur l’ensemble de ces 1 227 entit´es reconnues, 1 154 ont e´ t´e correctement typ´e.
+Restaient 73 erreurs de typage, comme un chef de chorale qui a rec¸u le trait +pol.
+   Finalement, 1 142 entit´es ont e´ t´e correctement reconnues et bien balis´ees ; pour la
+plupart des erreurs (11 sur 12), le balisage e´ tait ferm´e avant la fin de l’entit´e.
+  Le tableau 7 pr´esente ces e´ valuations en termes de rappel, pr´ecision et F-mesure
+(Maurel et al., 2009).
+
+                     Entit´es reconnues        Entit´es bien typ´es     Entit´es bien balis´ees
+      Rappel               94,0 %                    88,4 %                     87,5 %
+      Pr´ecision           97,8 %                    92,0 %                     91,1 %
+      F-mesure             95,9 %                    90,2 %                     89,3 %
+
+           ´
+Tableau 7. Evaluation de la cascade CasEN sur le corpus Eslo 1
+
+
+
+3.3. Balisage du corpus
+
+    Pour permettre la consultation du fichier annot´e, nous avons d´efini un balisage de
+type XML pour rendre visible les e´ tiquettes en dehors du logiciel Unitex. A   ` partir de
+l’annotation {Nicolas Sarkozy.N+Entity+pers+hum}, nous avons ajout´e au texte des
+balises <ENT type=”pers.hum”> Nicolas Sarkozy </ENT>. Le tableau 8 pr´esente
+quelques exemples de balisage. Finalement, les cent douze fichiers ont e´ t´e relus (et
+corrig´es manuellement) a` partir du balisage effectu´e, c’est-`a-dire que les erreurs de
+rappels ont e´ t´e ignor´ees. Ce corpus annot´e sera bientˆot mis a` disposition des cher-
+cheurs.
+    Contrairement a` ce que nous pensions a priori, le corpus Eslo 1 a r´ev´el´e une tr`es
+faible pr´esence des disfluences dans le cadre des entit´es nomm´ees. Il nous a donc
+sembl´e que les erreurs dues aux disfluences ne n´ecessitaient pas de modifications im-
+
+9. Ce point a e´ t´e corrig´e par des r`egles d’aliasisation ajout´ees a` Prolexbase et donc au diction-
+naire de noms propres utilis´e. Bien sˆur, ces r`egles ne sont pas syst´ematiques sur chaque entr´ee,
+mais r´eserv´ees a` des c´el´ebrit´es de grande renomm´ee.
+82   TAL. Volume 52 n° 1/2011
+
+
+ il y a deux ans une euh <ENT type=”pers.hum.gent”> anglaise </ENT>
+ chez moi <ENT type=”pers.hum”> B´er´enice Nutal </ENT>
+ dans les <ENT type=”org.com”> PTT </ENT>
+ moi je suis native de <ENT type=”loc.admi”> Pithiviers </ENT> j’aime mieux
+     <ENT type=”loc.admi”> Orl´eans </ENT>
+ oh j’ai une <ENT typr=”prod.art”> encyclop´edie Quill´e </ENT> j’ai le
+ <ENT type=”time.date.abs”> en dix-neuf cent trente-huit </ENT>
+ je crois que le <ENT type=”org.pol”> minist`ere de l’Education Nationale </ENT>
+ le <ENT type=”org.edu”> lyc´ee Pothier </ENT> et les e´ l`eves qui vont au
+     <ENT type=”org.edu”> lyc´ee Benjamin Franklin </ENT>
+ euh passer quelques jours sur la <ENT type=”loc.geo”> Cˆotes d’Azur </ENT>
+ je suis je travaille a` l’<ENT type=”loc.fac”> hˆopital d’Orl´eans </ENT> quoi
+ parce que nous avions un <ENT type=”loc.fac”> magasin Phildar </ENT> juste en face de chez nous
+
+
+Tableau 8. Exemples de balisage du corpus Eslo 1
+
+
+portantes de nos graphes, d’autant plus que les entit´es sont la plupart du temps loca-
+lis´ees, mˆeme si la position exacte de l’entit´e n’est pas correcte. Or, nous souhaitions
+surtout e´ viter les erreurs de rappel, puisque, comme nous venons de le dire, le bali-
+sage de l’ensemble des entit´es nomm´ees du corpus Eslo 1 a e´ t´e r´evis´e. Ces quelques
+erreurs ont donc e´ t´e corrig´ees manuellement. Le tableau 9 pr´esente quelques exemples
+de disfluences trouv´ees sur les entit´es nomm´ees.
+
+
+3.4. La campagne Ester
+
+     Le syst`eme CasEN a particip´e a` la campagne Ester 210 , sur la tˆache destin´ee a`
+l’´evaluation des syst`emes de reconnaissance des entit´es nomm´ees sur des flux de pa-
+roles transcrites manuellement ou automatiquement. Une autre discussion sur cette
+campagne se trouve dans (Brun et Ehrmann, 2009). Le corpus de la campagne Es-
+ter 2 e´ tait constitu´e d’´emissions radiophoniques transcrites (fichiers Transcriber). Les
+e´ missions enregistr´ees contenaient des e´ missions d’information, des dossiers li´es a`
+l’actualit´e du moment et des e´ missions plus conversationnelles. Les entit´es nomm´ees
+d´etect´ees devaient eˆ tre cat´egoris´ees selon sept cat´egories : personnes (pers), lieux
+(loc), organisations (org), productions humaines (prod), montants (amount), mesures
+de temps (time) et fonctions (fonc). Cette typologie e´ tait sous-divis´ee en 38 sous-
+cat´egories, qui n’ont pas e´ t´e e´ valu´ees (voir section 2.1). Le tableau 10 pr´esente les
+r´esultats officiels de la campagne Ester 2, publi´es par (Galliano et al., 2009). La me-
+sure des performances e´ tait une variante pond´er´ee du slot error rate (SER) (Makhoul
+et al., 1999) ; la pr´ecision, le rappel et la F-mesure e´ taient aussi fournis.
+
+10. http ://www.afcp-parole.org/ester/
+                                                               Cascades autour des entit´es nomm´ees   83
+
+
+ Les pauses vides ou remplies :
+ le faubourg Saint </Turn> <Turn speaker=”spk1 spk4” startTime=”1671.987” endTime=”1672.683”>
+     <Sync time=”1671.987”/> <Who nb=”1”/> <ENT type=”loc.admi”> Vincent </ENT>
+ <ENT type=”time.hour”> trois heures </ENT> euh moins vingt
+ <ENT type=”loc.admi”> La Chapelle </ENT> euh <ENT type=”loc.admi”> Saint Mesmin </ENT>
+ Les r´ep´etitions, e´ ventuellement accompagn´ees d’une pause :
+ de janvier a` <Sync time=”1337.908”/> <ENT type=”time.date.rel”> a` mai </ENT>
+ <ENT type=”loc.admi”> France </ENT> euh <ENT type=”org.div”> France Inter </ENT>
+ Les amorces, e´ ventuellement accompagn´ees d’une pause :
+ <ENT type=”time.date.rel”> au mois </ENT> de sep- <Sync time=”3288.958”/> tembre
+ <ENT type=”time.date.abs”> en mille neuf cent </ENT> cin- <Sync time=”563.383”/>
+     <Sync time=”564.101”/> Cinquante
+ Les autocorrections :
+ <ENT type=”time.date.rel”> une p´eriode </ENT> de euh <Sync time=”2859.139”/> <Sync time=”2859.913”/>
+     combien <Sync time=”2860.444”/> <Sync time=”2860.882”/> <ENT type=”time.date.rel”>
+     six mois </ENT> ?
+ <ENT type=”time.date.rel”> dans l’ann´ee </ENT> ils font <ENT type=”amount.phy.wei”> un g
+     </ENT>- euh un un grand voyage de <ENT type=”time.date.rel”> plusieurs jours </ENT>
+ <ENT type=”time.hour”>trois heures</ENT> de du matin
+ <ENT type=”pers.hum”> Louis </ENT> trei- <ENT type=”pers.hum”> Louis seize </ENT>
+ vers la <ENT type=”loc.admi”> Seine </ENT> -et-Oi- euh la
+     <ENT type=”loc.admi”> Seine-et-Marne </ENT>
+
+
+Tableau 9. Exemples de disfluences sur les entit´es nomm´ees du corpus Eslo 1
+
+
+                                                                     Transcription
+                                                              humaine              automatique
+       Participant (approche)                     SER        Pr´ecision Rappel         SER
+       Xerox (syntaxe profonde)                    9,8          93,6       91,5        44,6
+       Synapse (syntaxe profonde)                  9,9          93,0       89,3        44,9
+       LIA (CRF)                                  23,9          86,4       71,8        43,4
+       LIMSI (syntaxe surface)                    30,9          81,1       70,9        45,3
+       LI Tours (syntaxe surface)                 33,7          79,3       65,8        50,7
+       LSIS (CRF)                                 35,0          82,6       73,0        55,3
+       LINA (syntaxe surface)                     37,1          80,7       55,4        54,0
+
+Tableau 10. Les r´esultats de la campagne Ester 2
+
+
+    Sept syst`emes (dont le nˆotre, CasEN, not´e LI Tours sur le tableau 10) ont particip´e a`
+cette campagne, reposant sur des m´ethodes vari´ees : apprentissage par CRF, syst`emes
+a` base de r`egles, avec analyses syntaxiques de surface ou profondes. Les syst`emes
+centr´es sur les connaissances qui int`egrent une analyse syntaxique profonde (Xerox,
+Synapse) obtiennent les meilleurs r´esultats pour la transcription manuelle. Pour les
+84   TAL. Volume 52 n° 1/2011
+
+
+transcriptions automatiques, la meilleure approche, celle du LIA, est a` base d’appren-
+tissage ; on constate ici que les approches a` base de r`egles voient leurs performances
+se d´egrader progressivement en pr´esence de bruits.
+      Les performances de CasEN sont proches de celles des autres syst`emes non indus-
+triels (`a l’exception du LIA), ce qui est rassurant pour un syst`eme qui, rappelons-le,
+a e´ t´e d´evelopp´e initialement pour l’´ecrit. La faible d´egradation des performances de
+CasEN sur la premi`ere des transcriptions automatiques est satisfaisante ; cela est no-
+tamment dˆu a` la robustesse des analyses syntaxiques partielles. Nos performances
+sont plus modestes sur les deux autres car les transcriptions ne comportaient pas
+de majuscules, dont la pr´esence est utilis´ee par CasEN. Ces derniers r´esultats ne
+sont donc pas r´eellement significatifs et nous ne les avons pas report´es sur le ta-
+bleau 10. Nos r´esultats e´ taient meilleurs sur le corpus Eslo 1 (voir section 3.2) princi-
+palement a` cause d’une difficult´e suppl´ementaire dans la campagne d’´evaluation : la
+cat´egorisation des noms propres ambigus, comme les toponymes qui peuvent d´esigner
+un lieu g´eographique (+loc+admi), une entit´e gouvernementale (+org+gsp) ou... une
+e´ quipe sportive (+org+div) ! (voir la pr´esentation de la typologie de CasEN section
+2.2). Dans les e´ valuations pr´esent´ees section 3.2, ce genre d’erreur n’a pas e´ t´e pris en
+compte, ces toponymes e´ tant syst´ematiquement e´ tiquet´es +loc+admi, conform´ement
+au principe d´efini dans le tableau 2. Cependant, il faut souligner que le passage entre
+les deux corpus s’est r´ealis´e sans travaux importants sur la cascade qui montre, de ce
+fait, une grande stabilit´e entre les corpus. Il nous a juste fallu supprimer les balises
+que nous avions ajout´ees a` la typologie. D’ailleurs les transformations de balises se
+r´ealisent facilement, contrairement aux syst`emes a` base d’apprentissage qui ont besoin
+d’un nouveau corpus balis´e...
+      Afin d’analyser en d´etail le comportement du syst`eme, chaque erreur de CasEN
+(1 180 erreurs pour 2 512 entit´es nomm´ees) a e´ t´e annot´ee en pr´ecisant les informa-
+tions suivantes : la localisation, le type d’erreur (suppression, insertion, cat´egorie er-
+ron´ee, erreur de fronti`ere, etc.) et la r`egle de la convention Ester 2 concern´ee (Nouvel
+et al., 2010a). Au passage, cette annotation a r´ev´el´e que la r´ef´erence comportait un
+nombre non n´egligeable d’erreurs. En utilisant sept types d’entit´es nomm´ees, Ester 2
+introduit en effet une cat´egorisation plus fine que celles mise en place lors des cam-
+pagnes ant´erieures. Il en r´esulte des subtilit´es de cat´egorisation qui expliquent aussi
+les difficult´es qu’ont rencontr´ees les annotateurs. Au final, CasEN s’est en tous cas
+vu compter 43 fausses erreurs d’insertion (entit´es nomm´ees omises dans la r´ef´erence,
+mais correctement d´etect´ees par le syst`eme). Dans d’autres cas, les annotations de
+r´ef´erence se conforment au corpus d’apprentissage plutˆot qu’aux r`egles sp´ecifi´ees
+dans le guide d’annotations, ce qui a pu p´enaliser les syst`emes qui, comme CasEN,
+ont suivi le guide. Au final, nous observons une r´eduction de presque 10 % du SER
+apr`es avoir nettoy´e la r´ef´erence.
+   Les instructions de cette r´ef´erence e´ taient parfois d´econcertantes. Donnons deux
+exemples extraits de la version 0.3.
+    – (R`egle 1.3.3.1) Dans la phrase Le Laboratoire de Recherche Informatique de
+l’universit´e Paris Sud rel`eve du d´epartement des Sciences Pour l’Ing´enieur, il fal-
+                                                  Cascades autour des entit´es nomm´ees   85
+
+
+lait reconnaˆıtre comme org.edu seulement universit´e Paris Sud et d´epartement des
+Sciences Pour l’Ing´enieur, bien que Laboratoire de Recherche Informatique, qui
+comporte des majuscules, nous semble eˆ tre aussi un nom d’organisation, ce qui est
+confirm´e par ailleurs par l’utilisation d’un sigle (LRI).
+    – (R`egle 1.4.6.4) Il fallait Ne pas e´ tiqueter les lieux personnels, c’est-`a-dire tout
+lieu ou habitation d´esign´ee comme appartenant a` un particulier, avec comme exemple
+La propri´et´e Saint-Vincent a e´ t´e rachet´ee par le Comte de Bourgogne. Mais, en Tou-
+raine, de nombreux chˆateaux sont a` la fois des lieux publics qui se visitent, donc des
+loc.fac, et des habitations priv´ees (certaines parties du chˆateau ne se visitent pas). Qui
+nous dit qu’il n’en est pas de mˆeme pour la propri´et´e Saint-Vincent ?
+     La figure 3 pr´esente les performances de CasEN par cat´egories. Le rappel varie si-
+gnificativement d’une cat´egorie a` une autre. Globalement satisfaisante, la pr´ecision est
+m´ediocre pour la cat´egorie des productions humaines. Cette cat´egorie, tr`es h´et´erog`ene,
+a aussi gˆen´e les autres participants. Nos plus grosses difficult´es concernaient les
+v´ehicules, qu’il fallait reconnaˆıtre mˆeme sous une forme incompl`ete, comme depuis
+que j’ai achet´e le Zafira je me demande comment j’ai fait pour conduire ma 106,
+o`u il fallait reconnaˆıtre Zafira et 106. La reconnaissance des productions artistiques,
+des prix et des productions documentaires comportait moins d’erreurs. Une des ques-
+tions soulev´ees ici concerne les ressources dictionnairiques : faut-il les augmenter,
+par exemple ici avec des noms africains ou des noms de marque ? Mikheev et al.
+(1999) prˆonaient l’utilisation de peu de ressources, mais l’extension de la notion d’en-
+tit´es nomm´ees et la possibilit´e d’utiliser de grandes bases documentaires. Charton et
+Torres-Moreno (2009) mettent la question a` nouveau a` l’ordre du jour.
+
+
+
+
+Figure 3. R´esultats de CasEN par cat´egories
+
+
+
+4. Utilisation de deux cascades successives
+
+     Nous pr´esentons deux exemples d’une seconde e´ tape d’annotations, r´ealis´ee a` par-
+tir d’un corpus balis´e par CasEN. Il s’agit tout d’abord de la suite de notre travail sur
+Eslo 1 (section 4.1), puis d’une e´ tude r´ealis´ee sur un corpus du Monde (section 4.2).
+86   TAL. Volume 52 n° 1/2011
+
+
+4.1. Les entit´es d´enommantes du corpus Eslo 1
+
+4.1.1. La protection des personnes
+    Dans le cadre du projet Variling, le corpus Eslo 1 (d´ej`a pr´esent´e section 3.1) sera
+mis a` disposition des chercheurs et, peut-ˆetre aussi du public. Or, la mise a` disposition
+d’un corpus oral soul`eve le probl`eme de la protection des personnes (Baude, 2006).
+En effet, celles qui ont r´epondu a` cette enquˆete, l’ont fait avec des garanties d’anony-
+mat, ce qui suppose la disparition, par effacement ou bipage, de toutes les indications
+personnelles qui permettraient de les reconnaˆıtre. Le corpus Eslo est particuli`erement
+touch´e par cette probl´ematique, car les personnes enregistr´ees n’ont pas donn´e leur
+autorisation pour une exploitation de leurs paroles telle qu’elle est pr´evue maintenant
+(diffusion en ligne notamment).
+    Diffuser le Corpus d’Orl´eans selon les techniques actuelles, implique donc une
+d´emarche fond´ee sur de bonnes pratiques juridiques et e´ thiques. Ainsi, si pour des
+analyses scientifiques pr´ecises, le corpus brut reste le seul objet d’analyse possible, la
+diffusion par Internet requiert un corpus anonymis´e. L’objectif du projet de construire
+un portrait sonore de la ville et de ses habitants implique a` un haut degr´e des propos
+dont la diffusion demande une extrˆeme prudence (informations personnelles, confi-
+dences, avis exprim´es, etc.). Bien que l’on parle souvent d’anonymisation, la ques-
+tion l´egale concerne principalement l’assurance qu’il sera impossible d’identifier des
+personnes. Juridiquement l’anonymisation sert a` qualifier l’op´eration par laquelle se
+trouve supprim´e dans un ensemble de donn´ees, recueillies aupr`es d’un individu ou
+d’un groupe, tout e´ l´ement qui permettrait l’identification de ces derniers. Bien sˆur il
+ne s’agit pas de rendre totalement impossible l’identification d’un locuteur (il faudrait
+alors brouiller la voix sur l’ensemble de l’enregistrement, ce qui rendrait toute analyse
+linguistique impossible). L’objectif du projet e´ tait de rep´erer des e´ l´ements dans le dis-
+cours du locuteur permettant son identification par un e´ ventuel utilisateur du corpus.
+     Le processus d’anonymisation ne co¨ıncide pas avec la reconnaissance des en-
+tit´es nomm´ees classiques, car il s’agit aussi du rep´erage des e´ l´ements d’identifica-
+tion hors nom propre (profession, lieu de travail, lien de parent´e...). Nous avons ap-
+pel´e ces donn´es entit´es d´enommantes puisqu’elles permettent d’identifier le locuteur
+(Eshkol, 2010). De plus, tous les noms propres ne sont pas a` anonymiser : la Loire
+et Jeanne d’Arc ne sont pas a` inclure dans l’effacement, ainsi que les noms de lieu
+se trouvant dans la r´eponse a` la question O`u parle-t-on bien le franc¸ais ? ou en-
+core le nom des animateurs c´el`ebres de l’´epoque, dans les r´eponses sur les questions
+concernant les e´ missions t´el´evis´ees ou radiophoniques. Enfin, soulignons que l’entit´e
+nomm´ee rep´er´ee doit eˆ tre e´ tiquet´ee selon le rapport avec le locuteur. Un lieu va de-
+venir un lieu d’habitat ou de travail, etc. Le balisage pr´esent´e ci-dessous servira a` un
+annotateur humain qui prendra ou non la d´ecision d’anonymiser.
+
+4.1.2. La m´ethodologie adopt´ee
+    Nous avons choisi pour cette tˆache de construire une deuxi`eme cascade, qui passe
+sur le corpus Eslo 1 annot´e par la cascade CasEN, pour y effectuer une recherche
+                                                    Cascades autour des entit´es nomm´ees     87
+
+
+d’informations (Hobbs et al., 1997). Cette cascade a pour finalit´e le rep´erage des in-
+formations personnelles (famille, travail, engagement...). Certaines de ces informa-
+tions serviront a` l’anonymisation du corpus (section 4.1.1) et les autres permettront
+des e´ tudes sociologiques sur la vie a` Orl´eans a` cette p´eriode. Bien sˆur, certaines infor-
+mations, qui sont pr´esent´ees de mani`ere trop dissemblable pour les reconnaˆıtre par un
+graphe, ont e´ t´e annot´ees manuellement a` partir de l’annotation des entit´es nomm´ees.
+    Nous avons d´ecid´e de conserver une certaine homog´en´eit´e entre les deux cascades.
+L’enquˆete correspond essentiellement a` des questions concernant la personne inter-
+rog´ee et sa famille : origine, aˆ ge, naissance, arriv´ee a` Orl´eans, travail et mˆeme syndi-
+cat. Pour cela nous avons d´efini une typologie avec six types principaux :
+      1) le type personne permet de rep´erer les informations concernant la personne
+int´errog´ee et celles qu’il donne sur sa famille ;
+      2) le type identit´e marque des informations pr´ecises comme la date de naissance
+ou la date d’arriv´ee a` Orl´eans, l’ˆage de la personne dont on parle, son origine, sa date
+de mariage, etc. ;
+      3) le type travail e´ tiquette le m´etier, le secteur d’activit´e, le lieu de travail ou le
+nom de l’entreprise de la personne dont on parle ;
+      4) le type engagement concerne la vie associative (y compris syndicale ou paren-
+tale) et la vie militaire ;
+      5) le type voyage les diff´erents d´eplacements car il ne faut pas oublier que ceux-ci
+e´ taient plus rares a` l’´epoque du questionnaire qu’aujourd’hui ;
+      6) le type e´ tudes indique les diplˆomes, les lieux ou les e´ tablissements.
+    Ces diff´erents types et sous-types sont pr´esent´es dans le tableau 11.
+     Pour la reconnaissance des entit´es nomm´ees, nous avons consid´er´e que la pr´esence
+des disfluences e´ tait n´egligeable (voir section 3.3). Il n’en est pas de mˆeme pour celle
+des entit´es d´enommantes car leur reconnaissance se d´eroule sur plusieurs groupes syn-
+taxiques, qui peuvent mˆeme relever de plusieurs locuteurs. Il e´ tait donc indispensable
+de pr´evoir la pr´esence e´ ventuelle de disfluences et de reprises syntaxiques. Deux sous-
+graphes sp´ecifiques ont e´ t´e e´ crits pour d´etecter respectivement les pauses simples et
+les insertions et amorces. Les r´ep´etitions ne sont pas trait´ees et les erreurs commises
+a` ces endroits ont e´ t´e corrig´ees manuellement. D’autre part, certains graphes utilisent
+la question comme amorce. Ils comportent donc une description du d´ecoupage XML
+de transcriber et de la balise {S} qu’utilise Unitex pour segmenter le document ana-
+lys´e (voir section 2.2). Par exemple le graphe de la figure 4 comporte quatre sous-
+graphes d´ecrivant respectivement une question (sur la date d’arriv´ee a` Orl´eans), les
+balises XML Transcriber et la segmentation, une disfluence e´ ventuelle et la r´eponse a`
+la question.
+    La figure 5 pr´esente un graphe pour la reconnaissance de l’origine g´eographique
+de la personne interrog´ee.
+88   TAL. Volume 52 n° 1/2011
+
+
+                                            la personne interrog´ee (+speaker)
+                                            son conjoint (+spouse)
+            Personne (+pers)
+                                            ses enfants (+child)
+                                            les autres membres de la famille (+parent)
+                                            le nom (+name)
+                                            l’adresse (+addr)
+                                            l’ˆage (+age)
+                                            le mariage (+wedding)
+            Identit´e (+identity)
+                                            l’origine (+origin)
+                                            la naissance (+birth)
+                                            l’arriv´ee a` Orl´eans (+arrival)
+                                            le nombre d’enfants (+children)
+                                            m´etiers (+occupation)
+                                            secteur d’activit´e (+field)
+            Travail (+work)
+                                            lieu de travail (+location)
+                                            entreprise (+business)
+                                            association (+voluntary)
+            Engagement                      militaire (+military)
+            (+involvement)                  scolaire (+school)
+                                            syndical (+tradeunion)
+                                            e´ tudes (+study)
+            Voyage
+                                            vacances (+holiday)
+            (+trip)
+                                            professionnel (+work)
+                                            lieu (+location)
+            ´
+            Etudes
+                                            diplˆome (+degree)
+            (+study)
+                                            e´ tablissement (+edu)
+
+
+Tableau 11. Typologie des entit´es d´enommantes
+
+
+
+
+Figure 4. Un graphe question-r´eponse sur la date d’arriv´ee a` Orl´eans
+
+
+    Comme pour les entit´es nomm´ees, nous avons transform´e le corpus Eslo 1 en un
+texte balis´e. Quelques exemples sont pr´esent´es sur le tableau 12.
+
+       ´
+4.1.3. Evaluation
+   Pour e´ valuer la cascade des entit´es d´enommantes, nous avons utilis´e les mˆemes
+enregistrements que pour celle des entit´es nomm´ees (voir section 3.2). Les fichiers
+                                                 Cascades autour des entit´es nomm´ees   89
+
+
+
+
+Figure 5. Un graphe pour la reconnaissance de l’origine g´eographique
+
+
+de test comprenaient 77 entit´es d´enommantes, ce qui est peu, mais nous voulions
+e´ valuer ce rep´erage sur le mˆeme corpus d’´evaluation pour les deux cascades, or, en
+mettant de cˆot´e ce corpus pour le rep´erage des entit´es nomm´ees, nous n’avons pas
+contrˆol´e la pr´esence les entit´es d´enommantes sur lesquelles nous n’avions pas encore
+commenc´e a` travailler... Sur ces 77 entit´es d´enommantes, nous en avons reconnu 69,
+nous avons fait 4 erreurs et oubli´e 12 entit´es. Notre pr´ecision est donc de 94,2 % et
+notre rappel de 84,4 %. Parmi les entit´es non reconnues, certaines e´ taient dues aux
+disfluences (euh j’habitais dans dans le <ENT type=”loc.admi”> Berry </ENT>
+a` <ENT type=”loc.admi”> Bourges </ENT>), d’autres a` des oublis dans la cas-
+cade des entit´es nomm´ees (je travaille actuellement a` l’agence financi`ere du <ENT
+type=”loc.geo”>bassin Loire-Bretagne</ENT> o`u la pr´esence d’agence financi`ere
+aurait dˆu permettre le balisage d’une organisation et donc celui d’une entreprise o`u
+travaille le t´emoin). Notons une remarque int´eressante a` laquelle nous n’avions pas
+pens´e de prime abord : certains m´etiers sont pr´esent´es par des pr´edicats (euh j’ensei-
+gnais le franc¸ais), ce qui nous a conduits a` ajouter quelques transducteurs pour ce
+genre de pr´esentation professionnelle.
+    Avec une pr´ecision qui doit donc toujours d´epasser les 90 %, le gain de cette
+identification automatique est manifeste dans le processus de production de la
+ressource envisag´ee : les experts n’auront que peu de corrections a` faire et le bon
+rappel observ´e nous garantit que le travail d’annotation manuelle sera au final tr`es
+sensiblement am´elior´e.
+90   TAL. Volume 52 n° 1/2011
+
+
+ alors <DE type=”pers.speaker”> <DE type=”identity.name”> je suis <ENT type=”pers.hum”>
+     monsieur Gabrion </ENT></DE></DE>
+ <DE type=”pers.speaker”> je suis <DE type=”identity.origin”> parisien </DE> </DE> de naissance
+ <DE type=”pers.speaker”> je suis <DE type=”work.occupation”> ing´enieur chimiste </DE> </DE>
+ j’ai <DE type=”identity.children” value=”quatre”> quatre enfants </DE>
+ <DE type=”pers.spouse”> mon mari est <DE type=”work.occupation”> instituteur </DE> </DE>
+ <DE type=”pers.child”> la quatri`eme souhaite eˆ tre employ´ee </DE type=”work.business”> a` la
+     <ENT type=”org”> BNP </ENT></DE> <Sync time=”515.129”/> <DE typer=”work.location”>
+     de <ENT type=”loc.admi”> Paris </ENT> </DE></DE>
+ <DE type=”pers.parent”> <DE type=”identity.origin”> mon p`ere e´ tait de la
+     <ENT type=”loc.admi”> Sarthe </ENT>et ma m`ere du
+     <ENT type=”loc.admi”> Berry </ENT></DE></DE>
+ que <DE type=”pers.child”> ma fille qui a <DE type=”identity.age”>
+     <ENT type=”amount.phy.age”> dix huit ans </ENT></DE></DE> ne parle pas tr`es
+     ne parle pas bien franc¸ais
+ <DE type=”pers.speaker”> je suis n´e a` <DE type=”identity.birth”>
+     <ENT type=”loc.admi”> Orl´eans </ENT></DE></DE>
+ c¸a fait <DE type=”pers.speaker”> <DE type=”identity.arrival”>
+     <ENT type=”time.date.rel”>trente-quatre ans</ENT>
+     que je suis a` <ENT type=”loc.admi”> Orl´eans </ENT></DE></DE>
+ je m’y suis habitu´e depuis longtemps <DE type=”pers.speaker”>on est mari´e <DE type=”identity.wedding”>
+     <ENT type=”time.date.abs”> depuis mille neuf cent trente et un </ENT></DE></DE>
+
+
+Tableau 12. Exemples d’entit´es d´enommantes
+
+
+4.2. Les relations directes entre entit´es nomm´ees du corpus Le Monde
+
+4.2.1. La m´ethodologie adopt´ee
+    L’id´ee de ce travail e´ tait de voir comment la simple d´etection des entit´es nomm´ees
+pouvait permettre de les mettre en relation. Comme la plate-forme Unitex d´ecoupe les
+textes e´ crits en phrases, nous avons travaill´e sur les phrases contenant au moins deux
+entit´es.
+     Le corpus utilis´e est constitu´e de l’ensemble des journaux du quotidien Le Monde
+sur les ann´ees 1998 et 1999. Soit, pour 1998, 312 fichiers (344 Mo) et, pour 1999,
+278 fichiers (259 Mo). Six journaux ont e´ t´e utilis´es pour construire une nouvelle
+cascade a` partir de la pr´ec´edente et trois ont e´ t´e gard´es pour une e´ valuation des
+r´esultats. La cascade CasEN de reconnaissance des entit´es nomm´ees a e´ t´e lanc´ee sur
+ces 590 journaux, puis nous avons s´electionn´e et e´ tudi´e les phrases contenant deux en-
+tit´es nomm´ees, en les partageant en quatre groupes : personne-organisation, personne-
+lieu, personne-personne et personne-temps (tableau 13).
+    Nous avons donc e´ tudi´e toutes les phrases de six journaux pour y trouver les re-
+lations existantes. Cette e´ tude nous a conduits a` reconnaˆıtre diff´erents liens traduisant
+                                                     Cascades autour des entit´es nomm´ees     91
+
+
+                           Pers org      Pers loc     Pers pers     Pers time
+                  1998       2 034         7 895        14 473          2 671
+                  1999       1 469         5 839        10 873          1 964
+
+Tableau 13. Nombre de phrases contenant deux entit´es nomm´ees
+
+
+l’appartenance a` un parti ou une autre organisation, le simple contact entre deux entit´es
+ou des liens plus identitaires sur la famille, la justice, le m´etier, la politique, la gou-
+vernance, le sport, etc. Une cascade de transducteurs a ensuite e´ t´e construite pour le
+balisage des relations entre ces entit´es. Ces graphes reconnaissent les entit´es nomm´ees
+pr´ec´edemment annot´ees par la cascade CasEN, ainsi que des contextes entre ces deux
+entit´es. Par exemple, le graphe de la figure 6 reconnaˆıt une relation familiale entre
+deux personnes.
+
+
+
+
+Figure 6. Un graphe de relation familiale entre deux personnes
+
+     Pour cette nouvelle cascade, nous avons r´eparti les relations en quatorze cat´egories,
+e´ ventuellement sous-cat´egoris´ees par un sous-typage identique a` celui de la cascade
+CasEN. Ces cat´egories sont pr´esent´ees sur le tableau 14.
+
+4.2.2. Les r´esultats
+   Bien sˆur, ces cat´egories ne se r´epartissent pas de la mˆeme mani`ere suivant le type
+des entit´es nomm´ees en relation (tableau 15).
+    Comme cela a e´ t´e dit section 4.2.1, trois journaux ont e´ t´e utilis´es pour l’´evaluation,
+ceux dat´es des 27 juin 1998, 12 aoˆut 1998 et 22 f´evrier 1999. Nous avons tout d’abord
+pass´e la cascade CasEN sur ces trois journaux, puis la cascade CasRel. Pour la validit´e
+de cette derni`ere, il nous suffisait de localiser la pr´esence des entit´es, sans tenir compte
+de la correction du balisage, ce qui nous donne e´ videmment des r´esultats surestim´es11 ,
+a` comparer a` la premi`ere colonne du tableau 7. Pour la reconnaissance des relations
+(cascade CasRel), les r´esultats sont corrects avec, toujours sur l’ensemble des trois
+
+11. Sur l’ensemble des trois journaux, 99,96 % de pr´ecision et 98,09 % de rappel, soit une
+F-mesure de 99,01 %.
+92    TAL. Volume 52 n° 1/2011
+
+
+                                                        +appartenance+org+pol
+                                                        +appartenance+org+com
+                                                        +appartenance+org+edu
+        +appartenance            +appartenance+org
+                                                        +appartenance+org+non-profit
+                                                        +appartenance+org+div
+                                                        +appartenance+org+gsp
+                                                        +contact+org+pol
+                                                        +contact+org+com
+                                                        +contact+org+edu
+        +contact                 +contact+org
+                                                        +contact+org+non-profit
+                                                        +contact+org+div
+                                                        +contact+org+gsp
+        +existence
+        +famille
+        +identite
+        +justice
+        +litterature
+        +media
+                                                        +metier+org+pol
+                                                        +metier+org+com
+                                                        +metier+org+edu
+        +metier                  +metier+org
+                                                        +metier+org+non-profit
+                                                        +metier+org+div
+                                                        +metier+org+gsp
+        +origine
+        +politique
+                                                        +presidence+org+pol
+                                                        +presidence+org+com
+                                                        +presidence+org+edu
+        +presidence              +presidence+org
+                                                        +presidence+org+non-profit
+                                                        +presidence+org+div
+                                                        +presidence+org+gsp
+        +sport
+        +voyage
+
+
+Tableau 14. Les types des balises de CasRel
+
+
+journaux, 93,46 % de pr´ecision et 90,51 % de rappel, soit une F-mesure de 91,96 %.
+Nous avons en effet commis quatre erreurs et oubli´e neuf relations, plus des balisages
+trop courts ou trop larges.
+     Le tableau 16 pr´esente quelques exemples de balisages.
+                                                           Cascades autour des entit´es nomm´ees       93
+
+
+                                  PERS ORG       PERS PERS       PERS TIME       PERS LOC
+                +existence             *                                              *
+                +div                   *
+                +metier                *               *              *
+                +litterature           *               *
+                +sport                 *               *              *               *
+                +president             *
+                +politique             *               *              *               *
+                +appartenance          *
+                +famille                               *
+                +identite                              *
+                +contact                               *                              *
+                +media                                 *                              *
+                +politique                             *
+                +candidature                           *
+                +justice                               *              *
+                +voyage                                                               *
+
+
+Tableau 15. R´epartition des balises suivant le type des entit´es nomm´ees en relation
+
+
+ <REL type=”appartenance.org.non-profit”> <ENT type=”pers.hum”> pr´esident du conseil r´egional
+     Nord-Normandie </ENT> de l’<ENT type=”org.non-profit”> Eglise r´eform´ee </ENT> </REL>
+ <REL type=”appartenance.org.pol”> <ENT type=”pers.hum”> Jean-Michel Alexandre,
+     directeur de l’´evaluation </ENT> a` l’<ENT type=”org.pol”> Agence du m´edicament </ENT> </REL>
+ <REL type=”sport”> <ENT type=”pers.hum”> Le Br´esilien Gustavo Kuerten </ENT>
+     a gagn´e le <ENT type=”org.div”> tournoi de Rome </ENT> </REL>
+ <REL type=”presidence.org.com”> <ENT type=”pers.hum”> Luc Soete </ENT> dirige le
+     <ENT type=”org.com”> Maastricht Economic Research </ENT> </REL>
+ <REL type=”metier.org.com”> <ENT type=”pers.hum”> Marie Owens Thomsen </ENT>, e´ conomiste chez
+     <ENT type=”org.com”> Merrill Lynch </ENT> </REL>
+ <REL type=”justice”> <ENT type=”pers.hum”> Mathieu Filidori </ENT> est condamn´e a`
+     <ENT type=”time.date.rel”> treize ans </ENT> </REL>
+ <REL type=”litterature”> <ENT type=”pers.hum”> Nigel Barley </ENT> est l’´editeur de
+     <ENT type=”pers.hum”> Mani </ENT> </REL>
+
+
+Tableau 16. Quelques exemples de balisages par CasRel
+
+
+5. Conclusion
+
+    Dans cet article nous avons pr´esent´e plusieurs applications d´evelopp´ees a` l’aide de
+cascades de transducteurs a` nombre fini d’´etats autour de tˆaches li´ees a` la d´etection des
+entit´es nomm´ees. Nous avons cherch´e a` montrer que les techniques a` base de connais-
+94    TAL. Volume 52 n° 1/2011
+
+
+sances restaient adapt´ees a` ce type de tˆache, comme l’ont montr´e, par exemple, nos
+performances sur la campagne d’´evaluation Ester 2. L’ind´ependance de notre base de
+connaissance par rapport aux donn´ees d’apprentissage permet par ailleurs une adapta-
+tion rapide de nos syst`eme pour passer d’un domaine d’application (flux audio et vid´eo
+pour Ester et l’ANR EPAC) a` un autre (enquˆete sociolinguistique pour l’ANR Vari-
+Ling). Il n’en reste pas moins que cette adaptation n’est jamais optimale et que, comme
+pour tout syst`eme travaillant sur le sujet, la d´etection d’entit´es nomm´ees requiert le
+d´eveloppement de ressources importantes. Nous travaillons actuellement a` l’utilisa-
+tion de techniques de fouille de textes a` base de d´etection de motifs hi´erarchiques pour
+l’´evolution semi-automatique de nos bases de connaissances (Nouvel et al., 2010b).
+     Remerciements
+    Ce travail a e´ t´e r´ealis´e grˆace au soutien de l’ANR (projet Variling) et du Feder
+R´egion Centre (projet Entit´es).
+
+
+6. Bibliographie
+
+Abney S., « Partial Parsing via Finite-State Cascades », Proc. of Workshop on Robust Parsing,
+   8th European Summer School in Logic, Language and Information, p. 8-15, 1996.
+Ait-mokhtar S., Chanod J.-P., « Incremental Finite-State Parsing », Applied Natural Language
+    Processing, p. 72-79, 1997.
+                                                              ´
+Baude O., Corpus oraux : guide des bonnes pratiques, CNRS-Editions    et Presses universitaires
+    d’Orl´eans, 2006.
+Bauer G., Namenkunde des Deutschen, Bern, Germanistische Lehrbuchsammlung Band 21,
+   1985.
+B´echet F., Sagot B., Stern R., « Coop´eration de m´ethodes statistiques et symboliques pour
+    l’adaptation non supervis´ee d’un syst`eme d’´etiquetage en entit´es nomm´ees », TALN 2011,
+    2011.
+Bontcheva K., Dimitrov M., Maynard D., Tablan V., Cunningham H., « Shallow Methods for
+   Named Entity Coreference Resolution », TALN 2002, 2002.
+Brun C., Ehrmann M., « Un syst`eme de d´etection d’entit´es nomm´ees adapt´e pour la campagne
+   d’´evaluation ESTER 2 », TALN 2009, 2009.
+Charton E., Torres-Moreno J. M., « Classification d’un contenu encyclop´edique en vue d’un
+   e´ tiquetage par entit´es nomm´ees », TALN 2009, 2009.
+Chinchor N., Muc-7 Named Entity Task Definition, 1997.
+Coates-Stephens S., The Analysis and Acquisition of Proper Names for the Understanding of
+   Free Text, Kluwer Academic Publishers, Hingham, MA, 1993.
+Courtois B., Silberztein M., « Dictionnaires e´ lectroniques du franc¸ais », Langues franc¸aise, vol.
+   87, p. 11-22, 1990.
+Dister A., De la transcription a` l’´etiquetage morphosyntaxique. Le cas de la banque de donn´ees
+    textuelles orales VALIBEL, th`ese de doctorat, Universit´e catholique de Louvain, 2007.
+                                                    Cascades autour des entit´es nomm´ees     95
+
+
+Ehrmann M., Les entit´es nomm´ees, de la linguistique au TAL : statut th´eorique et m´ethodes
+   de d´esambigu¨ısation, th`ese de doctorat, Universit´e Paris 7 - Centre de recherche Xerox,
+   Grenoble (XRCE), 2008.
+                                     ´
+Eshkol I., Entrer dans l’anonymat. Etude  des entit´es d´enommantes dans un corpus oral, Narr
+   Francke Attempto Verlag GmbH, Germany, p. 245-266, 2010.
+Eshkol I., Maurel D., Friburger N., « Eslo : from transcription to speakers’ personal information
+   annotation », Seventh language resources and evaluation conference (LREC 2010), Valetta,
+   Malte, 2010.
+Friburger N., Reconnaissance automatique des noms propres ; application a` la classification
+    automatique de textes journalistiques, th`ese de doctorat, Universit´e Franc¸ois-Rabelais de
+    Tours, 2002.
+Friburger N., Dister A., Maurel D., « Am´eliorer le d´ecoupage des phrases sous Intex », Revue
+    Informatique et Statistique dans les Sciences Humaines, vol. 36, n° 1-4, p. 181-200, 2000.
+Friburger N., Maurel D., « Finite-state transducer cascade to extract named entities in texts »,
+    Theoretical Computer Science, vol. 313, p. 94-104, 2004.
+Galliano S., Gravier G., Chaubard L., « The ester 2 evaluation campaign for the rich transcrip-
+   tion of french radio broadcasts », Proceedings of Interspeech’09, p. 2583-2586, 2009.
+Gazeau M.-A., Maurel D., « Un dictionnaire INTEX de noms de professions : quels f´eminins
+   possibles ? », Formaliser les langues avec l’ordinateur. De INTEX a` Nooj, Presses univer-
+   sitaires de Franche-Comt´e, p. 115-127, 2006.
+Grass T., « Typologie et traductibilit´e des noms propres de l’allemand vers le franc¸ais », TAL,
+   vol. 41, n° 3, p. 643-669, 2000.
+Hobbs J., Appelt D., Bear J., Israel D., Kameyama M., Stickel M., Tyson M., « FASTUS :
+   A cascaded finite-state transducer for extracting information from natural-language text »,
+   Finite-State Language Processing, MIT Press, p. 383-406, 1997.
+Makhoul J., Kubala J., Schwartz R., Weischedel R., « Performance measures for information
+  extraction », Proceedings of DARPA Broadcast News Workshop, 1999.
+Maurel D., Friburger N., Eshkol I., « Who are you, you who speak ? Transducer cascades for
+  information retrieval », in Proceedings of 4th Language & Technology Conference : Human
+  Language Technologies as a Challenge for Computer Science and Linguistics, Poznan, Po-
+  land, p. 220-223, 2009.
+Mikheev A., Moens M., Grover C., « Named entity Recognition without Gazetteers », EA-
+   CL’99, p. 1-8, 1999.
+Nadeau N., Sekine S., A survey of named entity recognition and classification, Satoshi Sekine
+   and Elisabete Ranchhod, ed., John Benjamins publishing company, p. 3-28, 2009.
+Nouvel N., Antoine J.-Y., Friburger N., Maurel D., « An analysis of the performances of the
+   CasEN named entities detection system in the Ester2 evaluation campaign », LREC 2010,
+   2010a.
+Nouvel N., Soulet A., Antoine J.-Y., Friburger N., Maurel D., « Reconnaissance d’entit´es
+   nomm´ees : enrichissement d’un syst`eme a` base de connaissances a` partir de techniques
+   de fouille de textes », TALN 2010, 2010b.
+Paik W., Liddy E. D., Yu E., McKenna M., Categorizing and Standardizing Proper Nouns for
+    Efficient Information Retrieval, Massachussetts Institute of Technology, p. 61-73, 1996.
+96   TAL. Volume 52 n° 1/2011
+
+
+Paumier S., De la reconnaissance de formes linguistiques a` l’analyse syntaxique, th`ese de Doc-
+   torat en Informatique, Universit´e de Marne-la-Vall´ee, 2003.
+Petit G., « Le nom de marque d´epos´ee : nom propre, nom commun et terme », META, vol. 51,
+    n° 4, p. 690-705, 2006.
+Poibeau T., Extraction automatique d’information, du texte brut au web s´emantique, Lavoisier,
+   2003.
+Tran M., Prolexbase, un dictionnaire relationnel multilingue de noms propres : conception,
+   impl´ementation et gestion en ligne, th`ese de doctorat en informatique de l’Universit´e
+   Franc¸ois-Rabelais de Tours, 2006.
+Tran M., Maurel D., « Prolexbase : un dictionnaire relationnel multilingue de noms propres »,
+   TAL, vol. 47, n° 3, p. 115-139, 2006.
+

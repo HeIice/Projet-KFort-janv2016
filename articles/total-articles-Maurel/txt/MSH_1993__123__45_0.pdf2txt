@@ -1,0 +1,440 @@
+M ATHÉMATIQUES ET SCIENCES HUMAINES
+
+
+
+
+ P HILIPPE B ERNARD
+ D ENIS M AUREL
+ Interrogation en langage naturel d’une base de données : interprétation
+ des adverbiaux de localisation temporelle
+ Mathématiques et sciences humaines, tome 123 (1993), p. 45-52.
+ <http://www.numdam.org/item?id=MSH_1993__123__45_0>
+
+
+
+
+      © Centre d’analyse et de mathématiques sociales de l’EHESS, 1993, tous droits réservés.
+      L’accès aux archives de la revue « Mathématiques et sciences humaines » (http://msh.revues.
+      org/) implique l’accord avec les conditions générales d’utilisation (http://www.numdam.org/legal.
+      php). Toute utilisation commerciale ou impression systématique est constitutive d’une infraction
+      pénale. Toute copie ou impression de ce fichier doit contenir la présente mention de copyright.
+
+
+
+
+                               Article numérisé dans le cadre du programme
+                             Numérisation de documents anciens mathématiques
+                                           http://www.numdam.org/
+                                                          45
+
+
+
+
+        INTERROGATION EN LANGAGE NATUREL D’UNE BASE DE DONNÉES :
+        INTERPRÉTATION DES ADVERBIAUX DE LOCALISATION TEMPORELLE
+
+                                  Philippe BERNARD, Denis MAUREL*
+
+      RÉSUMÉ 2014 Cet article présente un travail d’interprétation des adverbiaux de localisation temporelle du
+français, en vue de l’interrogation d’une base de données. Celle-ci s’effectue par des requêtes en langue naturelle,
+comprenant des expressions temporelles. L’interprétation de ces adverbiaux, qui passe par la définition
+d’informations sémantiques associées aux entrées d’un dictionnaire, analyse chaque catégorie de mots : modifieurs,
+adverbes, noms de temps, déterminants, prépositions, etc., et revient à traduire les expressions temporelles en
+données qui serviront de points de départ à l’interrogation de la base : une date de début, une date de fin, une heure
+de début et une heure defin.
+
+
+         SUMMARY 2014 Natural Language Database Queries : Interpretation of Adverbials of Location in Time.
+This paper presents a study of the application of French adverbials of location in database queries. Such queries
+will be formulated using natural language and including temporal adverbials. The interpretation of these
+adverbials, possible only through reference to the semantic interpretation of the associated dictionary entry,
+provides an analysis of each word category : modifiers, adverbs, determinants, prepositions, etc. Such an
+interpretation amounts to a translation of the temporal expressions into data which can be used to query the
+database : start date , end date, start time, and end time.
+
+
+
+
+1. LE TRAITEMENT AUTOMATIQUE DU LANGAGE NATUREL : CAS DES
+EXPRESSIONS TEMPORELLES1
+
+Longtemps limitée au calcul et à la gestion des entreprises, l’informatique se tourne aujourd’hui
+de plus en plus vers des applications destinées au grand public, les possibilités matérielles et
+logicielles aidant. Ainsi le langage naturel, qui est le propre de l’homme, apparaît comme le
+meilleur moyen de dialoguer avec une machine. L’idée de faire communiquer hommes et
+ordinateurs n’est pas nouvelle et remonte même aux débuts de l’informatique, avec autant
+d’espoirs que de désillusions. Nous ne tracerons pas ici l’histoire du traitement automatique du
+langage naturel, la littérature sur ce sujet étant abondante. Citons simplement une synthèse
+intéressante réalisée par Coulon et Kayser 1986 [5] présentant les applications du traitement
+automatique du langage naturel et les différents modèles de la langue.
+    Si l’imperfection du traitement automatique du langage naturel est soulignée dans des
+domaines tels que la traduction, l’indexation, la correction de textes où il est plutôt question
+pour l’instant d’assistance au travail humain que d’automatisation complète (cf. par exemple
+
+* Denis Maurel, Institut de Recherche en Informatique de Nantes (IRIN) - 3 rue du Maréchal Joffre, 44041 Nantes
+cedex 01, France. Tél: (33) 40.30.60.52. Fax: (33) 40.30.60.53. - e-mail: denis.maurel@ iut-nantes.univ-nantes.fr.
+1 Les auteurs remercient Henri Labesse
+                                         pour ses conseils après la lecture d’une première version de cet article.
+                                                    46
+
+
+
+Carré et al. 1991[4]), on constate en revanche que les systèmes de gestion de bases de données
+disposent de plus en plus souvent de modules d’interface en langage naturel qui s’interposent
+entre l’usager et la machine, évitant au premier l’apprentissage d’un langage de requête.
+
+
+     Malgré les progrès réalisés, et compte tenu de la complexité du langage humain, de tels
+systèmes fonctionnent dans des domaines restreints. C’est ainsi que, dans notre application,
+nous nous attachons simplement à interpréter des expressions temporelles appartenant à la
+langue française, dans le but de pouvoir interroger une base de données contenant des horaires
+de trains. Ce travail d’interprétation, réalisé à l’IRIN (Institut de Recherche en informatique de
+Nantes) dans le cadre d’un mémoire de DEA d’informatique [1], constitue une suite logique aux
+travauxeffectués sur la reconnaissance des adverbes de date par Denis Maurel, travaux dont les
+méthodes et résultats ont été exposés dans le numéro 109 de cette revue [ 10]2.
+
+
+2. INTERPRÉTATION                   SÉMANTIQUE     DES ADVERBIAUX DE LOCALISATION
+TEMPORELLE
+
+2.1. Interprétation
+
+L’interprétation sémantique concernant la notion de temps dans le langage naturel est un sujet
+délicat qui a fait l’objet de nombreuses études de la part des linguistes, des informaticiens et des
+logiciens (cf. entre autres les travaux de Bestougeff et Ligozat [2], ceux de Desclés et al. [6], de
+Maire-Reppert [7] et Oh [15], ou encore ceux de Molines [13][14] et Bras [3]). Nous ne
+reprendrons pas ici ces études ambitieuses mais il faut savoir qu’elles ont servi à notre projet
+dont l’objectif était d’attribuer des interprétations sémantiques à des formes syntaxiques. Il
+s’agissait en fait de donner des interprétations sémantiques sous forme de dates et d’heures à
+partir de la reconnaissance des adverbiaux de localisation temporelle, afin de pouvoir interroger
+une    base de données.
+
+     Dans les textes en langage naturel, la structure temporelle dépasse le cadre de la date (le 3
+juin 92) et de l’heure (à 8 heures). D’autres expressions, plus ou moins floues, peuvent faire
+référence à une date ou une période (à la fin de la semaine). Si l’adverbe de date le 3 juin 92 est
+facilement interprétable, grâce à un calendrier, il n’en va pas de même pour l’adverbial fin de
+semaine qui sera identifié comme une période ayant des bornes représentées chacune par un
+jour précis du calendrier. Cette interprétation apparaît pour le moins subjective car le simple
+concept de semaine recouvre au moins deux sens possibles : s’agit-il d’une semaine au sens
+strict du terme, commençant le dimanche et finissant le samedi ou d’une semaine de travail, du
+lundi au vendredi? Il en est de même pour la restrîctionfin de semaine dont l’interprétation peut
+varier d’une personne à l’autre. Pour pouvoir associer des dates et des heures à des expressions
+concernant des requêtes en vue de l’interrogation d’une base de données, il est nécessaire
+d’effectuer au préalable des choix de définition des termes composant l’expression. Pour vers la
+fin de la semaine, cela revient à attribuer un certain nombre d’informations sémantiques aux
+trois termes suivants : vers, fin, et semaine, si l’on considère que les mots de et la ne sont pas
+porteurs de sens.
+2.2.   Interprétation
+Les informations       sémantiques diffèrent selon la catégorie grammaticale des termes : préposition,
+déterminant, prédéterminant, nom de temps, modifieur, adverbe, etc. De même, la valeur de ces
+informations peut varier d’une application à une autre. Prenons par exemple la préposition avant
+dans l’expression avant Noël. C’est un trait sémantique attaché à cette préposition qui     indique le
+nombre de jours de la période qui précède Noël. L’interprétation de avant Noël              dépendra
+
+ZVoir aussi [8], 191, [ 11 ] et [12].
+                                                 47
+
+
+
+directement de ce trait qui dépendra lui-même de l’application. Les informations sémantiques
+sont associées à chaque entrée d’un dictionnaire des termes apparaissant dans des adverbiaux de
+localisation temporelle ; elles complètent les informations déjà existantes utilisées par le module
+de reconnaissance de ces adverbiaux. Le dictionnaire peut être mis à jour à tout moment, en cas
+d’évolution de l’application informatique qui l’utilise ou en fonction d’une autre application.
+Notre étude nous a amené à définir quatorze informations sémantiques :
+(1) Le type du mot : un mot peut être, soit non porteur de sens (comme en dans en fin de
+             semaine), soit représentatif d’une période (mois), ou d’une restriction de période
+                    ou encore d’une période relative (lendemain, avant), soit, enfin, représentatif
+             d’une durée (jour, heure).
+(2)(3)       La durée : ce sera 1 pour demain, 7 pour semaine, etc. On lui associe son unité
+                    heure ou minute).
+(4)(5)       Le nombre de jours : un choix a été fait pour attribuer une valeur quantifiée à
+             certains mots ; par exemple, le mot fin correspond à 3 (en fin de mois renverra au
+             trois derniers jours du mois en question) ; pour d’autres, comme première moitié,
+             c’est une formule de calcul qui s’appliquera par la suite au nom de temps qui suit. Il
+             en est de même pour le nombre d’heures : pour vers il vaut 1 (vers ll h
+
+             correspondra à la période allant de 10h30 à 1 lh30).
+(6)  La position : le mot troisième correspond à la valeur 3.
+(7)-(9)      Le signe qui indique si la référence sur l’axe des temps se fait en avant (après-
+             demain vaut +) ou en arrière (avant vaut -), on lui ajoute son attribut : exclu (avant)
+             et inclu           et le saut correspondant (2 pour après-demain).
+(10)-(12)    La  borne  de début et la borne de fin de la période de référence : pour matinée, nous
+            avons   respectivement : 5(h), 12 (h) et jour.
+(13)        Le code de priorité associé à chaque nom de temps, de 1 (minute) à 11 (année).
+(14)        Une condition booléenne pour calculer si certains mots sont ou non porteurs de
+            sens suivant leur contexte (jeudi est porteur de sens dans l’adverbial jeudi prochain,
+            mais non dans jeudi 15 avril).
+
+     Il est important de signaler que les informations utilisées ne sont pas les mêmes pour tous
+les mots mais dépendent directement de leur propre catégorie grammaticale. Après lecture dans
+le dictionnaire des mots composant l’expression entrée, le module de reconnaissance des
+adverbiaux de localisation temporelle (cf. [10]) renvoit au module d’interprétation les
+informations sémantiques de chaque mot avec leur catégorie grammaticale.
+
+                               Exemples d’informations sémantiques
+
+
+
+
+2.3. Adverbiaux traités
+
+L’application distingue      trois types d’adverbiaux de localisation       temporelle sujets     à
+interprétation :
+   (1)      les adverbes de date : dates et heures
+                                                 48
+
+
+
+   (2)      les adverbes de temps apparentés à une date (aujourd’hui, demain)
+   (3)      les compléments circonstanciels de temps (dans les 3 jours) qui sont des groupes
+            nominaux en général prépositionnels.
+     Ces trois types sont traités, mais notre étude s’est limitée aux adverbiaux de référence
+temporelle qui constituent le seul type de requêtes plausibles que peut donner un utilisateur de
+notre système : nous avons donc écarté de notre application tous les adverbiaux qui se situent
+dans le passé par rapport au moment d’énonciation de la requête, tels que hier ou la semaine
+dernière puisque nous nous intéressons à des renseignements de trains, c’est-à-dire situés dans
+le futur. Cependant, la gestion des adverbes situés dans le passé ne pose aucun problème
+puisqu’il suffirait de les rajouter dans le dictionnaire avec des informations sémantiques
+appropriées.
+     Etant donné qu’il n’est pas possible d’envisager toutes les expressions temporelles pour
+une telle application, nous nous sommes limités dans notre étude à un lexique d’environ deux
+cents quatre-vingts mots, taille bien suffisante pour offrir une grande complexité de réponses
+possibles au système. En fait, rien n’empêche d’envisager l’élargissement ultérieur du lexique
+ou son adaptation à une autre base de données, dans le cadre d’une autre application. Là aussi
+il suffirait de rajouter dans le dictionnaire les mots qui nous intéressent ou bien encore de
+modifier la valeur des informations sémantiques des différents termes qui y figurent.
+
+    Le  lexique utilisé est un extrait du dictionnaire de [9] et comporte aussi bien des mots
+simples, comme demain, que des mots composés, comme à peu près. Cependant, pour les
+besoins de l’interprétation, le dictionnaire a été complété par des informations sémantiques.
+
+     D’autres types d’adverbiaux, comme les coordinations (lundi ou mercredi) ou les
+exclusions (cette semaine, sauf mercredi) ne sont pas traités actuellement, mais le seront par la
+suite.
+
+
+3. DE LA RECONNAISSANCE À L’INTERPRÉTATION
+
+Dans une première étape, l’utilisateur saisit sa      requête en langage naturel, par exemple : je
+souhaite partir lundi prochain enfin de matinée       (supposons que cette saisie ait lieu le vendredi
+1 er janvier 1993 à midi).
+
+     Puis s’effectue le lancement du module de reconnaissance. Dans la            réponse ci-dessus,
+l’expression temporelle reconnue est lundi prochain enfin de matinée.
+    Le module de reconnaissance renvoit à celui d’interprétation la liste des mots de
+l’expression temporelle reconnue ainsi que, pour chacun d’eux, leur catégorie grammaticale et
+leurs informations sémantiques, après lecture du dictionnaire. A l’aide de ces données, le
+programme d’interprétation va transformer l’expression temporelle en une période en dates et en
+heures, soit, pour l’expression ci-dessus, du 04/01/93 au 04/01/93, de 10h à 12h.
+
+    L’interprétation des expressions temporelles reconnues s’effectue en neuf phases :
+3.1. Elimination des mots "non porteurs de sens"
+
+les démonstratifs, les articles, certaines   prépositions (à, durant, en,...),   etc.   Certains   autres
+mots (dans, mois, prochain, ...) peuvent être également non porteurs   de sens, dans certains
+contextes d’utilisation, ce qui est noté dans leur information sémantique par une condition
+booléenne (voir supra §2.2). Le programme teste cette condition pour chaque mot de
+l’expression qui contient une telle information et élimine tous ceux dont l’information "non
+porteur de sens" est vraie.
+                                                     49
+
+
+
+ce jour
+    -&#x3E;    jour
+3.2.    Regroupement des déterminants numériques
+avec  le(s) mot(s) associé(s) et interprétation des expressions numériques. L’interprétation peut
+donner lieu à une durée (3 jours), une période en jours (mars 93), une période en heures (dans
+les 3 heures), une date (15 mai) ou une heure (16 heures 30).
+à dix-sept heures trente et une
+   -&#x3E;  dix-sept heures trente et une     (cf. 3.1)
+    -&#x3E;    ((17 heures) 31)
+3.3.    Regroupement des modifieurs
+prochain, à venir, premier,...       avec   leur(s) mot(s) associé(s)   et   calcul de   l’interprétation
+correspondante.
+                                      Exemples de regroupements
+                                  (M0==modifieur, NT=nom de temps)
+
+
+
+
+     Les mots de l’expression sont examinés un par un à partir du dernier. Pour chaque mot de
+classe modifieur, le système détermine le nom de temps avec lequel il doit être interprété. Cela
+ne pose aucun problème lorsqu’il n’y a qu’un seul nom de temps dans l’expression (les deux
+premiers exemples). Par contre, lorsque deux noms de temps figurent dans l’expression à
+interpréter, on risque une ambiguïté d’interprétation (lequel choisir?). Celle-ci est levée en
+tenant compte de la structure de l’expression :
+
+-
+     Si la structure est NT MO NT ou NT NT MO                     et 4ènie exemples), le système
+interprète le modifieur  avec  le nom de temps qui possède   (dans  son information sémantique) le
+code priorité le plus grand, conformément à la liste ci-dessous :
+   1:        minute
+   2:        heure
+   3:        aube, aurore, crépuscule
+   4:        après-midi, matin, matinée, midi, soir, soirée, tantôt
+   S:        avant-veille, lendemain, surlendemain, veille
+   b:        jour, journée
+   7:        lundi, mardi, etc, dimanche
+   8:        week-end
+   9:        semaine
+   10 :      mois
+   11 :      an, année
+
+     Ainsi, dans l’exemple lundi prochain au matin, prochain est interprété avec lundi
+(priorité=7) et non matin (priorité=4). Ce dernier sera interprété plus loin (en phase 6).
+-
+        Si la structure est MO NT NT (5ème       exemple), le modifieur est interprété avec    les deux
+noms      de temps qui forment alors un tout :
+                                                     50
+
+
+
+le premier week-end du mois
+     -&#x3E;        premier week-end du mois (cf. 3.1)
+     -&#x3E;        premier (week-end du mois )
+    Le calcul se fera bien sûr toujours vers le futur, pour correspondre à notre application.
+Ainsi, le ler janvier 1993, la réponse sera le week-end du 2-3 janvier, alors que le 8 janvier, la
+réponse correspondra au week-end du 6-7 février.
+3.4.     Interprétation des adverbes de temps
+aujourd’hui, demain, après-demain
+    Le résultat est la journée correspondante, avec éventuellement une restriction sur la période
+en   heure     (comme dans demain, vers midi) ;
+3.5.     Interprétation des noms de fête
+Noël, Pâques,...
+    Le programme recherche tout d’abord la date de la fête en question, puis le calcul se fait
+normalement à partir de cette date. Par exemple, si nous supposons toujours être le 1 er janvier
+1993 à midi :
+Trois jours avant Pâques
+   -&#x3E;  3 jours avant Pâques (cf. 3.2)
+   -&#x3E;  3 jours avant Il avril 1993
+
+3.6.    Interprétation des noms de temps
+mois, matinée, semaine,... Il s’agit ici d’interpréter les noms de temps dans des expressions
+telles que ce matin, au début de l’après-midi, en milieu de semaine. Dans certains cas, les noms
+de temps peuvent être interprétés dans des étapes antérieures, soit en les regroupant avec un
+déterminant numérique (dans les trois jours, deux jours avant Noël), soit, comme on l’a vu en
+phase 3, par regroupement avec un modifieur (la semaine prochaine, le week-end à venir).
+3.7.    Interprétation des déterminants
+début, fin, moitié... Chaque déterminant est interprété avec le mot qui le suit (la fin de la
+semaine). L’expression à interpréter est examinée mot par mot à partir de la droite, dans le but
+de traiter les cas où plusieurs déterminants se succèdent.
+
+3.8.    Interprétation des prépositions
+dès, vers,... Chaque préposition est interprétée   avec le mot (ou le groupe de mots) qui la suit.
+Trois cas     présentent :
+               se
+-
+     avant la semaine prochaine, après la fin de la matinée, à partir de 16 heures.
+L’interprétation d’une préposition consiste en le calcul d’une période finale à partir d’une
+période initiale définie par les mots qui la suivent. Ce calcul est déterminé par l’intermédiaire
+des informations sémantiques de la préposition, notamment celle qui indique si la période finale
+se situe avant ( ler exemple) ou après (2ème et 3éme exemples) la période initiale, et celle qui
+précise l’inclusion (3éme exemple) ou la non inclusion ( 1 er et 2éme exemples) de la borne.
+-
+     trois jours avant Noël
+La préposition est alors précédée d’un groupe de mots indiquant une durée. C’est la neuvième
+information sémantique, le saut, qui permet l’interprétation de cette expression : ici, elle prend
+la valeur de la durée, c’est-à-dire 3, et indique que trois jours séparent la période initiale de la
+période finale.
+                                                  51
+
+
+
+-
+      dans trois jours, d’ici trois jours
+Cette fois, la préposition est suivie d’un groupe de mots indiquant une durée. L’interprétation
+de ces expressions s’effectue en fonction du signe de la préposition. Dans le premier exemple,
+il est positif et indique alors un saut (de trois jours) à effectuer à partir de la date du jour. Dans
+le second, il est négatif. Dans ce cas, la période correspondant à l’interprétation débute à la date
+du jour et s’achève 3 jours après.
+3.9. Interprétation des prédéterminants
+
+environ, exactement,... Chaque prédéterminant      interprété avec le mot suivant ou le mot
+                                                       est
+précédent,  selon   un       précision qui présente ainsi : heure (16 heures), période en
+                         ordre de               se
+heures (matin), jour (demain), période en jours (la semaine prochaine). Par exemple, dans
+l’expression demain environ à 16 heures, le prédéterminant sera interprété avec 16 heures et
+non avec   demain..
+
+
+4. DE L’INTERPRÉTATION À L’INTERROGATION
+
+Le résultat de l’interprétation des différents termes composant l’expression temporelle consiste
+en quatre valeurs qui caractérisent l’interprétation de l’expression reconnue : une date de début,
+une date de fin, une heure de début et une heute de fin. A l’aide de ces quatre données, le
+
+programme peut ensuite, dans une dernière étape, interroger la base de données. Celle-ci
+contient tous les horaires des TGV entre Paris et Nantes mais pourrait bien sûr être étendue.
+
+    Si l’expression temporelle est, par exemple, la semaine prochaine en début d’après-midi,
+nous obtiendrons les quatre données suivantes (en supposant toujours que nous sommes le
+vendredi ler janvier 1993 à midi) :
+
+                                       Résultat de l’analyse
+
+
+
+
+     Le programme fournira donc la liste des TGV circulant entre Paris et Nantes du 3           au   9
+janvier 1993, de 12 heures à 14 heures :
+                                        Réponses fournies
+                                                       52
+
+
+
+Il en est de même pour chaque type de question         :
+ce   jour (cf. 3.1 )
+à dix-sept heures trente et une     (cf. 3.2)
+le premier week-end du mois         (cf. 3.3)
+demain,     vers   midi (cf. 3.4)
+
+Trois jours avant Pâques       (cf. 3.5)
+etc.
+
+    Ce résultat montre que la reconnaissance des adverbiaux de localisation temporelle
+proposée par [lo] permet leur interprétation lorsque le contexte détermine un point de référence
+pour le calcul (ici, la date et l’heure de l’interrogation de la base).
+
+
+
+                                            BIBLIOGRAPHIE
+
+
+[1] BERNARD, P., Interrogation en langage naturel d’une base de données, interprétation des
+adverbes de temps du français, mémoire de DEA d’Information Scientifique et Technique
+(Université Paris VII), Paris, 1992.
+[2] BESTOUGEFF, H., LIGOZAT G., Outils logiques pour le traitement du temps, De la
+linguistique à l’intelligence artificielle, Paris, Masson, 1989.
+[3] BRAS, M., Calcul des structures temporelles du discours, Toulouse, Thèse de Doctorat
+(Université Paul Sabatier), 1990.
+[4] CARRÉ, R., DÉGREMONT, J.F., GROSS, M., PIERREL, J.M., SABAH, G., Langage
+humain et machines , Paris, Presse du CNRS, 1991.
+[5] COULON, D., KAYSER, D., "Informatique et langage naturel, Présentation générale des
+méthodes d’interprétation des textes écrits", Technique et Science Informatiques , février 1986,
+103-124.
+[6] DESCLES, J.P., JOUIS, C., OH, H.G., REPPERT D., Segond F., Représentations                             et
+recherches des valeurs    sémantiques           des temps de   l’indicatif du français pour   une   mise   en
+oeuvre  informatique, CAMS, GDR 957, n°1, Paris, 1991.
+[7] MAIRE-REPPERT, D., Les temps de l’indicatif du français en vue d’un traitement
+informatique, l’imparfait, Paris, Thèse de Doctorat (Université Paris IV), 1991.
+[8] MAUREL, D., "Grammaire des dates, étude préliminaire à leur traitement automatique",
+Linguisticae Investigationes, vol. 12 (1988), n°1, 101-128.
+[9] MAUREL, D., Reconnaissance de séquences de mots par automate, adverbes de date du
+Français, Paris, Thèse de Doctorat (Université Paris VII), 1989.
+[10] MAUREL, D., "Description par automate des dates et des adverbes apparentés",
+Mathématiques, Informatiques et Sciences humaines, n° 109 (1990), 5-16, Paris.
+[11] MAUREL, D., "Adverbes de date, étude préliminaire à leur traitement automatique",
+Linguisticae Investigationes, vol. 14 (1990), n°1, 31-63.
+[12] MAUREL, D., "Préanalyse des adverbes de date du français", TA information, volume 32
+(1991), n°2, 5-17, Paris.
+[13] MOLINES, F., Adverbes de localisation temporelle à base de noms de temps, Mémoire de
+maîtrise (Université de Toulouse le Mirail), Toulouse, 1988.
+[14] MOLINES, F., Acceptabilité et interprétation des adverbiaux de localisation temporelle,
+grammaire ou dictionnaire?, Mémoire de DEA (Université de Toulouse le Mirail), Toulouse,
+1989.
+[15] OH. H. G., Représentation des valeurs sémantiques du passé composé français                    en vue
+d’un traitement informatique, Paris, Thèse de Doctorat (Université Paris IV), 1991.
+

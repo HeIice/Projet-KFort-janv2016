@@ -1,0 +1,7 @@
+../articles/TALN/txt/eternal-2015-long-001.txt
+../articles/TALN/txt/taln-2001-long-009.txt
+../articles/TALN/txt/taln-2001-long-016.txt
+../articles/TALN/txt/taln-2006-long-021.txt
+../articles/TALN/txt/taln-2010-court-034.txt
+../articles/TALN/txt/taln-2013-court-003.txt
+../articles/TALN/txt/taln-2014-court-029.txt

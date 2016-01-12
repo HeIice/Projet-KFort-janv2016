@@ -1,0 +1,2 @@
+../articles/TALN/txt/eternal-2015-long-001.txt
+../articles/TALN/txt/taln-2013-court-007.txt

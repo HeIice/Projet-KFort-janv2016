@@ -1,0 +1,1093 @@
+Prolexbase et LMF : vers un standard pour
+les ressources lexicales sur les noms propres
+
+
+B´eatrice Bouchou, Denis Maurel
+Universit´e Franc¸ois Rabelais Tours - Laboratoire d’Informatique
+{beatrice.bouchou, denis.maurel}@univ-tours.fr
+
+
+   ´
+RESUM  ´ Nous pr´esentons dans cet article l’expression de Prolexbase dans le cadre d´efini par
+       E.
+le projet de norme LMF (Language resource management - Lexical Markup Framework). Pro-
+lexbase est une ressource lexicale de noms propres, organis´ee suivant une approche onoma-
+siologique, regroupant les entr´ees sous le concept multilingue de nom propre conceptuel, mais
+qui met e´ galement l’accent sur la description morphologique des noms propres. Nous mon-
+trons qu’il est possible, sans perte d’information, d’exprimer Prolexbase selon une approche
+s´emasiologique, conforme a` LMF.
+ABSTRACT. We present  in this paper how Prolexbase can be expressed within the LMF (Language
+resource management - Lexical Markup Framework) ISO project framework. Prolexbase is a
+lexical resource of proper names, organized according to an onomasiological view, with entries
+based on the concept of conceptual proper name. In the same time, Prolexbase also focuses
+on morphological description of proper names. We show that it is possible, without loss of
+information, to represent Prolexbase according to a semasiological view compliant with LMF.
+       ´ :
+MOTS-CLES    dictionnaire e´ lectronique, norme ISO, LMF, nom propre.
+KEYWORDS:    Electronic dictionary, ISO standard, LMF, Proper name.
+
+
+
+
+TAL. Volume 49 - n˚1/2008, pages 61 a` 88
+62   TAL. Volume 49 - n˚1/2008
+
+
+1. Introduction
+
+    Le projet Prolex, initi´e dans les ann´ees 90 et pilot´e par le laboratoire d’informa-
+tique de l’universit´e Franc¸ois Rabelais de Tours, a pour but le traitement automatique
+des noms propres. Une de ses derni`eres r´ealisations, dans le cadre de l’appel Techno-
+langue (Maurel et al., 2006), a e´ t´e celle d’un dictionnaire multilingue de noms propres,
+Prolexbase (Tran et Maurel, 2006), muni de relations, aujourd’hui disponible sur le
+site du CNRTL1 .
+    Dans cet article nous montrons comment Prolexbase peut s’appr´ehender dans le
+mod`ele LMF, afin d’en faire une ressource lexicale standard, mais aussi pour guider la
+construction de ressources du mˆeme type dans des langues de plus en plus nombreuses
+et favoriser leur interop´erabilit´e.
+   Par ailleurs, le d´eveloppement d’une ressource ou d’un mod`ele de ressource
+conforme a` LMF repr´esente en soi une contribution a` la r´eflexion en cours sur
+ce standard. En effet, LMF (pour Lexical Markup Framework, future norme ISO
+24613 (ISO/TC 37/SC 4, 2007)), est encore un projet de norme concernant les lexiques
+pour le traitement automatique des langues. Ce projet de norme consiste en un mod`ele
+abstrait, destin´e a` servir de cadre a` la d´efinition de mod`eles de donn´ees lexicales
+(comme par exemple les noms propres).
+     LMF se concentre sur les lexiques (Francopoulo et al., 2006b ; Salmon-Alt
+et al., 2005), mais plus g´en´eralement l’ISO/TC 37 regroupe un ensemble de standards
+pour la cr´eation et l’utilisation des ressources linguistiques, dans le but de faciliter les
+e´ changes de donn´ees, voire l’int´egration de ressources. L’´etendue de ces standards est
+vaste, cela va des ressources monolingues aux multilingues, et concerne les diff´erents
+niveaux de description (morphologie, syntaxe et s´emantique). Les langages consid´er´es
+ne se limitent pas aux langues europ´eennes et il n’y a pas non plus de limite a priori
+concernant les applications auxquelles sont destin´ees ces ressources.
+    L’utilisation de ces normes apporte donc, d’une part, l’avantage de la r´eutilisation
+d’un mod`ele existant, d´ej`a valid´e, dans la construction de nouvelles ressources lexi-
+cales, ainsi que la possibilit´e d’´echanges et d’int´egration de ressources. D’autre part,
+le fait de normaliser ces ressources ne peut que favoriser le d´eveloppement d’applica-
+tions utilisatrices, en leur offrant une interface d’acc`es standard. Ainsi que le montrent
+les auteurs de (Francopoulo et al., 2006a), les standards ne rel`event pas uniquement de
+l’ing´enierie, mais permettent e´ galement a` la recherche de se d´evelopper, en particulier
+dans le domaine du TAL.
+   Pour tendre vers l’universalit´e, il faut en plus utiliser XML2 , mais dans cet article
+nous n’abordons pas cette e´ tape, nous restons volontairement au niveau des concepts
+communs aux ressources lexicales. Dans la suite de cet article nous appellerons Pro-
+lexLMF le mod`ele de Prolexbase conforme a` LMF.
+1. http://www.cnrtl.fr/lexiques/prolex/
+2. Ce que pr´econise LMF et ce que nous faisons e´ galement.
+                                                                      Prolexbase et LMF     63
+
+
+    Nous rappelons dans un premier temps les caract´eristiques essentielles de Prolex-
+base (section 2), puis les parties principales de LMF et plus particuli`erement celles
+que nous utilisons (section 3), avant de d´ecrire ProlexLMF. La description proc`ede
+en trois temps : l’architecture g´en´erale (section 4), le niveau linguistique (section 5)
+et le niveau interlingue (section 6). En ce qui concerne le niveau linguistique nous
+pr´esentons le mod`ele qui correspond a` la partie de Prolexbase publi´ee sur le site du
+CNRTL, a` savoir le dictionnaire de formes fl´echies. Il existe dans Prolexbase une par-
+tie o`u sont d´ecrites les r`egles de flexion qui permettent de g´en´erer les formes fl´echies,
+mais nous ne l’abordons pas ici, afin d’offrir un aperc¸u relativement complet de notre
+d´emarche tout en e´ vitant un « effet catalogue ». Enfin nous discutons (section 7) des
+diff´erents mod`eles de Prolexbase et de l’ad´equation de LMF a` cette ressource lexicale.
+
+
+2. Pr´esentation de Prolexbase
+
+   Prolexbase est d’abord un dictionnaire, avec des lemmes et des formes fl´echies. Il
+contient des noms propres, mais aussi des alias de ces noms propres et des d´eriv´es de
+nom propre, pour peu que la d´erivation soit r´eguli`erement porteuse de sens et que ce
+sens soit directement en relation avec un nom propre de Prolexbase. Cette relation est
+appel´ee lien morphos´emantique dans WordNet (Fellbaum et Miller, 2003). Donnons
+quelques exemples :
+   – Onu, Nations unies et Organisation des Nations unies sont des alias d’un mˆeme
+nom propre ;
+    – Parisien et Parigot sont des noms d´eriv´es dont le sens se d´eduit r´eguli`erement
+du nom propre Paris (habiter/ˆetre n´e a` Paris, avec un sens familier ou p´ejoratif pour
+le second) ;
+    – parisianisme est bien un nom d´eriv´e du nom propre Paris, mais son sens est
+lexicalis´e (ensemble des comportements, d´efauts et qualit´es, prˆet´es aux Parisiens ou
+des caract´eristiques cens´ees eˆ tre celles de la vie (mondaine) parisienne, d’apr`es le
+TLFI) et cette d´erivation ne se retrouve pas pour les autres noms de ville. Ce mot ne
+sera pas plac´e dans Prolexbase, contrairement aux deux pr´ec´edents.
+     L’originalit´e de Prolexbase est de proposer l’ensemble de ces lemmes sous une
+seule entr´ee, appel´ee « prolex`eme », avec l’id´ee que, dans un contexte multilingue, la
+traduction d’un des mots de cet ensemble peut n´ecessiter l’utilisation d’un autre mot
+du prolex`eme de la langue cible. Si Parisien a une traduction en anglais, Parisian, il
+n’en va pas de mˆeme pour Tourangeau qui se traduira par une glose o`u sera pr´esent
+le nom propre Tours, par exemple inhabitant of the city of Tours in France. Certaines
+langues ont une morphologie d´erivationnelle plus cons´equente que le franc¸ais. Par
+exemple, il existe en serbe un adjectif possessif construit sur chaque nom a` trait hu-
+main, y compris sur les noms de personne ou sur les noms d’habitant : C’est la voiture
+d’un Parisien peut se traduire par To je Pari˘zaninov auto, o`u Pari˘zaninov est un adjec-
+tif possessif (Maurel et al., 2007).
+64   TAL. Volume 49 - n˚1/2008
+
+
+    Ainsi, le prolex`eme franc¸ais Paris sera en fait un ensemble de lemmes, associ´es
+a` une cat´egorie3 ; par commodit´e, on choisit pour d´esigner cet ensemble l’un de ses
+repr´esentants, abusivement appel´e aussi prolex`eme :
+
+        Prolex`eme-fraP aris={Paris.N, Parisien.NR, Parigot.NRD, parisien.AR,
+                                    parigot.ARD}
+
+    Chaque lemme est associ´e a` une r`egle de flexion, e´ ventuellement complexe lors-
+qu’il s’agit de mots polylexicaux (Savary, 2005). Ces r`egles permettent la g´en´eration
+de toutes les formes fl´echies associ´ees a` un prolex`eme :
+
+ Instances-fraP aris={Paris.N:ms:fs, Parisien.N:ms, Parisienne.N:fs, Parisiens.N:mp,
+    Parisiennes.N:fp, Parigot.N:ms, Parigote.N:fs, Parigots.N:mp, Parigotes.N:fp,
+   parisien.A:ms, parisienne.A:fs, parisiens.A:mp, parisiennes.A:fp, parigot.A:ms,
+                    parigote.A:fs, parigots.A:mp, parigotes.A:fp}
+
+
+2.1. Un dictionnaire multilingue
+
+     Ensuite, Prolexbase est un dictionnaire multilingue. Comme cela vient d’ˆetre
+pr´esent´e ci-dessus, pour une langue donn´ee, une entr´ee linguistique de Prolexbase
+est un prolex`eme. Chaque prolex`eme d’une langue est reli´e a` un et un seul pivot in-
+terlingue qui est un identificateur unique. C’est par ce pivot que passe la traduction
+d’une langue a` l’autre. Le pivot correspond a` ce qu’on pourrait appeler un « sens »,
+s’il s’agissait d’un nom commun... Ici, il d´esigne un « point de vue sur le r´ef´erent ».
+Nous distinguons ainsi Paris de Ville lumi`ere qui auront dans Prolexbase deux pivots
+diff´erents (voir section 2.2).
+   Par exemple, le pivot correspondant a` Paris est 38 558. C’est le pivot de chacun
+des prolex`emes suivants4 :
+
+       Prolex`eme-fraP aris={Paris.N, Parisien.NR, Parigot.NRD, parisien.AR,
+      parigot.ARD} Prolex`eme-engP aris={Paris.N, Parisian.NR, Parisian.AR}
+ Prolex`eme-srpP ariz ={Pariz.N, Pari˘zanin.NRM, Pari˘zanka.NRF, Pari˘zaninov.APM,
+                          Pari˘zankin.APF, pari˘zanski.AR...}
+
+   Pour passer d’une langue a` une autre, suivant les mots et les cat´egories, on « tra-
+duit » ou on « glose » : le nom franc¸ais Paris donnera Paris en anglais et Pariz en
+serbe, mais l’adjectif possessif serbe Pari˘zaninov donnera d’un Parisien en franc¸ais.
+3. On distingue en particulier le nom propre lui-mˆeme (N), le nom relationnel (NR), le nom
+relationnel diastratique (NRD), l’adjectif relationnel (AR) et l’adjectif relationnel diastratique
+(ARD).
+4. Dans cet exemple s’ajoutent quatre autres cat´egories : le nom relationnel masculin (NRM) et
+son adjectif possessif (APM), le nom relationnel f´eminin (NRF) et son adjectif possessif (APF).
+                                                                          Prolexbase et LMF       65
+
+
+2.2. Un dictionnaire muni de relations
+
+    Enfin, Prolexbase est un dictionnaire muni de relations. Les diff´erents points de
+vue repr´esent´es par les pivots sont li´es les uns aux autres par deux relations paradig-
+matiques (synonymie et m´eronymie) et par une relation syntagmatique (accessibilit´e).
+Reprenons l’exemple du pivot 38 558 (Paris) : il est en relation de synonymie (dia-
+phasique) avec le pivot de Ville lumi`ere, en relation de m´eronymie avec le pivot de
+ˆ
+Ile-de-France   et en relation d’accessibilit´e (rep´erage « capitale ») avec le pivot de
+France.
+    Pour eˆ tre plus pr´ecis :
+    1) a` la relation de synonymie est associ´e un indicateur diasyst´ematique (selon
+(Coseriu, 1998)) : diachronique (vari´et´e dans le temps, par exemple Birmanie et Myan-
+mar), diastratique (vari´et´e relative a` la stratification socioculturelle, comme Johnny
+Hallyday et Jean-Philippe Smet) et diaphasique (vari´et´e concernant les finalit´es de
+l’emploi, Paris et Ville lumi`ere)5 ;
+    2) la relation de m´eronymie est tr`es largement e´ tendue et ne concerne pas que
+l’inclusion spatiale ou temporelle, mais aussi le lien entre une c´el´ebrit´e et un pays,
+entre une entreprise et une filiale, entre un roi et une dynastie ;
+    3) comme pour la synonymie, la relation d’accessibilit´e est associ´ee a` des
+rep´erages g´en´eraux, comme la parent´e (Ir`ene Joliot-Curie est la fille de Marie Cu-
+rie), la cr´eation (Antonio Lucio Vivaldi est le compositeur des Quatre Saisons), la
+gouvernance (Henri IV est un roi de France)...
+   La figure 1 reprend l’exemple du pivot 38 558 (Paris). La version XML de cette
+entr´ee est pr´esent´ee en annexe 6.
+    Ces trois relations sont compl´et´ees par des relations d’hyperonymie, soit vers une
+typologie qui comporte trente types (personne, association, hydronyme, ville, pays,
+histoire, catastrophe...) et neuf supertypes, soit vers un paradigme d’existence, qui
+comporte trois instances (historique, fictif et religieux). Plus de d´etails sont donn´es
+sur ce sujet dans (Tran et Maurel, 2006).
+    D’autre part, deux relations syntagmatiques existent aussi au niveau linguistique :
+l’expansion classifiante6 (collocations libres) et l’´eponymie (lexicalisations et fige-
+ments), voir (Tran et Maurel, 2006).
+      Prolexbase est actuellement disponible sur le site du CNRTL ; la version
+t´el´echargeable ne contient que la partie franc¸aise, avec 54 774 entr´ees, les pivots des
+prolex`emes franc¸ais. Ceux-ci incluent 730 alias et 20 614 d´eriv´es, ce qui repr´esente
+
+5. En fait, Coseriu en d´efinit un quatri`eme, diatopique (vari´et´e dans l’espace), mais cette sorte
+de synonymie est d´ependante de la langue et est plac´ee au niveau linguistique, a` l’int´erieur du
+prolex`eme. Par exemple, en franc¸ais, Naoned fait partie du prolex`eme Prolex`eme-fraNantes . En
+breton, ce serait lui le prolex`eme.
+6. C’est cette relation et la relation de m´eronymie qui permettent par exemple la glose propos´ee
+ci-dessus pour traduire Tourangeau par inhabitant of the city of Tours in France.
+66   TAL. Volume 49 - n˚1/2008
+
+
+
+
+Figure 1. L’entr´ee Paris dans Prolexbase, d´ecrite en XML dans l’annexe 6
+
+
+75 368 lemmes qui engendrent 123 859 formes fl´echies. Ces lemmes se r´epartissent en
+65 805 noms, 10 300 adjectifs et 13 pr´efixes. Les relations entre pivots sont au nombre
+de 50 567, correspondant a` 2 249 accessibilit´es, 47 670 m´eronymies et
+648 synonymies.
+    Prolexbase a permis la g´en´eration de dictionnaires utilis´es par les logiciels Unitex
+(Paumier, 2003) et Nooj (Silberztein, 2004). Une autre version de la base est incluse
+dans la plateforme WS4LR (Work Station for Lexical Resources) (Krstev et al., 2006).
+Faciliter l’utilisation de Prolexbase par d’autres applications est notre principale mo-
+tivation pour proposer un mod`ele LMF de Prolexbase.
+
+
+3. Les bases du projet de norme LMF
+
+     LMF s’articule autour de la sp´ecification d’un noyau de descriptions obligatoire,
+d’une part, et, d’autre part, d’un ensemble de descripteurs e´ l´ementaires d´efinis par
+une autre norme, l’ISO 12620, appel´ee cat´egories de donn´ees (Romary, 2000). Nous
+pr´esentons d’abord la structure de LMF, puis les principes des cat´egories de donn´ees.
+Les noms des classes LMF, les noms et les valeurs des cat´egories de donn´ees sont
+cit´es en anglais, comme dans la proposition de norme.
+                                                                      Prolexbase et LMF      67
+
+
+3.1. La structure modulaire de LMF
+
+    Une ressource lexicale, telle que la conc¸oit LMF, est au moins compos´ee d’un
+ou plusieurs lexiques (classe Lexicon), chacun contenant la description d’une langue
+particuli`ere. Un lexique contient un ensemble d’entr´ees lexicales (classe Lexical En-
+try) qui sont compos´ees d’un ensemble de formes (classe Form) et, e´ ventuellement,
+d’un ensemble de sens (classe Sense). Les formes peuvent eˆ tre raffin´ees en diff´erentes
+repr´esentations (classe Form Representation). Quant aux sens, ils peuvent eˆ tre mul-
+tiples, pour repr´esenter la polys´emie, pour autant que les informations attach´ees aux
+formes soient identiques pour tous les sens.
+     Prenons l’exemple du mot tour. Avec cette structure minimale, si nous souhaitons
+seulement une liste de mots, nous pouvons d´efinir une entr´ee lexicale contenant sim-
+plement cette forme, e´ ventuellement avec un attribut pour sa cat´egorie grammaticale.
+Si notre lexique contient une repr´esentation s´emantique, nous pouvons ajouter a` cette
+entr´ee trois sens, construction nettement plus haute que large, machine-outil servant
+a` fac¸onner des pi`eces cylindriques tournant sur leur axe et boˆıte, armoire cylindrique
+tournant sur un pivot (d’apr`es le TLFI). Si nous compl´etons encore ce mot par son
+genre, ce n’est plus une, mais deux entr´ees lexicales qu’il faudra cr´eer, une f´eminine
+associ´ee au premier sens et l’autre masculine, associ´ee aux deux autres sens.
+   Les lexiques contenant les formes et les sens constituent le cœur de LMF, autre-
+ment dit le noyau de description obligatoire. Toutes les autres informations possibles
+sont r´eparties dans huit extensions7, elles aussi normalis´ees.
+    Pour ajouter a` notre exemple les deux formes fl´echies tour et tours, il nous faudra
+utiliser l’extension morphologique qui comprend au moins la notion de lemme (classe
+Lemma), mais permet aussi de lister les formes fl´echies (classe Word Form)8 . En re-
+vanche, si l’information flexionnelle que nous souhaitons voir apparaˆıtre consiste en
+une r`egle et non en une liste, il faudra a` nouveau compl´eter cette extension par une
+autre (l’extension paradigmatique).
+   Remarquons que ces deux extensions sont ind´ependantes de la partie s´emantique
+de l’entr´ee lexicale. Celle-ci aussi peut eˆ tre compl´et´ee par l’extension s´emantique,
+avec la possibilit´e de d´efinir des relations entre sens (classe Sense Relation)9 .
+     Il est important de voir que cette description s´emantique est d´ependante de la
+langue. C’est grˆace a` l’extension multilingue qu’il est possible de relier un sens propre
+a` une langue avec un sens qui peut eˆ tre partag´e par plusieurs langues. On retrouve dans
+cette derni`ere extension aussi bien l’id´ee du pivot de traduction (classe Sense Axis) que
+
+7. Morphology extension, Machine Readable Dictionary extension, NLP syntax extension, NLP
+semantics extension, NLP multilingual notations extension, NLP paradigm pattern extension,
+NLP multiword expression patterns extension et Constraint expression extension.
+8. Ainsi que les racines (classe Stem Or Root) ou les unit´es des mots polylexicaux (classe List
+Of Components).
+9. Tout comme des ensembles de synonymes (classe Synset) et des structures pr´edicativess
+(classe Predicative Representation), e´ ventuellement conjointement a` l’extension syntaxique.
+68    TAL. Volume 49 - n˚1/2008
+
+
+celle du transfert (classes Transfert Axis et Example Axis), notions issues des princi-
+paux projets de ressources multilingues pour le traitement automatique des langues.
+Ces trois classes se rattachent directement a` la ressource lexicale, comme les lexiques.
+Des relations entre ces pivots peuvent eˆ tre d´efinies via la classe Sense Axis Relation.
+De plus, la classe Interlingual External Ref permet de lier un pivot a` des descriptions
+externes a` la ressource lexicale.
+
+
+3.2. Les cat´egories de donn´ees
+
+     Si les classes et leurs liens sont normalis´es par LMF, il n’en est pas de mˆeme pour
+les attributs que l’on souhaite leur attacher. Cependant, il est recommand´e de suivre
+autant que faire se peut la norme ISO 12620 (Romary, 2000). Celle-ci « sp´ecifie les
+cat´egories de donn´ees utilis´ees pour l’enregistrement de l’information terminologique
+[...] ainsi que pour l’´echange et la recherche d’information terminologique ». Cette
+norme d´efinit :
+   – les cat´egories de donn´ees li´ees au terme (type d’entr´ee, grammaire, usage, for-
+mation, morphologie, statut...) ;
+     – l’´equivalence (pour l’aspect multilingue) ;
+     – le domaine ;
+     – la description (d´efinition, explication, contexte...) ;
+     – les relations (g´en´eriques, partitives, associatives...) ;
+     – les notions (et les syst`emes de notions hi´erarchiques) ;
+     – le langage documentaire et l’information administrative.
+       La norme ISO 12620 est donc un inventaire des descripteurs e´ l´ementaires courants,
+offrant ainsi un vocabulaire normalis´e pour d´ecrire des ressources linguistiques. Elle a
+e´ t´e d´efinie a` l’origine pour les grands projets sur les bases de donn´ees terminologiques
+(Geneter, MARTIF, etc.).
+    Cette norme d´efinit la notion de registre de cat´egories de donn´ees (DCR). Dans
+un tel registre, sont pr´ecis´es le nom et la d´efinition de chaque cat´egorie de donn´ees,
+les valeurs qu’elle peut prendre, et e´ ventuellement les classes du mod`ele auxquelles
+elle se rattache. Comme le souligne Susanne Salmon-Alt (Salmon-Alt, 2006), l’un
+des avantages majeurs du DCR r´eside dans la maintenance d’un seul r´ef´erentiel de
+descripteurs, utilisables a` la fois pour le lexique et l’annotation de corpus.
+   La d´efinition d’un mod`ele pour les noms propres dans le cadre de LMF revient
+donc a` instancier le noyau obligatoire par les e´ l´ements mis en e´ vidence dans Pro-
+lexbase, a` choisir les extensions n´ecessaires et a` d´efinir l’ensemble des cat´egories de
+donn´ees10 qui permettent de d´ecrire les prolex`emes et leurs relations.
+
+10. L’annexe 1 pr´esente cet ensemble, pr´elude a` un DCR pour les noms propres, et l’annexe 2
+les adaptations de Prolexbase qui lui sont li´ees. Le sch´ema g´en´eral des classes de ProlexLMF
+                                                                          Prolexbase et LMF       69
+
+
+4. Architecture g´en´erale de Prolexbase en LMF
+
+    Nous utilisons d’abord le noyau obligatoire de LMF : formes et sens. Pour les
+formes, Prolexbase contient a` la fois des r`egles de flexion (mono et polylexicale) et
+l’ensemble des instances. Dans la gestion de la base, un lemme est entr´e avec ses infor-
+mations morphologiques et un programme de g´en´eration compl`ete automatiquement
+la table des instances. Pour le lexique de formes fl´echies ProlexLMF, la repr´esentation
+des lemmes et des formes fl´echies exige l’instanciation des classes Lemma et Word
+Form de l’extension morphologique.
+     Pour les sens, Prolexbase distingue les relations qui ne d´ependent pas de la langue
+(synonymie, m´eronymie et accessibilit´e) et les relations qui en d´ependent (aliasisation,
+d´erivation morphos´emantique, expansion classifiante, e´ ponymie). Il s’agit de ne pas
+dupliquer dans chaque langue une mˆeme information (inutile de dire a` la fois que
+Birmanie est un synonyme diachronique de Myanmar et que Burma est un synonyme
+diachronique de Union of Myanmar !). C’est pourquoi nous utilisons les relations de
+l’extension multilingue pour les premi`eres et les relations de l’extension s´emantique
+pour les secondes11 .
+     Nous venons de justifier notre choix de repr´esentation des relations s´emantiques
+d’un point de vue linguistique, il se justifie aussi par les r`egles de l’ing´enierie des
+syst`emes d’information. En effet, cette solution e´ vite une forte redondance des infor-
+mations or, la redondance est un facteur e´ vident d’incoh´erence et d’augmentation des
+coˆuts de maintenance. Dans ProlexLMF, l’ajout d’un nouveau langage a` la ressource
+lexicale revient a` ajouter une instance de la classe Lexicon, dans laquelle les pro-
+lex`emes font r´ef´erence aux instances de la classe Sense Axis qui existent d´ej`a dans la
+ressource lexicale, et a` ajouter de nouvelles instances de la classe Sense Axis pour les
+prolex`emes du nouveau langage qui n’auraient de correspondant dans aucune langue
+d´ej`a repr´esent´ee.
+    L’architecture g´en´erale de ProlexLMF correspond a` l’architecture g´en´erale d’une
+repr´esentation XML de Prolexbase a` laquelle nous aboutissions en 2005 (Bouchou
+et al., 2005) en d´eveloppant une approche de conception de syst`emes d’information
+                 ´
+orient´ee XML. Etant  donn´e que notre motivation pour LMF est d’aboutir a` un standard
+de repr´esentation XML, ce constat renforce nos choix, notamment celui d’utiliser la
+partie multilingue de LMF pour repr´esenter les relations s´emantiques (ind´ependantes
+de la langue).
+    Nous pr´esentons dans la section 5 la description des prolex`emes dans une langue
+et, dans la section 6, celle des pivots. La correspondance entre les termes utilis´es dans
+Prolexbase et des cat´egories de donn´ees est d´etaill´ee en annexes 1 et 2. De plus, les
+
+est donn´e dans l’annexe 3 et les attributs n´ecessaires a` la description des prolex`emes franc¸ais,
+dans l’annexe 4.
+11. Pr´ecisons cependant que, dans la version actuelle, ni l’expansion classifiante, ni l’´eponymie
+ne sont pr´esentes.
+70    TAL. Volume 49 - n˚1/2008
+
+
+annexes 3 et 5 r´ecapitulent les classes de ProlexLMF et un sch´ema XML pour les
+repr´esenter (o`u on retrouve les cat´egories de donn´ees dans les noms d’attributs).
+
+
+5. Description monolingue
+
+    Toutes les descriptions pr´esent´ees dans cette partie sont d´ependantes de la langue.
+En plus du noyau de description obligatoire du mod`ele LMF, elles utilisent les exten-
+sions morphologique et s´emantique, en leur associant un certain nombre de cat´egories
+de donn´ees (not´ees ci-dessous entre barres obliques, /data categorie/ ). On peut re-
+marquer qu’il existe deux grandes diff´erences entre le mod`ele de Prolexbase et la
+pr´esentation dictionairique classique, d´ecrite par LMF.
+    La premi`ere diff´erence est que l’entr´ee linguistique d’un terme de Prolexbase
+est un prolex`eme, c’est-`a-dire un ensemble de lemmes e´ ventuellement de cat´egories
+grammaticales diff´erentes, alors que celle de LMF correspond a` un unique lemme.
+Pour le nom propre et ses d´eriv´es, nous n’avons d’autre choix que de cr´eer une entr´ee
+lexicale LMF pour chacun de ces lemmes. Pour les alias, nous pourrions tous les
+regrouper sous une mˆeme entr´ee lexicale (en cr´eant diff´erentes repr´esentations du
+lemme), mais cela ne nous a paru judicieux que pour des alias vraiment tr`es proches
+(voir section 5.1). Remarquons qu’il faut une entr´ee lexicale pour chaque expansion
+classifiante et pour chaque e´ ponyme, mais ces entr´ees seront consid´er´ees comme ap-
+partenant a` un lexique de noms communs, de termes ou de phras`emes ; elles ne sont
+donc pas d´ecrites dans cet article.
+    La seconde diff´erence importante est que le prolex`eme se rapporte a` un unique
+pivot, alors qu’une entr´ee LMF peut regrouper des homonymes. Cela n´ecessite une
+r´eorganisation fort simple qui met l’accent sur les sens puisque, dans LMF, les rela-
+tions s´emantiques propres a` une langue et les liens vers un pivot s´emantique multi-
+lingue portent sur les sens et non sur les entr´ees lexicales.
+
+
+5.1. Les formes
+
+    L’extension morphologique ne pr´evoit qu’un unique lemme par entr´ee lexicale.
+D`es lors, pour repr´esenter les diff´erents alias d’un nom propre, deux solutions s’of-
+fraient a` nous :
+    – cr´eer une seule entr´ee lexicale par nom propre en choisissant comme lemme un
+repr´esentant et en le d´ecomposant en plusieurs repr´esentations (une par alias), puis
+faire de mˆeme pour chaque forme ;
+     – cr´eer plusieurs entr´ees lexicales en associant un lemme a` chaque alias.
+   La premi`ere solution, quoique acceptable pour le franc¸ais, serait limitative pour des
+langues dont la morphologie est plus complexe. Mˆeme en franc¸ais, nous pouvons noter
+par exemple qu’Organisation des Nations unies est un singulier, alors que Nations
+                                                                         Prolexbase et LMF   71
+
+
+unies est un pluriel... En revanche, la deuxi`eme solution apparaˆıt trop verbeuse, voire
+redondante, lorsqu’il s’agit d’alias tr`es proches, comme O.N.U., ONU et Onu.
+   Nous avons donc choisi une solution interm´ediaire en partageant en deux sous-
+ensembles les alias d’un nom propre12 :
+    1) les variantes d’´ecriture, regroup´ees sous un mˆeme lemme :
+        - variante (/variant/ ) - Pierre Ab´elard versus Pierre Abailard,
+        - forme transcrite (/transcribed form/ ) - Changa¨ı versus Shanghai,
+        - forme latine (/romanized form/ ) - Pariz13 versus Pariz ;
+    2) les variantes lexicales, correspondant a` des lemmes diff´erents :
+        - forme int´egrale (/full form/ ) - Organisation des Nations unies,
+        - abr´eviation (/abbreviation/ ) - Microsoft corp.,
+        - forme courte (/short form/ ) - Nations unies,
+        - sigle (/initialism/ ) - ONU,
+        - acronyme (/acronym/ ) - Inalco,
+        - quasi-synonyme (/quasi-synonym/ ) - Naoned ;
+      - explication (/explanation/ ) - le Secours Catholique allemand versus Caritas
+Allemagne.
+    Conform´ement au mod`ele de Prolexbase, le choix du repr´esentant est arbitraire.
+Nous avons choisi comme repr´esentant du prolex`eme la forme int´egrale (/full form/ ).
+L’information sur le type d’alias sera, pour les variantes d’´ecriture, not´ee dans l’at-
+tribut othographyName de la repr´esentation et, pour les variantes lexicales, dans l’at-
+tribut termProvenance du sens (voir section 5.2), car une mˆeme entr´ee lexicale peut
+correspondre a` plusieurs sens.
+     Pour illustrer notre propos, consid´erons trois exemples d’entr´ee lexicale : un
+repr´esentant de prolex`eme (Organisation des Nations unies, figure 2), un alias (ONU,
+figure 3) et un d´eriv´e (onusien, figure 4). Ces trois entr´ees ont pour attribut leur
+cat´egorie grammaticale (partOfSpeech = ”noun” ou partOfSpeech = ”adjective”) et
+sont associ´ees a` leur lemme, muni de l’attribut writtenForm.
+    Le prolex`eme et son alias ont un attribut suppl´ementaire : leur cooccurrent (/col-
+location/ ) : collocation = ”l’”. Les cooccurrents repr´esentent dans Prolexbase une
+contrainte sp´ecifique, comme, par exemple pour le franc¸ais, la pr´esence ou non d’un
+d´eterminant.
+   Suivant la morphologie sp´ecifique de la langue d´ecrite, les attributs associ´es aux
+formes peuvent varier (le nombre, le genre, le cas, etc.). Sur nos exemples, il y a
+une forme fl´echie pour le prolex`eme et l’alias (qui en franc¸ais n’ont pas de varia-
+
+12. La liste compl`ete des cat´egories d’alias est donn´ee en annexe 2.
+13. Le serbe utilise conjointement l’alphabet latin et l’alphabet cyrillique.
+72   TAL. Volume 49 - n˚1/2008
+
+
+
+
+Figure 2. Repr´esentation du prolex`eme Organisation des Nations Unies
+
+
+
+
+Figure 3. Repr´esentation de l’alias ONU
+
+
+tion flexionnelle) et quatre formes fl´echies pour le d´eriv´e : les accords en genre et en
+nombre d’un adjectif en franc¸ais.
+    Enfin, l’´ecriture de l’alias ONU est raffin´ee en plusieurs repr´esentations : une
+premi`ere avec seulement une majuscule initiale (orthographyName = ”lowerCase”)
+et une seconde avec des points (orthographyName = ”withDots”).
+
+
+5.2. Les sens
+
+    Pour d´ecrire la s´emantique des entr´ees d’un mˆeme prolex`eme, nous utilisons en
+g´en´eral deux cat´egories de donn´ees comme attributs :
+                                                                         Prolexbase et LMF      73
+
+
+
+
+Figure 4. Repr´esentation de l’adjectif onusien
+
+
+    – le mode de formation du terme14 (/term provenance/ ) ;
+    – l’´etymologie (/etymology/ ).
+    La figure 5 reprend les trois exemples pr´ec´edents, Organisation des Nations
+Unies, ONU et onusien. Les deux premiers ont pour mode de formation leur type
+d’alias (termProvenance = ”fullForm” et termProvenance = ”initialism”) et le
+troisi`eme, sa cat´egorie de d´eriv´e termProvenance = ”relationalAdjective”. Dans les
+trois cas, l’´etymologie est l’identificateur unique du pivot correspondant (etymo-
+logy = ”48 226”). Par ce partage de la mˆeme e´ tymologie, les diff´erents lemmes d’un
+prolex`eme peuvent eˆ tre regroup´es.
+    De plus, les sens de l’alias et du d´eriv´e sont en relation avec celui du repr´esentant
+du prolex`eme. Ces relations entre sens comportent comme label le type de relation
+(alias ou derivative)15 . Notons que cette fac¸on de d´ecrire les d´eriv´es permet e´ galement
+de repr´esenter des formes particuli`eres de d´eriv´e (par exemple suppl´etives), sous la
+forme d’une arborescence.
+   Le mod`ele LMF permet d’avoir une entr´ee lexicale avec plus d’un sens : par
+exemple, Paris pourra eˆ tre une entr´ee lexicale avec une partie sense qui fait r´ef´erence
+au pivot « capitale de la France » et une autre partie sense qui fait r´ef´erence au pivot
+« ville du Texas », alors que, dans Prolexbase, les homonymes constituent des entr´ees
+
+14. Lorsque cet attribut prend la valeur /quasi-synonym/, nous ajoutons un attribut /usage/, pour
+pr´eciser le diasyst`eme.
+15. Si des expansions classifiantes ou des e´ ponymes sont pr´esents dans le lexique, nous ajoutons
+de mˆeme des relations entre les sens dont l’attribut label prend les valeurs context ou eponymy.
+74   TAL. Volume 49 - n˚1/2008
+
+
+
+
+Figure 5. Repr´esentation des relations entre les sens associ´es au prolex`eme Organi-
+sation des Nations Unies, a` l’alias ONU et a` l’adjectif onusien
+
+
+distinctes16 . Cependant, dans LMF si les diff´erents sens ne sont pas reli´es aux mˆemes
+formes il faut cr´eer diff´erentes entr´ees lexicales. Par exemple, il y a une entr´ee pour la
+France et une pour le France. Nous ajoutons sur le sens du prolex`eme un attribut de
+notori´et´e (reliabilityCode = ”commonlyUsed”17), car celle-ci d´epend du sens, en cas
+d’homonyme (Paris est plus connu comme la capitale de la France que comme une
+ville du Texas...).
+    Pour r´esumer, presque tous les alias et tous les d´eriv´es d’un prolex`eme sont
+repr´esent´es par une entr´ee lexicale ; ces entr´ees sont reli´ees entre elles via leurs sens,
+formant une arborescence dont la racine est le repr´esentant du prolex`eme. En franc¸ais,
+cette arborescence n’a, en g´en´eral, qu’un niveau sous la racine, mais lorsqu’il y a des
+alias ou des d´eriv´es de d´eriv´e, ils sont repr´esent´es par des niveaux suppl´ementaires,
+tous reli´es au pivot du prolex`eme via l’attribut d’´etymologie. Ainsi, pour traduire beo-
+grananinov, le traducteur pourra savoir qu’il s’agit de l’adjectif possessif du nom rela-
+tionnel (masculin) du prolex`eme serbe reli´e au mˆeme pivot que le prolex`eme franc¸ais
+Belgrade et sugg´erer d’un Belgradois.
+
+16. Notons que l’homonymie est une relation d´ependante de la langue. En anglais, le nom
+propre London correspond a` la capitale anglaise, mais aussi a` une ville de l’Ontario ; alors
+qu’en franc¸ais, ces deux noms ne sont pas homonymes (Londres versus London).
+17. Les valeurs prises par cet attribut sont d´etaill´ees en annexe 2.
+                                                                      Prolexbase et LMF     75
+
+
+6. Description multilingue
+
+    Nous repr´esentons grˆace a` l’extension multilingue les pivots, ainsi que leurs re-
+lations. Rappelons en effet que, par exemple, le pivot 38558 (Paris) est en relation
+de synonymie (diaphasique) avec le pivot de Ville lumi`ere, en relation de m´eronymie
+                   ˆ
+avec le pivot de Ile-de-France    et en relation d’accessibilit´e (rep´erage « capitale »)
+avec le pivot de France. Les pivots mettent e´ galement en relation les prolex`emes de
+diff´erentes langues. Par exemple le pivot 38558 relie le prolex`eme Paris en franc¸ais et
+le prolex`eme Paris en anglais (figure 1).
+     La figure 6 illustre ces liens : il faut bien saisir que les classes Lexicon et Sense Axis
+se rattachent toutes deux au niveau de la ressource lexicale. Les diff´erentes classes de
+ProlexLMF sont indiqu´ees en italique sur la gauche de la figure. On y voit les entr´ees
+lexicales correspondant au prolex`eme Paris, a` son d´eriv´e (nom relationnel) Parisien
+et au prolex`eme France, en franc¸ais et en anglais. Chaque relation entre sens (ici
+d´eriv´e de type nom relationnel) est repr´esent´ee par un point et deux fl`eches poin-
+tant vers les sens li´es. De plus, chaque prolex`eme d’une langue est reli´e a` un pivot,
+c’est-`a-dire un Sense Axis en LMF, via son e´ tymologie ; inversement chaque Sense
+Axis peut r´ef´erencer le repr´esentant du prolex`eme dans diff´erentes langues. Ce lien est
+repr´esent´e dans la figure par une fl`eche a` double sens. La relation d’accessibilit´e entre
+Paris et France est implant´ee via la relation entre les pivots correspondants ; dans la
+figure 6, cette relation est e´ galement repr´esent´ee par un point et deux fl`eches pointant
+vers les pivots.
+   Les valeurs pour la cat´egorie de donn´ees /label/ qui caract´erise les relations au
+niveau des pivots sont les suivantes :
+   – /quasi-synonym/ pour la synonymie ;
+   – /partitive relation/ pour la m´eronymie ;
+   – /associative relation/ pour l’accessibilit´e ;
+   – /generic relation/ pour l’hyperonymie.
+    La figure 7 montre l’exemple de la relation d’accessibilit´e que nous avons
+sch´ematis´ee par un point et deux fl`eches vers les pivots 38558 et 27 dans la figure 6.
+Cette relation associe donc le pivot de Paris et le pivot de France ; elle a pour label as-
+sociativeRelation et pour domaine (/subject field/ ) capital. Les relations de synonymie
+et de m´eronymie sont repr´esent´ees selon le mˆeme principe. Pour la synonymie, il est
+possible de pr´eciser l’indicateur diasyst´ematique via la cat´egorie de donn´ees /usage/.
+     Il est aussi pr´evu dans le mod`ele LMF de faire un lien vers une description
+ext´erieure a` la ressource, par la classe Interlingual External Ref. Nous avons donc
+conserv´e tels quels notre typologie et notre paradigme d’existence, en utilisant les
+cat´egories de donn´ees /external system/ et /external reference/. Par exemple, la fi-
+gure 8 montre que le pivot de Paris a pour type City.
+76   TAL. Volume 49 - n˚1/2008
+
+
+
+
+Figure 6. Vue g´en´erale des relations s´emantiques et multilingues
+
+
+
+
+Figure 7. Une instance de la relation d’accessibilit´e
+                                                                       Prolexbase et LMF      77
+
+
+
+
+Figure 8. Une instance du lien vers la typologie
+
+
+7. Des mod`eles de Prolexbase
+
+     Comme tout syst`eme d’information conc¸u d’une part pour refl´eter le plus
+fid`element possible ce qu’il repr´esente, et d’autre part pour eˆ tre exploitable et main-
+tenable, Prolexbase dispose de plusieurs mod`eles, li´es, formant une hi´erarchie d’abs-
+traction18 .
+    Les recherches en mod´elisation des donn´ees ont e´ tabli, depuis la seconde moiti´e
+des ann´ees 60, les avantages, et mˆeme les n´ecessit´es, pour un syst`eme d’information de
+s’appuyer sur une telle hi´erarchie de mod`eles, qui comporte en g´en´eral trois niveaux :
+conceptuel (le plus abstrait), logique (interm´ediaire) et physique (le plus proche de
+la machine) (Elmasri et Navathe, 2007). Ces niveaux correspondent en particulier a`
+diff´erents types d’acteurs interagissant avec le syst`eme d’information : les utilisateurs
+se servent du mod`ele conceptuel (souvent mˆeme de certaines vues particuli`eres de ce
+mod`ele), les analystes-d´eveloppeurs manipulent les concepts du niveau logique et les
+administrateurs utilisent le mod`ele physique pour l’optimisation du fonctionnement et
+de la maintenance du syst`eme.
+    Le mod`ele conceptuel est celui qui nous permet (nous, eˆ tres humains) de raisonner
+sur le syst`eme d’information, donc de travailler avec cette ressource. Il convient que
+le mod`ele conceptuel soit un reflet des plus fid`eles du r´eel qu’il repr´esente : le mod`ele
+conceptuel de Prolexbase a e´ t´e rappel´e en section 2. La r´eflexion qui a abouti a` ce
+mod`ele conceptuel ne pouvait que relever de la linguistique, puisque le r´eel est ici
+la langue naturelle ; ses principes et ses d´etails ont e´ t´e publi´es dans (Tran et Maurel,
+2006). C’est lui que nous exprimons dans le cadre propos´e par LMF ; ProlexLMF est
+un mod`ele conceptuel.
+    Le mod`ele physique sert a` optimiser l’organisation, le stockage et la maintenance
+des donn´ees, en particulier la maintenance de la coh´erence (une facette importante de
+la qualit´e) des donn´ees : le mod`ele physique de Prolexbase est une base de donn´ees
+relationnelle (celui du syst`eme de gestion de bases de donn´ees MySQL (Dubois et al.,
+2004)). Les motivations et les caract´eristiques techniques de ce mod`ele ont e´ t´e d´ecrites
+dans (Tran, 2006).
+18. L’abstraction s’entend ici dans son sens classique en informatique : niveau d’abstraction par
+rapport au codage binaire.
+78   TAL. Volume 49 - n˚1/2008
+
+
+    Par d´efinition, le mod`ele logique permet aux d´eveloppeurs d’exploiter les in-
+formations. Le mod`ele logique de Prolexbase est, par d´efaut, le mod`ele relation-
+nel (Codd, 1970). Pourtant, le mod`ele relationnel n’est pas largement utilis´e par les
+d´eveloppeurs sp´ecialistes du TAL or Prolexbase est une ressource pour le TAL. De
+plus, notre objectif est d’offrir la ressource en acc`es libre sur le Web, et le standard
+de repr´esentation des donn´ees dans ce cadre est XML. Les outils de manipulation
+des donn´ees XML (pour ex´ecuter des requˆetes en particulier) se servent couramment
+du sch´ema de ces donn´ees pour optimiser leurs traitements. Ainsi, dans ce cadre, le
+mod`ele logique est fourni par le sch´ema XML. Pour eˆ tre utile au TAL, Prolexbase doit
+donc eˆ tre muni d’un sch´ema XML aussi naturel que possible pour les chercheurs et
+d´eveloppeurs en TAL.
+    Les initiatives de l’ISO/TC 37 pour d´efinir un ensemble de standards pour la
+cr´eation et l’utilisation des ressources linguistiques vont dans le sens d’une adh´esion
+de la partie la plus large possible de la communaut´e TAL a` un cadre commun de des-
+cription, et, par suite, d’exploitation de ces ressources. Comme il est courant dans
+le domaine de la normalisation, la d´emarche du projet LMF consiste a` r´ealiser une
+synth`ese des meilleures pratiques pour les ressources lexicales. LMF repr´esente clai-
+rement un cadre pour l’expression des mod`eles conceptuels des ressources lexicales.
+Nous avons explor´e des pistes pour exprimer le mod`ele conceptuel de Prolexbase dans
+ce cadre, et nous proposons dans cet article une solution qui montre que ce projet LMF
+est arriv´e a` un niveau de maturit´e suffisant pour qu’une ressource comme Prolexbase
+rentre dans son cadre sans y perdre ses sp´ecificit´es.
+    Il ressort de nos analyses que la seule chose qui peut eˆ tre consid´er´ee comme une
+difficult´e de LMF pour Prolexbase est la conservation de la notion mˆeme de pro-
+lex`eme, qui regroupe l’ensemble des mots d’une langue li´es a` un certain point de vue
+sur un r´ef´erent (nom propre). Le pivot, quant a` lui, trouve un correspondant direct
+dans la mˆeme notion pr´evue dans LMF. Le fait que, pour Prolexbase, la s´emantique se
+d´ecline essentiellement au niveau interlingue ne pose pas de probl`eme non plus dans
+LMF, grˆace a` la possibilit´e de d´efinir et param´etrer des relations au niveau des pivots.
+En ce qui concerne le prolex`eme dans ProlexLMF, au niveau d’un lexique (c’est-`a-
+dire d’une langue donn´ee) on y acc`ede par n’importe lequel de ses constituants, dont
+le sens fait r´ef´erence au pivot (attribut /etymology/ ) ; on peut reconstituer l’ensemble
+du prolex`eme soit grˆace a` ce pivot (en s´electionnant toutes les entr´ees lexicales dont
+les sens partagent la mˆeme valeur pour /etymology/ ), soit en suivant les liens qui re-
+lient les sens.
+   Nous nous e´ tions d’abord pench´es sur TMF (Terminological Markup Lan-
+guage) (Romary, 2002) du fait de son approche onomasiologique, regroupant les
+termes sous le concept auquel ils se rattachent19 , qui correspond naturellement a` l’or-
+
+19. Les structures des descriptions lexicales peuvent organiser la relation entre les mots et les
+sens en privil´egiant les uns ou les autres. LMF suit une approche s´emasiologique en associant
+l’entr´ee lexicale aux mots (ou groupes de mots) et en consid´erant les sens comme des sous-
+e´ l´ements de ces entr´ees lexicales. TMF permet, quant a` lui, une approche onomasiologique,
+regroupant les mots sous les concepts (ou termes).
+                                                                             Prolexbase et LMF        79
+
+
+ganisation pivot/prolex`eme de Prolexbase. Cependant TMF n’offre pas la richesse de
+description de LMF ; or, les noms propres ne sont pas de simples listes de termes,
+par exemple, ils ont un comportement linguistique qui se rapproche de celui des mots
+compos´es lorsqu’il s’agit de les fl´echir (mˆeme s’il y a plus de ph´enom`enes de fige-
+ment pour les noms propres). Il est en effet important de rappeler le double aspect
+du mod`ele de Prolexbase, qui met l’accent d’une part sur la description ontologique
+des noms propres et d’autre part sur leur morphologie : en plus des flexions il per-
+met de repr´esenter les d´erivations, les variantes (alias), les flexions des d´erivations,
+les flexions des alias, les d´erivations des d´erivations (et des alias), etc. Prolexbase est
+une ressource lexicale, qui contient des descriptions morphologiques, syntaxiques et
+s´emantiques, dont le mod`ele conceptuel n´ecessite un cadre comparable a` celui des
+autres ressources lexicales.
+    Rappelons que notre objectif en d´ecrivant le mod`ele conceptuel de Prolexbase dans
+un format LMF est d’aboutir a` un mod`ele logique qui facilite les d´eveloppements au-
+tour de cette ressource. Nous remarquons que, bien que se situant au niveau concep-
+tuel, en favorisant l’acc`es direct aux lemmes (entr´ees lexicales) un mod`ele compa-
+tible LMF augmente l’efficacit´e des applications telles que la recherche d’information,
+l’aide a` la traduction, l’alignement, l’extraction terminologique, etc. Dans ProlexLMF,
+l’acc`es du pivot vers le prolex`eme (implant´e simplement par l’´etymologie) favorise
+aussi des applications ax´ees sur les concepts (`a la TMF20 ).
+    ProlexLMF est donc une e´ tape essentielle pour rattacher a` Prolexbase un sch´ema
+XML aussi efficace et aussi naturel que possible pour les chercheurs et d´eveloppeurs
+en TAL. Mais passer d’un mod`ele conceptuel a` un mod`ele logique correspondant est
+moins e´ vident pour une cible de type sch´ema XML que pour une cible de type base
+de donn´ees relationnelle (Bouchou et al., 2005). Si un sch´ema XML accompagne
+la description de LMF, c’est loin d’ˆetre le seul possible, les contributeurs a` LMF
+le rappellent eux-mˆemes. En fait, les possibilit´es offertes par XML sont au moins
+aussi nombreuses que celles que l’on aurait avec un mod`ele orient´e objet, or Christian
+Soutou analyse par exemple, dans (Soutou, 2002), pas moins de huit possibilit´es de
+repr´esenter dans une base de donn´ees orient´ee objets une association « un a` plusieurs »
+entre deux classes d’un mod`ele conceptuel... Les choix parmi toutes ces possibilit´es
+s’op`erent selon un crit`ere op´erationnel, c’est-`a-dire en fonction des traitements dont
+le mod`ele logique doit eˆ tre le support. C’est a` ce niveau-l`a (le sch´ema XML) que
+                                             ´
+doit intervenir la discussion initi´ee par Eric   Laporte dans (Laporte, 2007), concer-
+nant l’ad´equation des formats standard de lexiques aux applications qui utilisent ces
+lexiques. Nous pr´esentons en annexe une DTD issue de ProlexLMF, que nous utilisons
+pour une vue XML de Prolexbase propos´ee sur le site du CNRTL21 , mais une discus-
+sion des avantages et inconv´enients de cette DTD e´ chappe au cadre de cet article.
+
+20. A` ce propos il nous paraˆıt int´eressant de relever le fait que notre repr´esentation de l’organisa-
+tion pivot/prolex`eme dans ProlexLMF peut eˆ tre directement reprise pour adapter une ressource
+en TMF a` un format LMF.
+21. Un exemple en XML (Paris) se trouve e´ galement en annexe.
+80   TAL. Volume 49 - n˚1/2008
+
+
+8. Conclusion
+
+    Apr`es avoir pr´esent´e a` la fois le dictionnaire de noms propres multilingue muni
+de relations Prolexbase et le projet de norme LMF (Language resource management,
+Lexical markup framework), nous avons montr´e qu’il est possible de disposer d’une
+vision de Prolexbase conforme a` LMF. Ceci bien que l’approche entre les deux pro-
+jets soit a priori diff´erente, puisque Prolexbase privil´egie l’aspect conceptuel du nom
+propre plutˆot que les entr´ees lexicales qui lui correspondent dans chaque langue.
+     Cette r´eorganisation est possible essentiellement par l’utilisation de l’exten-
+sion multilingue de LMF, elle-mˆeme d´ependante de l’extension s´emantique. La
+repr´esentation interne a` chaque langue s’appuie sur le noyau, l’extension morpho-
+logique et l’extension s´emantique. Au passage, cela nous a aussi amen´es a` rempla-
+cer certains noms d’attributs ou certaines valeurs utilis´es dans Prolexbase par des
+cat´egories de donn´ees conformes a` la norme ISO 12620. En effet, plus nous avan-
+cions dans notre e´ tude de LMF (relativement a` Prolexbase) et plus l’importance d’un
+langage de description standard s’est impos´ee.
+    Prolexbase regroupe tous les niveaux de description (morphologie, syntaxe et
+s´emantique) ; son originalit´e est de permettre de d´ecrire finement a` la fois l’ontologie
+des noms propres et leur morphologie. Dans cet article nous avons ax´e la pr´esentation
+sur les formes fl´echies, pour autant Prolexbase s’appuie e´ galement sur des ensembles
+de r`egles de flexion, qui peuvent eˆ tre exprim´ees dans l’extension morphologique
+propos´ee par LMF (cette expression est en cours de mise au point). L’ajout d’autres
+caract´eristiques dans Prolexbase est encore pr´evu, comme la description des contextes
+d’apparition de certains noms propres (grammaires locales) par exemple : l`a encore, le
+cadre propos´e par LMF pour la description syntaxique sera utile. Ces deux exemples
+justifient notre motivation pour l’utilisation de LMF, dans le sens o`u ce projet de
+norme se r´ev`ele offrir un cadre a` la fois assez complet et assez souple pour mod´eliser
+une ressource lexicale telle que Prolexbase.
+
+Remerciements
+Les auteurs remercient Agata Savary pour ses remarques pertinentes, ainsi que les
+relecteurs anonymes qui ont beaucoup contribu´e a` l’am´elioration de cet article.
+
+
+9. Bibliographie
+
+Bouchou B., Tran M., Maurel D., « Towards an XML Representation of Proper Names and
+   Their Relationships », NLDB’2005, in Lecture Notes in Computer Science, 3513, p. 44-55,
+   2005.
+Codd E., « A Relational Model of Data for Large Shared Data Banks », CACM, 1970.
+Coseriu E., « Le double probl`eme des unit´es dia-s », Les Cahiers dia. Etudes sur la diachronie
+   et la variation linguistique, Universit´e de Gent, Belgique, vol. 1, p. 9-16, 1998.
+Dubois P., Hinz S., Pedersen C., MySQL : Guide officiel, CampusPress, Paris, 2004.
+                                                                     Prolexbase et LMF       81
+
+
+Elmasri R., Navathe S., Conception et architecture des bases de donn´ees, Pearson Education,
+   4e e´ dition, 2007.
+Fellbaum C., Miller G. A., « Morphosemantic Links in WordNet », TAL 44, vol. 2, p. 69-80,
+    2003.
+Francopoulo G., Declerck T., Monachini M., Romary L., « The relevance of standards to re-
+   search infrastructure », LREC, 2006a.
+Francopoulo G., Monte G., Calzolari N., Monachini M., Bel N., Soria C., « Lexical Markup
+   Framework (LMF) », LREC 2006, Genoa, Italie, 2006b.
+ISO/TC 37/SC 4, Language resource management - Lexical markup framework (LMF),
+   http ://lirics.loria.fr/documents.html, 2007.
+Krstev C., Stankovi´c R., Vitas D., Obradovi´c I., « WS4LR - a Workstation for Lexical Re-
+   sources », LREC 2006, Genoa, Italie, p. 1692-1697, 2006.
+Laporte E., « Lexicon management and standard formats », Cornell University Library,
+   http ://arxiv.org/abs/0711.3449v1, 2007.
+Maurel D., Tran M., Friburger N., « Projet Technolangue NomsPropres : Constitution et exploi-
+   tation d’un dictionnaire relationnel multilingue de noms propres », TALN 2006, Cahiers du
+   Cental, Louvain, Belgique, p. 927-936, 2006.
+Maurel D., Vitas D., S. S. K., Koeva S., « Prolex : a lexical model for translation of proper
+   names. Application to French, Serbian and Bulgarian », Bulag, vol. 32, p. 55-72, 2007.
+Paumier S., De la Reconnaissance de Formes Linguistiques a` l’Analyse Syntaxique, Th`ese de
+   Doctorat en Informatique, Universit´e de Marne-la-Vall´ee, 2003.
+Romary L., CLS Framework : Listing of                    ISO     12620    Data    Categories,
+   http ://www.ttt.org/clsframe/datcats.html, 2000.
+Romary L., The ISO 16642 document (draft),                     Version   ISO/TC      37/SC   3,
+   http ://www.loria.fr/projets/TMF/tmf.html, 2002.
+Salmon-Alt S., « V 1 Ωa = able ou «Normaliser des lexiques TAL est d´electable» », TALN,
+   2006.
+Salmon-Alt S., Akrout A., Romary L., « Proposals for a normalized representation of Stan-
+   dard Arabic full form lexica », Second International Conference on Machine Intelligence
+   (ACIDCA-ICMI), 2005.
+Savary A., « A formalism for the computational morphology of multi-word units », Archives of
+   Control Sciences, 15(LI), Silesian University of Technology, 2005.
+Silberztein M., « Nooj : A cooperative Object Oriented Architecture for NLP », Cahiers de la
+    MSH Ledoux, S´erie Archive, Bases, Corpus, vol. 1, p. 351-361, 2004.
+Soutou C., De UML a` SQL : conception de bases de donn´ees, Eyrolles, Paris, 2002.
+Tran M., Prolexbase, un dictionnaire relationnel multilingue de noms propres : conception,
+   impl´ementation et gestion en ligne, th`ese de doctorat en informatique de l’Universit´e
+   Franc¸ois Rabelais de Tours, 2006.
+Tran M., Maurel D., « Prolexbase : un dictionnaire relationnel multilingue de noms propres »,
+   TAL, vol. 47, n˚ 3, p. 115-139, 2006.
+82   TAL. Volume 49 - n˚1/2008
+
+
+Annexe 1. Les termes de Prolexbase et les cat´egories de donn´ees
+
+     Le tableau 1 est le r´esultat de notre analyse des cat´egories de donn´ees. Nous avons
+recherch´e celles qui correspondent aux termes que nous utilisons pour repr´esenter
+dans Prolexbase les noms propres, leurs d´eriv´es et leurs relations. Par exemple, la
+cat´egorie de d´eriv´e sera comprise comme le /mode de formation du terme/ et sera
+not´ee /term provenance/ dans le sch´ema XML.
+
+
+                                                          Data Categories
+ Prolex
+                                 Position      Franc¸ais                         Anglais
+ Langue                          A10.7         indicatif de la langue            language symbol
+ Prolex`eme et alias             A.2.1.1       entr´ee principale                main entry term
+ D´eriv´e                        A.2.1.1       entr´ee principale                main entry term
+ Cat´egorie de d´eriv´e          A.2.4.1       mode de formation du terme        term provenance
+ Relation de d´erivation         A.2.4.2       e´ tymologie                      etymology
+ Notori´et´e (Blark)             A.2.3.4       fr´equence                        reliability code
+ Phon´etique                     A.2.5         prononciation                     pronunciation
+ Expansion classifiante          A.5.3         contexte                          context
+ D´etermination (contrainte)     A.2.1.18.1    cooccurent                        collocation
+ Classe                          A.2.2.1       cat´egorie grammaticale           part of speech
+ Morphologie                     A.2.2         morphologie                       morphology
+ Antonomase                      A.2.4.1       mode de formation du terme        term provenance
+ Terminologie                    A.2.4.1       mode de formation du terme        term provenance
+ Figement                        A.2.4.1       mode de formation du terme        term provenance
+ Relation d’´eponymie            A.2.4.2       e´ tymologie                      etymology
+ Pivot                           A3            e´ quivalence                     equivalence
+ Relation                        A6            relation internotion              concept relation
+ Hyperonymie                     A6.1          relation g´en´erique              generic relation
+ M´eronymie                      A6.2          relation partitive                partitive relation
+ Accessibilit´e                  A6.4          relation associative              associative relation
+ Synonymie                       A.2.1.13      quasi-synonyme                    quasi-synonym
+ Rep´erage                       A4            domaine                           subject field
+ Diasyst`eme                     A.2.3.4       usage                             usage
+
+Tableau 1. Correspondance entre les termes de Prolexbase et les cat´egories de
+donn´ees
+                                                                   Prolexbase et LMF     83
+
+
+Annexe 2. Adaptations de Prolexbase aux cat´egories de donn´ees (types d’alias et
+notori´et´e)
+
+   L’analyse des cat´egories de donn´ees a men´e e´ galement a` certaines adaptations dans
+Prolexbase. Ainsi, il ressort du tableau 2 qu’il faut ajouter dans Prolexbase la cat´egorie
+d’alias nom usuel et diversifier les cat´egories Abr´eviation et Sigle ou acronyme.
+
+                                                   Data Categories
+   Prolex
+                               Position      Franc¸ais             Anglais
+   Prolex`eme                  A.2.1.7       forme int´egrale      full form
+   0                           A.2.1.5       nom usuel             common name
+   Variante                    A.2.1.9       variante              variant
+                               A.2.1.8.1     abr´eviation          abbreviation
+   Abr´eviation
+                               A.2.1.8.2     forme courte          short form
+                               A.2.1.8.3     sigle                 initialism
+   Sigle ou acronyme
+                               A.2.1.8.4     acronyme              acronym
+   0                           A.2.1.10      forme translitt´er´ee transliterated form
+   Transcription               A.2.1.11      forme transcrite      transcribed form
+   Latin                       A.2.1.12      forme romanis´ee      romanized form
+   Synonyme diatopique                       quasi-
+                               A.2.1.13                            quasi synonym
+   Synonyme diastratique                     synonyme
+   glose                       A.5.2         explication           explanation
+
+Tableau 2. Correspondance entre les cat´egories d’alias de Prolexbase et les type de
+terme des cat´egories de donn´ees
+
+     De mˆeme, les attributs de notori´et´e de Prolexbase (voir le tableau 3) ont e´ t´e mo-
+difi´es et sont pass´es de quatre degr´es a` trois, pour suivre les recommandations de l’ISO
+12620.
+
+                                             Data Categories
+             Prolex
+                              Position     Franc¸ais    Anglais
+             International
+                                           fr´equent       commonly used
+             Europ´een
+                              A.2.3.4
+             National                      peu fr´equent   unfrequently used
+             D´etails                      rare            rarely used
+
+Tableau 3. Correspondance entre les attributs de notori´et´e de Prolexbase et ceux de
+fr´equence des cat´egories de donn´ees
+84   TAL. Volume 49 - n˚1/2008
+
+
+Annexe 3. Sch´ema conceptuel de ProlexLMF (classes UML)
+
+   La figure 9 pr´esente l’ensemble des classes de ProlexLMF (la mˆeme classe Lexical
+Resource est plac´ee en haut et en bas de cette figure).
+
+
+
+
+Figure 9. Les classes LMF utilis´ees par Prolexbase
+                                                                  Prolexbase et LMF    85
+
+
+Annexe 4. Exemples d’attributs pour les diff´erentes classes utilis´ees dans
+ProlexLMF
+
+    A` chacune des classes pr´esent´ees sur la figure 9 de l’annexe 3 sont associ´es des
+attributs. Les noms de ces derniers ont e´ t´e choisis parmi les cat´egories de donn´ees
+existantes. L’attribut /entrySource/ peut eˆ tre ajout´e a` la classe Lexical Entry pour
+distinguer les entr´ees lexicales relevant de prolex`emes dans le cas o`u il y aurait dans
+le lexique d’autres entr´ees lexicales que celles provenant de Prolexbase, par exemple
+en cas de fusion avec une autre ressource lexicale. Le tableau 4 pr´esente les attribut
+n´ecessaires a` la description du franc¸ais.
+
+
+                                  Data Categories
+                  Classes                  Exemples d’attributs
+                                           partOfSpeech
+                  Lexical Entry            collocation
+                                           entrySource
+                  Lemma                    writtenForm
+                                           writtenForm
+                                           grammaticalNumber
+                                           grammaticalGender
+                  Word Form                grammaticalCase
+                                           grammaticalTense
+                                           grammaticalMood
+                                           person
+                                           writtenForm
+                  Form representation
+                                           orthographyName
+                                           etymology
+                                           termProvenance
+                  Sense
+                                           usage
+                                           reliabilityCode
+                  Sense Relation           label
+                  Sense Axis               id
+                                           label
+                  Sense Axis Relation      subjectField
+                                           usage
+                  Interlingual             externalSystem
+                  External Ref             externalReference
+
+Tableau 4. Exemples d’attributs pour les diff´erentes classes utilis´ees dans Prolexbase
+86   TAL. Volume 49 - n˚1/2008
+
+
+Annexe 5. Une DTD de ProlexLMF
+
+    Contrairement a` ce qui est pr´econis´e dans le cadre TMF et LMF22 , nous explicitons
+les attributs des classes sous la forme d’attributs XML23 .
+
+<!DOCTYPE LexicalResource [
+   <!ELEMENT LexicalResource (GlobalInformation, Lexicon+, SenseAxis*)>
+   <!ELEMENT GlobalInformation ([...])>
+   <!ELEMENT Lexicon (LexicalEntry+)>
+      <!ATTLIST Lexicon languageSymbol CDATA #REQUIRED>
+   <!ELEMENT LexicalEntry (Lemma, WordForm+, Sense+)>
+      <!ATTLIST LexicalEntry partOfSpeech CDATA #REQUIRED>
+      <!ATTLIST LexicalEntry entrySource CDATA #IMPLIED ”prolex”>
+      <!ATTLIST LexicalEntry collocation CDATA #IMPLIED>
+   <!ELEMENT Lemma ()>
+      <!ATTLIST Lemma writtenForm CDATA #REQUIRED>
+   <!ELEMENT WordForm (FormRepresentation*)>
+      <!ATTLIST WordForm writtenForm CDATA #REQUIRED>
+      <!ATTLIST WordForm grammaticalNumber CDATA #IMPLIED>
+      <!ATTLIST WordForm grammaticalGender CDATA #IMPLIED>
+      [...]
+   <!ELEMENT FormRepresentation ()>
+      <!ATTLIST FormRepresentation writtenForm CDATA #REQUIRED>
+      <!ATTLIST FormRepresentation orthographyName CDATA #IMPLIED>
+   <!ELEMENT Sense (SenseRelation*)>
+      <!ATTLIST Sense id ID #REQUIRED>
+      <!ATTLIST Sense etymology CDATA #REQUIRED>
+      <!ATTLIST Sense termProvenance CDATA #REQUIRED>
+      <!ATTLIST Sense usage CDATA #IMPLIED>
+      <!ATTLIST Sense reliabilityCode CDATA #IMPLIED>
+   <!ELEMENT SenseRelation ()>
+      <!ATTLIST SenseRelation label CDATA #REQUIRED>
+      <!ATTLIST SenseRelation targets IDREFS #REQUIRED>
+   <!ELEMENT SenseAxis (SenseAxisRelation*, InterlingualExternalRef*)>
+      <!ATTLIST SenseAxis id ID #REQUIRED>
+   <!ELEMENT SenseAxisRelation ()>
+      <!ATTLIST SenseAxisRelation label CDATA #REQUIRED>
+      <!ATTLIST SenseAxisRelation targets IDREFS #REQUIRED>
+      <!ATTLIST SenseAxisRelation subjectField CDATA #IMPLIED>
+      <!ATTLIST SenseAxisRelation usage CDATA #IMPLIED>
+   <!ELEMENT InterlingualExternalRef ([...])> ] >
+
+22. N’introduire les caract´eristiques des classes que sous forme de couples d’attributs (att, val)
+d’un e´ l´ement g´en´erique appel´e feat.
+23. Ceci afin de d´etecter les erreurs d’´el´ements ou d’attributs a` l’aide des validateurs XML.
+                                                         Prolexbase et LMF   87
+
+
+
+
+Annexe 6. L’entr´ee Paris dans le format XML de l’annexe 5
+
+< ?xml version=”1.0” encoding=”utf-8” ?>
+<LexicalResource>
+    <GlobalInformation type=”Prolex”> [...] </GlobalInformation>
+    <Lexicon languageSymbol=”Fr”>
+       [...]
+       <LexicalEntry partOfSpeech=”noun”>
+             <Lemma writtenForm=”Paris”/>
+             <WordForm writtenForm=”Paris” grammaticalGender=”masculine
+                feminine” grammaticalNumber=”singular”/>
+             <Sense id=”75000” etymology=”38558” termProvenance=”fullForm”
+                reliabilityCode=”commonlyUsed”>
+                <SenseRelation label=”derivative to” targets=”75001 [...]”/>
+             </Sense>
+       </LexicalEntry>
+       [...]
+       <LexicalEntry partOfSpeech=”adjective”>
+             <Lemma writtenForm=”parisien”/>
+             <WordForm writtenForm=”parisien” grammaticalGender=”masculine”
+                grammaticalNumber=”singular”/>
+             <WordForm writtenForm=”parisiens” grammaticalGender=”masculine”
+                grammaticalNumber=”plural”/>
+             <WordForm writtenForm=”parisienne” grammaticalGender=”feminine”
+                grammaticalNumber=”singular”/>
+             <WordForm writtenForm=”parisiennes” grammaticalGender=”feminine”
+                grammaticalNumber=”plural”/>
+             <Sense id=”75001” etymology=”38558”
+                termProvenance=”relationalAdjective” reliabilityCode=”commonlyUsed”>
+                <SenseRelation label=”derivative from” targets=”75000”/>
+             </Sense>
+       </LexicalEntry>
+       [...]
+       <LexicalEntry partOfSpeech=”noun” collocation=”la”>
+             <Lemma writtenForm=”France”/>
+             <WordForm writtenForm=”France” grammaticalGender=”feminine”
+                grammaticalNumber=”singular”/>
+             <Sense id=”33” etymology=”27” termProvenance=”fullForm”
+                reliabilityCode=”commonlyUsed”>
+                <SenseRelation label=”derivative to” targets=”[...]”/>
+             </Sense>
+       </LexicalEntry>
+88   TAL. Volume 49 - n˚1/2008
+
+
+         [...]
+   </Lexicon>
+   <Lexicon languageSymbol=”En”>
+         [...]
+         <LexicalEntry partOfSpeech=”noun”>
+               <Lemma writtenForm=”Paris”/>
+               <WordForm writtenForm=”Paris” grammaticalNumber=”singular”/>
+               <Sense id=”75000” etymology=”38558” termProvenance=”fullForm”
+                   reliabilityCode=”commonlyUsed”>
+                   <SenseRelation label=”derivative to” targets=”[...]”/>
+               </Sense>
+         </LexicalEntry>
+         [...]
+   </Lexicon>
+   [...]
+   <SenseAxis id=”38558”>
+         <SenseAxisRelation label=”AssociativeRelation to” targets=”27”
+               subjectField=”capital”/>
+         [...]
+         <InterlingualExternalRef externalSystem=”typology”
+               externalReference=”city”/>
+   </SenseAxis>
+   [...]
+</LexicalResource>
+

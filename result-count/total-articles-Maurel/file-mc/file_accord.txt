@@ -1,0 +1,13 @@
+../articles/total-articles-Maurel/txt/2005-corela-1203-hs-2-une-ontologie-multilingue-des-noms-propres.pdf2txt
+../articles/total-articles-Maurel/txt/2006-014330ar.pdf2txt
+../articles/total-articles-Maurel/txt/2011-corpus-2086-10-la-traduction-des-noms-propres-une-etude-en-corpus.pdf2txt
+../articles/total-articles-Maurel/txt/2012_CMLF.pdf2txt
+../articles/total-articles-Maurel/txt/Corpus2011.pdf2txt
+../articles/total-articles-Maurel/txt/MSH_1990__109__5_0.pdf2txt
+../articles/total-articles-Maurel/txt/MSH_1993__123__45_0.pdf2txt
+../articles/total-articles-Maurel/txt/MSH_1996__136__43_0.pdf2txt
+../articles/total-articles-Maurel/txt/TAL-2007-48-2-01-Antoine.pdf2txt
+../articles/total-articles-Maurel/txt/TAL-2008-49-1-04-Bouchou.pdf2txt
+../articles/total-articles-Maurel/txt/TALN_2013_ANCOR_FINAL.pdf2txt
+../articles/total-articles-Maurel/txt/taln2015-ETeRNAL-AnonymisationEslo.pdf2txt
+../articles/total-articles-Maurel/txt/tran-2014-0050.pdf2txt

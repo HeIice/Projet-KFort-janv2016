@@ -1,0 +1,4 @@
+../articles/total-articles-Maurel/txt/Anonymisation_ESLO.pdf2txt
+../articles/total-articles-Maurel/txt/TAL-2007-48-2-01-Antoine.pdf2txt
+../articles/total-articles-Maurel/txt/TALN_2013_ANCOR_FINAL.pdf2txt
+../articles/total-articles-Maurel/txt/taln2015-ETeRNAL-AnonymisationEslo.pdf2txt

@@ -1,0 +1,635 @@
+ Article
+
+
+« La formation des gentilés sur Internet »
+
+     Elmar Eggert, Denis Maurel et Odile Piton
+     Revue québécoise de linguistique, vol. 32, n° 1, 2003, p. 25-39.
+
+
+
+
+Pour citer cet article, utiliser l'information suivante :
+
+
+URI: http://id.erudit.org/iderudit/012242ar
+
+DOI: 10.7202/012242ar
+
+Note : les règles d'écriture des références bibliographiques peuvent varier selon les différents domaines du savoir.
+
+
+
+Ce document est protégé par la loi sur le droit d'auteur. L'utilisation des services d'Érudit (y compris la reproduction) est assujettie à sa politique
+
+d'utilisation que vous pouvez consulter à l'URI https://apropos.erudit.org/fr/usagers/politique-dutilisation/
+
+
+
+
+Érudit est un consortium interuniversitaire sans but lucratif composé de l'Université de Montréal, l'Université Laval et l'Université du Québec à
+Montréal. Il a pour mission la promotion et la valorisation de la recherche. Érudit offre des services d'édition numérique de documents
+
+scientifiques depuis 1998.
+
+Pour communiquer avec les responsables d'Érudit : info@erudit.org
+
+
+
+
+                                                                                                     Document téléchargé le 6 janvier 2016 07:55
+         Revue québécoise de linguistique, vol. 32, no 1, 2003, © RQL (UQAM), Montréal
+                      Reproduction interdite sans autorisation de l’éditeur
+
+
+
+
+            LA FORMATION DES GENTILÉS SUR INTERNET
+
+                                   Elmar Eggert
+                          Université de la Ruhr à Bochum
+                                   Denis Maurel
+                               Université de Tours
+                                    Odile Piton
+                               Université de Paris I
+
+
+1. Utilisation des sources écrites sur Internet
+
+
+N     otre travail concerne l’étude de la formation des gentilés (noms d’habitants
+      d’une ville) en français synchronique. Nous avons tout d’abord étudié
+un large corpus de gentilés français, puis nous en avons déduit des règles de
+construction morphophonologique, règles qui nous semblent faire partie de la
+compétence linguistique des locuteurs du français. Nous avons alors utilisé
+la Toile pour y rechercher des exemples de formations de ces gentilés et pour
+valider notre travail d’étude systématique.
+      Dans une première partie, nous allons préciser le domaine linguistique
+sur lequel nous avons travaillé : les gentilés, et expliquer quelles sont leurs
+caractéristiques (section 2) et quelle est la problématique (section 3).
+      L’analyse de ce domaine dans une perspective pragmatique d’utilisation
+dans le traitement automatique de textes nous a conduits à émettre l’hypothèse
+d’une forte régularité dans la formation des gentilés. C’est cette régularité que
+nous allons présenter à la section 4. La recherche de gentilés sur la Toile (section
+5) nous a apporté, à côté de gentilés ofﬁciels, d’autres gentilés – disons «non
+ofﬁciels» – dont la régularité a pu être conﬁrmée. Il importe de signaler que
+l’attestation de telles formes prouve et conﬁrme la validité de notre hypothèse
+d’une construction régulière du gentilé par les locuteurs.
+26                  LA FORMATION DES GENTILÉS SUR INTERNET
+
+2. Les gentilés
+
+      Notre étude porte sur les noms d’habitants, ou gentilés, terme qui désigne
+de manière neutre le lien qui rattache une personne à un lieu. Il faut différen-
+cier ces noms des blasons populaires porteurs de connotation qui renvoient
+également à des habitants, mais qui le font d’une manière parfois affectueuse
+et hypocoristique, souvent humoristique ou critique. Par exemple, les habitants
+de la commune de Saint-André-les-Vergers dans l’Aube sont surnommés les
+«Têtes d’ail»1.
+      L’étude des gentilés est à l’intersection de l’onomastique et de la mor-
+phologie, plus précisément la morphophonologie. Les gentilés se différencient
+d’autres désignations des habitants par deux critères, un critère morphologique
+et un critère sémantique ou pragmatique. Nous posons le critère morphologique
+que le gentilé soit dérivé morphologiquement de la désignation du lieu. La dé-
+rivation comprend, en général, la préﬁxation, la sufﬁxation et la parasynthèse.
+Parmi les noms d’habitants, on trouve surtout des formes sufﬁxées, par exemple
+Colembert – les Colembertois, la préﬁxation et la formation parasynthétique
+(application simultanée d’un préﬁxe et d’un sufﬁxe) ne s’y trouvant pas. Pour-
+tant, certains gentilés sont formés par conversion du nom de lieu, par exemple
+Manois → les Manois, Filain → les Filains2. Le critère sémantique pose que
+le gentilé X-suf porte le sens de «habitants de X», où X est une forme du nom
+de la localité. Cette restriction exclut les dérivés comme la Marseillaise, dont
+le sens réfère à un objet, même si ce sens est dérivé sémantiquement du sens
+primaire du gentilé homonyme.
+      «Gentilé» est le terme technique pour la désignation des noms d’habitants,
+par exemple Toulousain de Toulouse. Les gentilés s’utilisent facilement pour
+se référer aux habitants d’une localité, et leur usage évite l’emploi de tournures
+plus complexes comme les habitants de Toulouse, les gens de Toulouse, ceux
+de Toulouse ou autre. On préfère souvent dire les Toulousains.
+
+
+3. La problématique des gentilés
+
+     Même si la plupart des gentilés sont facilement reconnaissables dans
+leur forme, il en existe plusieurs qui présentent une forme déviante. À part
+
+1 Cf. aussi http://perso.wanadoo.fr/famille.relland.jose/habitantsa/index.htm.
+2 On peut discuter si ces formes résultent de la troncation par haplologie d’une forme sufﬁxée,
+p.ex. Manois → *Manoisois → Manois, mais comme nous ne voudrons pas entrer dans cette
+discussion morphologique, nous nous contentons de constater ces formes.
+                 ELMAR EGGERT, DENIS MAUREL ET ODILE PITON                            27
+
+la simple sufﬁxation du nom de lieu comme dans Toulouse → Toulousain, il
+y a des gentilés qui sont formés par d’autres procédés morphologiques : les
+gentilés peuvent être construits sur un radical supplétif en relation référentielle
+avec le nom de ville associé : par exemple les habitants de Saint-Denis sont
+les Dionysiens. Nous distinguons la base, qui est la partie du nom de lieu qui
+sert à la construction du gentilé, qui peut subir des transformations et qui est
+sufﬁxée (ici : Denis), du radical, qui se trouve dans le gentilé, après avoir subi
+les transformations morphologiques (ici : Dionys-). Ainsi, la forme Dionysien
+est construite par le radical Dionys– et le sufﬁxe –ien, le radical Dionys– étant
+en relation référentielle avec le nom Denis3 du nom de ville Saint-Denis.
+      Théoriquement, la plupart des localités de France ont un gentilé, et nombre
+d’entre elles ont choisi un gentilé ofﬁciel. Une partie de ces gentilés ofﬁciels
+sont connus, principalement ceux des grandes villes françaises (les Parisiens,
+les Marseillais, Les Lyonnais, les Lillois, les Nantais, les Strasbourgeois) et
+de quelques villes plus petites, si elles sont d’un intérêt national : (Besançon
+→ les Bisontins).
+      Les gentilés de la plupart des villes et, surtout, des communes plus petites
+ne sont pas connus, au niveau national, ni même parfois dans la région. Qui
+sait que les habitants de Méréglise, une commune de 74 habitants dans l’Eure-
+et-Loir, s’appellent les Méréglisiens, que Charleville-Mézières possède le
+gentilé ofﬁciel Carolomacérien ou que Réginaburgien est le gentilé ofﬁciel de
+Bourg-la-Reine? La forme savante de tels gentilés paraît compliquée. Elle est
+peu connue. Plus le gentilé présente des irrégularités, plus sa méconnaissance
+paraît grande. Quelle est la conséquence de ce fait? Comme nous avons pu le
+constater, l’emploi des gentilés est pratique, mais les locuteurs ne les connais-
+sent pas tous : que feront donc les locuteurs francophones quand ils voudront
+désigner les habitants de Charleville-Mézières tout en ignorant le gentilé of-
+ﬁciel? Ils vont se construire un gentilé avec leur compétence linguistique. Il
+pourrait y avoir une forme comme °Charlevillois ou bien °Méziérois. C’est la
+situation imaginée de plusieurs personnes qui publient leur page personnelle
+sur Internet et qui utilisent des gentilés tout en ignorant les gentilés ofﬁciels.
+Comment arrivent-elles à ces formes gentiléennes tandis que le gentilé ofﬁciel
+est Carolomacérien ? Pourquoi les locuteurs ne forment-ils pas des formes
+comme *Charlois, *Charlevilliste ou *Charleville-Méziérand ? Ils ne le font pas
+parce qu’ils savent inconsciemment quelle forme est acceptable et correspond
+à la langue, donc ils appliquent des règles intuitivement. Cela présuppose que
+ce domaine est fortement régulier. C’est notre hypothèse que nous avons pu
+3 Denis : nom du premier évêque de Paris. Vient du latin Dionysius, lui-même issu du grec
+Dionysos, le dieu correspondant au Bacchus latin.
+28               LA FORMATION DES GENTILÉS SUR INTERNET
+
+démontrer tout d’abord par l’étude d’un corpus de 10 000 couples toponyme-
+gentilé, puis par les attestations de gentilés créés sur Internet.
+      Nous aimerions montrer les deux domaines : en premier lieu (section 4),
+les règles, déduites de nos observations, qui régissent la formation des gen-
+tilés en général. Elles ont pu être déchiffrées après la prise d’une perspective
+purement synchronique sur les gentilés et la stratiﬁcation de la formation des
+gentilés dans plusieurs phases, à partir de la génération d’une forme gentiléenne
+en passant par les processus morphologiques jusqu’au procès de la sélection
+d’un gentilé et de la détermination du gentilé ofﬁciel. En deuxième lieu (section
+5), nous présenterons des gentilés trouvés sur Internet, qui suivent ces règles
+linguistiques et prouvent ainsi leur fonctionnement.
+
+
+4. Les règles sous-jacentes de la formation des gentilés
+
+     Les gentilés sont, fondamentalement, les produits d’une sufﬁxation ré-
+gulière, malgré l’apparence d’un ensemble de formes idiosyncrasiques. Les
+sufﬁxes principaux se répartissent comme l’indique le tableau 1 :
+                                 Tableau 1
+          Les sufﬁxes principaux servant à la formation des gentilés
+
+                            LES SUFFIXES PRODUCTIFS
+
+            SUFFIXE              NOMBRE               POURCENTAGE
+
+              -ois               3 946                    36,9
+              -ais               2 583                    24,1
+              -ien               1 846                    17,2
+              -éen                 543                     5,1
+               -in                 308                     2,9
+              -ain                 267                     2,5
+              -on                  153                     1,4
+               -ot                 143                     1,3
+               -at                 116                     1,1
+
+     L’analyse du corpus d’environ 10 000 couples toponyme-gentilé a révélé
+que la plupart des gentilés sont formés régulièrement par simple concaténa-
+                  ELMAR EGGERT, DENIS MAUREL ET ODILE PITON                                  29
+
+tion, donc l’adjonction du sufﬁxe sans changement de la base : Montrésor
+→ Montrésorien. En plus, les gentilés considérés comme déviants d’une
+dérivation régulière ne le sont pas, les irrégularités de façade étant plutôt des
+sous-régularités.
+
+4.1 Vue d’ensemble des processus morphologiques
+
+     À première vue, les gentilés peuvent être classés dans cinq groupes, dis-
+tingués par le mode de formation :
+     a) simple concaténation de sufﬁxe :     Bergerac → Bergerac-ois,
+     b) radical tronqué
+        – de parties non prononcées :        Versailles → Versaill-ais,
+        – d’éléments prononcés :             Vézelay → Vézel-ien,
+     c) radical présentant une épenthèse : Chapeau → Chapeau-t-ois,
+     d) radical présentant une allomorphie : Elbeuf     → Elbeuv-ien,
+     e) radical présentant une supplétion : Épernay → Sparnac-ien.
+     Au dernier groupe, on pourrait ajouter les gentilés sans rapport for-
+mel avec le toponyme auquel ils sont associés, par exemple Monthermé
+→ Baraquin (il s’agit probablement d’un blason populaire usité comme
+gentilé). Le tableau 2 donne un aperçu de la quantification des différents
+modes de construction4.
+                                   Tableau 2
+              Aperçu de la fréquence des modes de construction
+
+          PROCÉDÉ                   NOMBRE           POURCENTAGE
+
+       concaténation
+ enlèvement de -e ou -es
+                                     3 114
+                                     2 433
+                                                           29,1
+                                                           22,7        }    5 547 (51,8 %)
+
+         troncation                  1 754                 16,4
+         épenthèse                   1 191                 11,1
+        allomorphie                  1 031                  9,6
+   variation graphique   5
+                                       352                  3,3
+
+
+4 Les nombres restants sont les supplétions, les transformations minoritaires et uniques (5 %).
+5 Ce groupe comprend, entre autres, les toponymes se terminant par -ey et dont cette partie est
+changée graphiquement, dans le gentilé, en -é : Mancey – Mancéen. Pourtant, il n’est pas évident
+de déterminer si la partié -é- appartient au sufﬁxe -éen ou au radical du gentilé, mais nous ne
+voulons pas nous concentrer sur cette question ici.
+30               LA FORMATION DES GENTILÉS SUR INTERNET
+
+     La quantiﬁcation nous montre que la concaténation reste de loin le mode
+de construction le plus fréquent qui s’analyse aisément au niveau de l’analyse
+morphologique automatique.
+     Pourtant, beaucoup de gentilés ne se laissent pas classer simplement dans
+ces groupes, parce que nous observons une épenthèse aussi dans les radicaux
+des gentilés qui ont subi une allomorphie ou une troncation ou les deux à la fois.
+Par exemple, le gentilé de Courçay est Courciquois, sur lequel nous constatons
+aussi bien la troncation de -ay que l’ajout de -iqu–. Dans le couple Hermeray
+→ Hermolitien, si la sufﬁxation s’effectue après la construction du radical, il
+faut constater une troncation de la ﬁnale -eray et l’ajout de -olit– pour arriver à
+la construction du radical du gentilé. Sur les gentilés des toponymes composés,
+ces altérations peuvent affecter plusieurs éléments dans le radical composé d’un
+gentilé. Par exemple, la base du gentilé Lupovillois de Louvilliers-en-Drouais est
+Louvilliers qui est tronqué de -iers, mais en même temps le premier constituant
+Lou- est apparamment rendu par Lupo- dans le radical du gentilé, c’est-à-dire
+par une supplétion lexicale sur le constituant Lou- associé probablement au
+nom commun loup (cf. lupus en latin). Par conséquent, nous devons analyser
+ces phénomènes séparément et successivement. Pour cela, il nous faut des
+distinctions précises.
+     La construction des gentilés qui sont dérivés des toponymes doit être
+analysée en deux étapes successives et stratiﬁées : celle de la construction du
+radical du gentilé à partir du toponyme et celle de la sufﬁxation, qui consiste
+principalement dans la sélection du sufﬁxe. Notre étude a montré que la sélection
+du sufﬁxe dépend, tout d’abord, de la structure du radical qui induit dans une
+certaine mesure le sufﬁxe à ajouter. Nous montrons plus loin que la phonologie
+joue un rôle dans ce procès.
+     Nous avons pu montrer, dans notre thèse, que les gentilés dits «irréguliers»
+sont formés par troncation (raccourcissement), par épenthèse (ajout de conson-
+nes ou de voyelles), par allomorphie (variation de forme reconnaissable) ou par
+supplétion (remplacement de forme) et que ces processus sont, pour la plupart,
+réguliers. Les différents changements sont explicités dans la suite.
+
+4.2 La troncation
+
+     La troncation est un processus d’effacement d’une partie, surtout à la
+ﬁn du mot, avant la sufﬁxation. Les exemples La Fermeté → Fermet-ois,
+Valpuiseaux → Valpuis-éen, Rupéreux → Rupér-ois montrent que la ﬁnale
+vocalique n’est pas gardée, mais tronquée et que le sufﬁxe s’attache au nom
+de lieu réduit. On trouve aussi des cas où la consonne ﬁnale est complètement
+                    ELMAR EGGERT, DENIS MAUREL ET ODILE PITON                                      31
+
+effacée, mais cela est moins fréquent : La Framboisière → Frambois-ien,
+Guilvinec → Guilvin-iste. L’élément tronqué le plus fréquent est la terminaison
+–y, qui représente un quart de tous les cas de troncation du corpus : Clichy →
+Clich-ois. Très fréquentes sont les troncations des terminaisons vocaliques
+-é et -o : La Trinité → Trinit-aire, Porcaro → Porcar-éen. Il faut ajouter les
+cas de variantes graphiques de ces terminaisons -et (Moulinet → Moulin-ois),
+–er (Castelner → Casteln-ois), –ez (Douarnenez → Douarnen-iste), –ée (La
+Charmée → Charm-ill-at) et -ay (Limeray → Limer-ien), –ey (Urcerey →
+Urcer-ois), –ais (Tortezais → Tortez-ien), –ai (Obernai → Obern-ois) et -eau
+(Samoreau → Samor-éen), –eaux (Champeaux → Champ-éen), –au (Guimiliau
+→ Guimilien), –aux (Auvernaux → Auvern-ois), –ot (Houdetot → Houdetois),
+–aud (Fontevraud-l’Abbaye → Fontevr-iste). En somme, on peut conclure que
+ce sont surtout les terminaisons vocaliques qui sont tronquées.
+
+4.3 L’épenthèse
+
+      Un procédé avec lequel la troncation entre en concurrence est l’épenthèse,
+ou ajout d’éléments qui sont appelés joncteurs6. Certains segments sont ajoutés
+à la base du nom de lieu avant la sufﬁxation : Herré → Herré-c-ois, Champdieu
+→ Champdieu-l-at 7. Le joncteur le plus fréquent dans notre corpus est –s [z],
+que nous retrouvons dans un quart de tous les gentilés contenant un joncteur :
+Berthenay → Berthenay-s-ien, Tréglonou → Tréglonou-s-ien. Mais aussi –t,
+–c et –n sont fréquents : Pierry → Pierry-t-ier, Fléty → Fléty-c-ois et Osséja
+→ Osséja-n-ais.
+      Si la troncation aide, apparemment, à réduire la base à un radical conve-
+nable pour un sufﬁxe, l’épenthèse remplit la même fonction de construire un
+radical auquel puisse s’appliquer un sufﬁxe. Dans ce contexte, il est important
+de signaler que la présence d’un joncteur sélectionne un sufﬁxe précis et évite
+l’adjonction d’autres sufﬁxes comme nous l’avons noté lors de l’ajout du
+joncteur –s [z] :
+      Luray → Luraysien, Saint-Éloi → Saint-Éloisien, Torfou → Torfousien.
+     La sélection du sufﬁxe -ien s’observe dans 93 % des gentilés construits à
+l’aide du joncteur –s– (136 sur 146). En même temps, le sufﬁxe -ais est presque
+systématiquement évité (par euphonie). Pareillement, le joncteur –l– se combine
+
+6 Cf. Gruaz 1988. Nous donnons à ce mot une acception large qui dépasse celle qu’il a en
+phonologie.
+7 Au lieu de supposer une multitude de sufﬁxes allomorphes (-ois, -cois, -lois, -tois, etc.), nous
+préférons nous baser sur une liste ﬁnie de sufﬁxes (surtout -ois, -ais, -ien) et segmenter le joncteur
+pour ensuite analyser les corrélations entre joncteur, base et sufﬁxe.
+32                 LA FORMATION DES GENTILÉS SUR INTERNET
+
+de préférence avec les sufﬁxes -ais et -ien, mais rarement avec le sufﬁxe -ois
+qui, lui, est le sufﬁxe ajouté à des bases prolongées par le joncteur –c– [k] pour
+former la terminaison typique -(a)cois. La sélection du joncteur semble être
+inﬂuencée par le radical, surtout la voyelle précédente, mais elle est étroitement
+liée à la sélection du sufﬁxe.
+
+4.4 L’allomorphie
+
+      Les gentilés présentant une allomorphie sont très nombreux, parce que
+l’allomorphie peut être de nature très variée. Certaines allomorphies corres-
+pondent à des règles morphologiques du français comme le redoublement des
+consonnes ﬁnales lors de la sufﬁxation. Ce sont surtout les trois consonnes -n,
+–s et -l qui se redoublent : Langeron → Langeronnais, Mézos → Mézossais,
+Lunel → Lunellois. Le changement de la qualité de la voyelle dans la syllabe
+fermée ﬁnale va dans le même sens : Cipières → Cipiérois8. Les changements
+qui affectent les consonnes ﬁnales sont moins réguliers. Il est assez fréquent
+que la terminaison par -x d’un nom de lieu se transforme en –s, qui paraît une
+allomorphie graphique simple, parce que c’est seulement dans cette position
+intervocalique que la consonne devient audible : Morlaix → Morlaisien. À côté
+de plusieurs variations graphiques sans répercussion dans la phonie, certains
+changements ont un effet sur elle, par exemple les transformations de –f en –v
+ou de –t en -d : Lindebeuf → Lindebeuvien, Carlat → Carladais ou lorsque
+la consonne ﬁnale -s se transforme soit en -d, soit en –t, soit en -c : Privas
+→ Privadois, Juliénas → Juliénaton, Allemans → Allemancois. Les gentilés
+ont toutes les apparences de termes formés oralement et non sur la base des
+noms écrits. Ceci conforte notre hypothèse sur l’importance de la composante
+phonologique.
+      Le changement de la consonne fricative sourde [∫]–ch en –c, qui s’explique
+par les formes latines étymologiques des noms de lieux, est assez fréquent et
+se trouve par exemple dans Chantepie → Cantepien. D’autres transformations
+concernent les voyelles ou des groupes de voyelle plus consonne. L’allomor-
+phie la plus fréquente dans ce domaine est celle de au à al, par exemple dans
+Mauvages → Malvagien ou Ronvaux → Ronvalois. Le digraphe ou se trans-
+forme régulièrement en ol, en ov ou en u, cf. Pomfou → Pamfolien, Bardou →
+Bardovien et Gommecourt → Gommecurien.
+
+
+
+
+8 Ces changements graphiques ne sont pas comptés parmi les allomorphies du tableau 2.
+                ELMAR EGGERT, DENIS MAUREL ET ODILE PITON                       33
+
+4.5 La sélection du sufﬁxe
+
+     À part la construction du radical, l’adjonction d’un sufﬁxe n’est pas non
+plus le fait du hasard. Il y a plus de trente sufﬁxes toponymiques, dont neuf
+servent à former des gentilés, trois d’entre eux (-ois, -ais, -ien) sont majoritai-
+res et sufﬁxent 78 % des gentilés du corpus (cf. le Tableau 1 pour des chiffres
+détaillés).
+     Leur distribution dépend de la forme phonique de la terminaison, c’est
+ainsi que –on détermine le sufﬁxe -ais dans 93 % des cas, par exemple dans
+Cernon → Cernonnais, la terminaison [εl] -el, -els, -elle, -elles détermine le
+sufﬁxe -ois (77 %) (Fontenelle → Fontenellois) et une terminaison de la frica-
+tive dentale sonore [z], surtout après ε] –ais, –ez provoque la sufﬁxation par
+-ien à 77 %, par exemple Gambais → Gambaisien, La Falaise → Falaisien.
+Le choix du sufﬁxe n’est donc pas libre, il y a plusieurs possibilités et surtout
+quelques restrictions de combinaisons peu probables. En résumant, on peut dire
+que la construction des gentilés apparemment irréguliers suit en fait des règles
+que nous avons pu mettre en évidence, mais ces règles sont plus complexes
+que pour les gentilés formés par simple concaténation.
+     Souvent, ces règles n’indiquent pas un processus dérivationnel biunivoque
+à une condition précise, mais une possibilité de réalisation parmi plusieurs
+possibles. Donc une certaine gamme de possibilités de dérivations est donnée
+alors que d’autres processus dérivationnels sont plutôt évités.
+
+
+5. Les gentilés trouvés sur la Toile
+
+     Quels sont les gentilés qui se trouvent en parcourant la Toile? Les gentilés
+ofﬁciels sont utilisés, notamment par les communes elles-mêmes sur leur page
+web. On trouve également des termes employés comme des gentilés bien qu’ils
+ne correspondent pas aux gentilés ofﬁciels. Ces gentilés sont formés intuitive-
+ment par des locuteurs pour des raisons diverses, dont nous supposons qu’elles
+tiennent soit à leur ignorance, soit à leur intention de créer un terme connoté
+ou compréhensible par tous. Ce sont surtout ces formations gentiléennes que
+nous avons cherchées.
+     Les gentilés sur la Toile ont été trouvés manuellement, mais il est possible
+de les faire rechercher par un automate. À partir du nom de ville ont été géné-
+rées, par sufﬁxation, plusieurs formes possibles et ces formes ont été cherchées
+sur le moteur de recherche Google. Nous y avons trouvé des attestations de
+beaucoup de ces formes.
+34                    LA FORMATION DES GENTILÉS SUR INTERNET
+
+     Ces gentilés «nouveaux», nous les avons répartis en trois groupes : ceux
+qui diffèrent du gentilé ofﬁciel seulement par leur sufﬁxe9 (Tableau 3), ceux
+dont le radical est inchangé10 (Tableau 4) et le tableau 5 regroupe les gentilés
+dont nous avons trouvé plusieurs variantes.
+                                      Tableau 3
+                      Sufﬁxe différent de celui du gentilé ofﬁciel
+
+  GENTILÉ CRÉÉ                 GENTILÉ OFFICIEL               TOPONYME ASSOCIÉ
+
+  Nantois                      Nantais                        Nantes
+  Marseillois                  Marseillais                    Marseille
+  Antibois (Antipolitain) Antibais                            Antibes
+  Cabourgeois                  Cabourgeais                    Cabourg
+  Vitryen,Vitryot              Vitryat                        Vitry-le-François
+  Anneçois                     Annecien                       Annecy
+
+
+                                       Tableau 4
+                 Gentilés ofﬁciels formés par allomorphie ou supplétion
+
+  GENTILÉ CRÉÉ                 GENTILÉ OFFICIEL               TOPONYME ASSOCIÉ
+
+  Besançonnais                 Bisontin                       Besançon
+  Fontaineblois                Bellifontain                   Fontainebleau
+  Reimsois                     Rémois                         Reims
+  Mézi
+  Mé
+   éziérois                    Macérien                       Mézi
+                                                              Mé
+                                                               ézières
+  Albien                       Albigeois                      Albi
+  Metzois   11
+                               Messin                         Metz
+
+
+
+9 Il peut y avoir deux raisons. Soit que le sufﬁxe -ois, qui est le sufﬁxe prototypique des gentilés,
+est préféré au sufﬁxe ofﬁciel, soit celui-ci est contraire à l’intuition ou trop peu fréquent.
+10 Les nouveaux gentilés créés n’altèrent pas la base du nom de ville, ce qui peut entraîner un
+sufﬁxe différent.
+11 Ce n’est que la graphie qui change, la prononciation restant la même [mεs–]. Nous revenons
+sur cet exemple.
+                  ELMAR EGGERT, DENIS MAUREL ET ODILE PITON                               35
+
+     Sur la base de Tours, quatre formes attestées sont observées, deux sufﬁxes
+différents, plus deux variantes graphiques du gentilé ofﬁciel. Les locuteurs
+connaissent donc le gentilé, mais ignorent son orthographe. Il est intéressant de
+voir que le radical des gentilés générés est toujours le même : celui du gentilé
+ofﬁciel Tourangeau.
+     Le cas extrême est celui des gentilés créés sur le nom du département
+Nord, avec trois gentilés nouveaux, sufﬁxés par les trois sufﬁxes principaux.
+Ce dernier cas ne surprend pas, parce que le sufﬁxe –iste n’est pas un sufﬁxe
+typique pour un gentilé.
+                                    Tableau 5
+                    Concurrence de plusieurs sufﬁxes différents
+
+     GENTILÉ CRÉÉ            GENTILÉ OFFICIEL            TOPONYME ASSOCIÉ
+
+     Toulousois
+                             Toulousain                  Toulouse
+     Toulousais
+     Cognacais
+                             Cognaçais                   Cognac
+     Cognacois12
+     Tourangeois
+     Tourangeais
+                             Tourangeau                  Tours
+     Tourangeot
+     Tourangeaud
+     Nordais
+     Nordien                 Nordiste                    Nord
+     Nordois
+
+      Il faut étudier maintenant le contexte de ces formes pour pouvoir les trai-
+ter en tant qu’afﬁrmation pour notre hypothèse. C’est ce que nous aimerions
+illustrer sur l’exemple des gentilés de la ville de Metz.
+
+
+6. Les contextes dans lesquels apparaissent ces gentilés
+
+     L’extrait suivant d’une page personnelle reﬂète un commentaire sur les
+performances des équipes de football de Metz et de Toulouse. L’auteur de cette
+
+
+12 La base des deux derniers exemples est inchangée, tandis que le radical du gentilé ofﬁciel
+est changé en Cognaç–.
+36                 LA FORMATION DES GENTILÉS SUR INTERNET
+
+page emploie Metzois au lieu de Messin, soit parce qu’il ne connaît pas le gentilé
+ofﬁciel, soit qu’il crée spontanément cette forme sans réﬂéchir.
+     Je ne vous cache pas nos performance footballistique [sic] puisque
+     depuis 1993 les Ultras Metzois ne l’ont emporté qu’une seule et uni-
+     que fois lors de Metz-Toulouse en 1998, lors d’un match mythique.
+     Il semble que les toulousains ...13
+    Ces amateurs de cavernes ont rencontré deux homologues de Metz qu’ils
+appellent également les Metzois.
+     Nous en discutons, le soir au gîte, avec deux spéléos de Metz avec qui
+     nous avons sympathisé. Ils sont nettement plus matinaux que nous et
+     nous proposent d’équiper le lendemain à l’aube. [...] L’équipement
+     mit [sic] en place par les Metzois est, selon eux, de type alpin.14
+     Le prochain extrait montre le mélange de niveaux de langage parlé ou
+relevé. Notons l’utilisation des gentilés ofﬁciels messin (et aussi toulousain) à
+côté de messois et toulousois.
+     Les messois et toulousois ont pris l’habitude de se retrouver pour de grosses
+     fêtes (tant à TOULOUSE qu’à METZ) sous l’égide de sainte PICOLE et
+     sous l’esprit régnant chez nous : l’esprit B.F.S (BOIRE FUMER SUPPOR-
+     TER)... dans lequel nos amis messois se sont largement fondus... Un match
+     inter supporters a lieu dans l’aprés midi [sic] [...] avec comme trophée un
+     magniﬁque bouclier, largement inspiré de la culture rugbistique toulousaine,
+     [...] symbolisant notre amitié et l’esprit de convivialité qui régient [sic] nos
+     relations [...] vu que les messins ne l’ont emporté qu’une seule et unique
+     fois, en 1998...
+     Comment peut-on expliquer l’usage de deux gentilés différents dans un
+même texte? Tout d’abord, ce voisinage ne choque pas les auteurs, puisqu’ils
+ne l’ont pas remarqué ou, du moins, ne croyaient pas nécessaire de le faire
+remarquer. Les deux formes leur paraissent tout à fait possibles et acceptables.
+L’introduction du gentilé ofﬁciel peut aussi résulter de la copie d’une phrase
+d’un autre site ou d’un autre auteur. À moins que messois et toulousois aient
+une fonction hypocoristique.
+     Un dernier exemple montre que même les journalistes (ici, sur Internet)
+emploient des gentilés créés par les locuteurs eux-mêmes, probablement par
+ignorance de la forme ofﬁcielle Messin.
+
+13 Cf. http://www.ifrance.com/hordafrenetik97/amities.htm.
+14 Cf. http://assoc.wanadoo.fr/brambel/pencoat/speleo/franchecomte.html.
+                   ELMAR EGGERT, DENIS MAUREL ET ODILE PITON                                  37
+
+      Un Metzois de 38 ans, connu des services de police pour ses provoca-
+      tions, a été réveillé par les gendarmes après avoir passé la nuit sur le
+      divan d’exposition d’un grand magasin de meubles de Forbach.15
+     Pourtant, il faut faire attention, le gentilé hypothétique Metzien (avec le
+sufﬁxe -ien) n’est pas une création de gentilé (bien que bien formé théorique-
+ment), parce qu’il s’agit d’un terme ofﬁciel, dérivé d’un nom propre (anthro-
+ponyme), de M. Christian METZ, spécialiste de l’audiovisuel. Les dérivations
+d’anthroponymes ont recours systématiquement au sufﬁxe -ien16. Il faut donc
+exclure ces attestations de nos analyses des gentilés.
+      [...] d’un [sic] tradition structuraliste française organisée autour de
+      C. Metz. [...] En fait, il nous semble que le syntagme metzien est une
+      unité d’un document audiovisuel.17
+
+      la grande syntagmatique de Christian METZ . […] celui de l’articu-
+      lation qu’on ne fait plus tout à fait sur le modèle metzien.18
+     Les différents contextes dans lesquels apparaissent ces gentilés soulignent
+l’extrême utilité de leur usage, même quand les locuteurs ne connaissent pas le
+gentilé ofﬁciel d’une commune. Ils se créent facilement une forme gentiléenne
+qui corresponde à leur intuition. Et c’est la grande prépondérance du sufﬁxe -ois
+dans plus d’un tiers des gentilés qui fait qu’il est employé systématiquement,
+comme le montre le cas du gentilé Metzois. La base de Metzois [mεs–] qui se
+termine par une voyelle suivie d’une consonne est apte à la sufﬁxation par ce
+sufﬁxe. Une transformation (troncation ou ajout) n’est même pas nécessaire.
+L’exemple du gentilé Besançonnais montre qu’un autre sufﬁxe (ici : –ais) est
+choisi si le contexte phonologique l’exige, cette fois-ci la voyelle nasale [  ]. Les
+règles énumérées plus haut ne sont pas, en fait, autre chose que l’intuition d’une
+bonne forme rendue patente. Les autres exemples ne contrarient pas ces règles
+et sont donc acceptés, indépendamment de leur statut de gentilé ofﬁciel.
+
+
+
+
+15 Cf http://bouquet.heb.fr.colt.net/lpb/archives.asp?numrubrique=26&start=29
+16 Il y a deux autres catégories de mots qui ressemblent aux gentilés : ceux qui décrivent des
+périodes géologiques : plutôt les sufﬁxes –ien ou –éen (abbevillien), et ceux qui sont construits
+sur des noms de personnes : Chiraquien, Jospiniste, Pompidolien, Giscardien, Hugolien … .
+Cf. Schweickard 1992.
+17 Cf. http://lisi.insa-lyon.fr/~yprie/these/node8.html.
+18 Cf. http://www.ina.fr/inatheque/activites/ateliers/atelier4/A4_20000417.light.fr.html.
+38                LA FORMATION DES GENTILÉS SUR INTERNET
+
+7. Conclusion
+
+      Nous avons trouvé sur Internet, à côté des gentilés ofﬁciels, bien sûr en
+grand nombre, aussi des gentilés crées par des locuteurs et différents des gen-
+tilés ofﬁciels.
+      L’attestation de ces gentilés conﬁrme notre hypothèse que les gens forment
+des gentilés spontanément, et, ce qui est plus important, le fait que les formations
+se réalisent selon certaines règles. Par l’attestation de ces formes gentiléennes
+sur Internet, nous avons pu apporter une preuve que la construction des gentilés
+se réalise suivant les règles présentées dans la section 4.
+
+
+Références
+
+CORBIN, D. 1987 Morphologie dérivationnelle et structuration du lexique, Tübingen,
+      Niemeyer.
+CORBIN, D. 1988 «Pour un composant lexical associatif et stratifié», DRLAV (Docu-
+      mentation et recherche en linguistique allemande contemporaine, Vincennes)
+      38 : 63-92.
+CORBIN, D. 1989 «La place de l’histoire dans une morphologie synchronique», dans
+      E. Ucherek et coll. Études de linguistique romane. Actes du VIe Congrès des
+      Linguistes Romanisants Polonais, Karpacz mai 1987, Wroclaw, Wydawn. Uniw.
+      Wroclawskiego, p. 51-67.
+CORBIN, D. 1990 «Associativité et stratification dans la représentation des mots cons-
+      truits», dans U. Dressler et coll. Contemporary Morphology, Berlin, Mouton
+      de Gruyter, p. 43-59.
+DUCHÁČEK, O. 1985 «La formation des noms d’habitants en français», dans Deanović et
+      coll. Mélanges de linguistique dédiés à la mémoire de Petar Skok (1881-1956),
+      Zagreb, Jugoslavenska akademija znanosti i umjetnosti, p. 127-133.
+DUGAS, J.-Y. 1987 Répertoire des gentilés du Québec, Québec, Commission de topo-
+      nymie.
+EGGERT, E., D. MAUREL et Cl. BELLEIL 1998a «Allomorphies et supplétions dans la
+      formation des gentilés. Application au traitement informatique», Cahiers de
+      lexicologie 73-2 : 167-179.
+EGGERT, E., D. MAUREL et Cl. BELLEIL 1998b «Utilisation de règles dérivationnelles et
+      de calculs de distance morphologique pour rapprocher une base et un dérivé :
+      application au couple toponyme-gentilé», Cahiers de l’Institut de Linguistique
+      de Louvain 24-3,4 : 113-116.
+GRUAZ, Cl. 1988 La dérivation sufﬁxale en français contemporain, Mont-Saint-Aignan,
+      Publications de l’Université de Rouen.
+                ELMAR EGGERT, DENIS MAUREL ET ODILE PITON                         39
+
+MAUREL, D., O. PITON et E. EGGERT 2000 «Les relations entre noms propres : lieux et
+      habitants dans le projet Prolex», Traitement automatique des langues (TAL)
+      41-1 : 623-641.
+SCHWEICKARD, W. 1992 Deonomastik : Ableitungen auf der Basis von Eigennamen im
+      Französischen, Tübingen, Niemeyer.
+SPORE, P. 1993 «Les suffixes -ais et -ois ajoutés à un nom de ville», dans R. Lorenzo
+      Actas do XIX Congreso internacional de Lingüística e Filoloxía Românicas
+      (Santiago de Compostela 1989), A Coruña, vol. IV: 453-468.
+WOLF, H.-J. 1982 «Anmerkungen zu den französischen Bewohnernamen», Beiträge
+      zur romanischen Philologie 21: 153-167.
+
