@@ -1,3 +1,4 @@
-../articles/TALN/txt/eternal-2015-long-001.txt
-../articles/TALN/txt/taln-2001-long-016.txt
-../articles/TALN/txt/taln-2010-court-034.txt
+../articles/TALN/txt/eternal-2015-long-001-Maurel.txt
+../articles/TALN/txt/taln-2001-long-016-Maurel.txt
+../articles/TALN/txt/taln-2009-long-029-Fort.txt
+../articles/TALN/txt/taln-2010-court-034-Maurel.txt

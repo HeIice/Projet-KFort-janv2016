@@ -1,0 +1,3 @@
+../articles/TALN/txt/taln-2008-court-006-Fort.txt
+../articles/TALN/txt/taln-2012-court-007-Fort.txt
+../articles/TALN/txt/taln-2014-court-031-Fort.txt

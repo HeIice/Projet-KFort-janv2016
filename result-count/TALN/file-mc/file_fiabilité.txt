@@ -1,2 +1,4 @@
-../articles/TALN/txt/taln-2013-court-007.txt
-../articles/TALN/txt/taln-2014-court-029.txt
+../articles/TALN/txt/taln-2010-long-035-Fort.txt
+../articles/TALN/txt/taln-2012-court-007-Fort.txt
+../articles/TALN/txt/taln-2013-court-007-Maurel.txt
+../articles/TALN/txt/taln-2014-court-029-Maurel.txt

@@ -1,0 +1,401 @@
+22ème Traitement Automatique des Langues Naturelles, Caen, 2015
+Annotateurs volontaires investis et éthique de l’annotation de lettres de suicidés
+
+K. Bretonnel Cohen1 John P. Pestian2 Karën Fort3
+(1) University of Colorado, Denver
+(2) Cincinnati Children’s Hospital Medical Center, University of Cincinnati, Cincinnati
+(3) Université Paris-Sorbonne / STIH
+kevin.cohen@gmail.com, john.pestian@cchmc.org, karen.fort@paris-sorbonne.fr
+
+Résumé. Cet article présente une perspective éthique sur le projet décrit dans (Pestian et al., 2012b). La campagne
+d’annotation en question a visé à produire un corpus de lettres de suicidés annotées en émotions. Les annotateurs étaient
+soit des parents ou des amis de suicidés, soit des professionnels de la santé mentale. Nous appelons ces annotateurs
+bénévoles, volontaires pour faire avancer la recherche, des volontaires investis. Ce projet soulève un certain nombre de
+questions éthiques, notamment en ce qui concerne le rôle de l’empathie des annotateurs, les effets possibles sur ceux-ci et
+les utilisations potentielles des résultats obtenus. Nous concluons par une analyse du corpus du point de vue de la Charte
+Éthique et Big Data.
+Abstract.
+Annotating suicide notes : ethical issues at a glance.
+According to the World Health Organization, 800,000 people die of suicide every year. About 20% of them leave a writ-
+ten message. This paper discusses a corpus of such messages. The corpus was annotated with reference to the emotions
+expressed in the notes. The annotators were family or friends of someone who had died by suicide, or mental health
+professionals. We refer to these non-coercivally and altruistically motivated annotators as vested volunteers. A number of
+ethical issues are explored with this task and group of annotators, including the role of empathy, possible effects on the
+annotators, and the uses that might be made of the products of the annotation project. We conclude considering the project
+from the point of view of the Ethics and Big Data Charter.
+Mots-clés :         lettres de suicidés, éthique, annotation, myriadisation, corpus.
+
+Keywords:           suicide notes, ethics, annotation, crowdsourcing, corpus.
+1     Introduction
+Selon l’Organisation Mondiale de la Santé (OMS), chaque année dans le monde, plus de 800 000 personnes se donnent
+la mort 1 . Environ 20 % d’entre elles laissent un message écrit (on peut citer par exemple, (Volant, 1990) 664 sur 3 450
+et (Fédération française de psychiatrie, 2001), 200 sur 621). On parle en anglais de suicide note. Nous utiliserons ici le
+terme de lettre, reprenant à notre compte la remarque à ce sujet d’Éric Volant (Volant, 1990) :
+Elles sont bien davantage qu’un simple mot qu’on laisse traîner [...]. Même s’il ne s’agit que d’un grif-
+fonnage, il a un but défini pour son auteur, et mérite donc pleinement le statut de lettre.
+Un certain nombre de chercheurs ont étudié différents aspects de ces lettres, dans le but d’aider à la prévention du suicide.
+L’analyse que nous présentons ici concerne un projet de recherche de ce type, mené aux États-Unis, qui a donné lieu à
+la constitution et à l’annotation en émotions d’un corpus de lettres de suicidés. Ce projet est détaillé dans (Pestian et al.,
+2012b).
+Les lettres de ce corpus ont été annotées par des volontaires qui ont eu une expérience concrète du suicide, soit parce qu’un
+membre de leur famille ou un de leurs amis s’est suicidé, soit parce qu’ils sont des professionnels de la santé mentale.
+Ceux-ci ont participé au projet bénévolement, sans contrainte, pour faire avancer les travaux des scientifiques dans ce do-
+maine. Pour rendre compte à la fois de cette volonté et de leur rapport personnel au suicide, nous les appelons « volontaires
+1. Voir http://www.who.int/mediacentre/news/releases/2014/suicide-prevention-report/fr/.
+
+K. B RETONNEL C OHEN , J OHN P. P ESTIAN , K ARËN F ORT
+investis » (vested volunteers).
+Ce type de projet pose un certain nombre de questions éthiques, que l’appel à des volontaires investis rend encore plus
+saillantes. Il en va ainsi du rôle de l’empathie de l’annotateur, des effets potentiels sur celui-ci, des sources de biais et des
+utilisations possibles des résultats de l’étude.
+1.1     Une foule (limitée) de volontaires
+
+Le terme anglais crowdsourcing est défini par le dictionnaire en ligne Merriam-Webster comme « la pratique consistant
+à obtenir le service désiré, qu’il s’agisse d’une idée ou de contenu, en sollicitant les contributions d’un grand groupe de
+personnes, en particulier de la communauté des internautes plutôt que des employés ou fournisseurs traditionnels 2 ». Ce
+mot valise très expressif, formé de foule (crowd) et de délocalisation (outsourcing), se délave à la traduction. Nous le
+traduirons ici par myriadisation 3 .
+Ces dernières années, la myriadisation est devenue une méthode populaire de construction de ressources langagières, en
+particulier dans le cadre de la recherche en Traitement Automatique des Langues (TAL). Cet essor n’a pas été sans poser
+des questions éthiques. Ainsi, (Fort et al., 2011) présente une critique détaillée de l’utilisation d’Amazon Mechanical
+Turk, une plate-forme de travail parcellisé qui permet l’exploitation de travailleurs de pays en développement. Les
+conditions de travail des Turkers ont d’ailleurs fait l’objet d’études sur le terrain qui confirment cette exploitation (Gupta
+et al., 2014).
+D’autres méthodes de myriadisation, plus satisfaisantes éthiquement, se sont développées en parallèle. Parmi celles-ci, les
+jeux ayant un but (Games With A Purpose) proposent de produire des ressources en jouant. Le premier de ces jeux pour les
+ressources langagières est à notre connaissance JeuxDeMots (Lafourcade & Joubert, 2008), qui crée un réseau lexical
+en français. Phrase Detectives (Chamberlain et al., 2008) a quant à lui été utilisé pour annoter des anaphores dans
+un corpus en anglais. Plus récemment, ZombiLingo (Fort et al., 2014) permet l’annotation en syntaxe de dépendances
+d’un corpus en français.
+Le point commun entre JeuxDeMots, ZombiLingo et d’autres formes de myriadisation comme Wikipédia ou le
+Projet Gutenberg est le bénévolat. Les participants savent qu’ils ne seront pas rémunérés 4 . Ils sont motivés par
+l’aspect ludique du jeu ou par l’envie de participer à un projet de bien commun ou de recherche. Dans ce dernier cas, on
+parle alors de sciences participatives. Un exemple de projet de science participative sans aspect particulièrement ludique
+est Vigie Nature développé au Muséum National d’Histoire Naturelle (Couvet et al., 2011).
+À la différence de ces projets, la campagne d’annotation en discussion ici n’a rien de plaisant. La motivation des partici-
+pants est donc simplement d’aider à faire avancer la recherche sur le sujet du suicide. Une autre différence est que l’appel
+à participation a été limité à certaines communautés (voir section 2.2) et n’a pas été totalement ouvert.
+1.2     Une annotation discriminante
+
+Les lettres de suicidés ont fait l’objet d’un nombre de recherches considérable (Shneidman & Farberow, 1957b; Osgood
+& Walker, 1959; Tuckman et al., 1959; Schneidman, 1981; Leenaars, 1988; Baume et al., 1997; Brevard et al., 1990; Ho
+et al., 1998; O’Connor & Leenaars, 2004; Olson, 2005).
+Le domaine tel que nous le connaissons aujourd’hui a vu le jour lorsque Edwin Shneidman a découvert un gisement de
+lettres de suicidés dans les bureaux du Coroner du comté de Los Angeles. Sa découverte a été complétée par la création
+d’un corpus témoin : il a demandé (pour des raisons pratiques) à des travailleurs syndiqués d’écrire la lettre qu’ils écriraient
+s’ils voulaient se suicider (Shneidman & Farberow, 1957a). La notion de contrôle en suicidologie est complexe (Pestian,
+2010), les participants « témoins » ont cependant été sélectionnés pour correspondre aux suicidés en termes d’âge, de
+genre, de religion et de nationalité (tous américains).
+Ces données ont servi dans de nombreuses expériences qui ont montré qu’« il est possible de distinguer entre de vraies
+lettres de suicidés et des simulacres, et, encore plus important, que les lettres de suicidés se caractérisent généralement par
+une logique dichotomique, davantage d’hostilité et d’auto-critique, de noms spécifiques et d’instructions aux survivants,
+2. the practice of obtaining needed services, ideas, or content by soliciting contributions from a large group of people and especially from the online
+community rather than from traditional employees or suppliers (Merriam-Webster, consulte en avril 2015)
+3. Cette traduction a été proposée par Gilles Adda dans (Sagot et al., 2011).
+4. Le cas de Phrase Detectives est un peu différent, car les joueurs peuvent gagner des bons d’achat.
+
+22ème A NNOTATION DE LETTRES DE SUICIDÉS
+Moy. des lettres (écart type)   Moy. des lettres simulées (écart type)   Signif.
+Nb phrases                                                    9,242 (8.058)                            4,848 (3,308)     0,001
+Fréquence max. d’un mot                                       7,909 (6,090)                            4,212 (3,525)     0,002
+Nb caractères hors mot                                    13,182 (11,078)                              7,212 (7,039)     0,004
+Niveau de lisibilité Flesch-Kinkaid                           4,719 (2,142)                            6,517 (2,994)     0,008
+
+TABLE 1 – Quelques spécificités des lettres de suicidés par rapport à des lettres simulées.
+moins de signes de réflexion sur ce que l’autre pense, et plus d’usage des différents sens du mot "amour" » (Shneidman,
+1973).
+Nous présentons ci-dessous deux lettres d’adieux au monde 5 écrites par des hommes américains :
+Please call my children first Can’t Take much more Love you all to much gone to See
+Mary I can’t live without Mary this pain + misery is to much Love all you kids forgive
+me ain’t going to Die in Hosp. Like Mom Love Dad
+(Leenaars, 1988)
+
+I’m sorry, but somewhere I lost the road, and in my struggle to find it again,
+I just got further and further away. There should be little sadness, and no searching
+for who is at fault; for the act and the result are not sad, and no one is at fault.
+My only sorrow is for my parents who will not easily be able to accept that this is
+so much better for me. Please folks, it’s all right, really it is. 1 :30 p.m.-The
+ultimate adventure begins! Car to Helen or Ray (needs a tune up). Money to Max and
+Sylvia. Furniture to George. I wanted to be too many things, and greatness besides-it
+was a hopeless task. I never managed to learn to really love another person-only to
+make the sounds of it. I never could believe what my society taught me to believe,
+yet I could never manage to quite find the truth. 2 :15 p.m.-:-I am about to will
+myself to stop my heart beat and respiration. This is a very mystical experience.
+I have no fear. That surprises me. I thought I would be terrified. Soon I will know
+what death is like-how many people out there can say that?
+(Shneidman, 1973)
+La première de ces lettres est relativement typique, puisqu’elle contient des verbes à l’impératif et l’expression d’une
+souffrance.
+La seconde a été écrite par un psychiatre de 31 ans qui s’est donné la mort en prenant des barbituriques. Il a été trouvé
+dans une forêt du mid-Ouest américain. Cette deuxième lettre est moins typique, car elle ne mentionne pas de souffrance
+(du moins pas explicitement). Elle contient cependant elle-aussi des formes à l’impératif.
+Le tableau 1 présente un certain nombre d’autres caractéristiques des véritables lettres de suicidés par rapport à des lettres
+simulées. Nous nous limitons ici aux spécificités les plus significatives (p < 0,01 ou moins).
+Il est à noter que les lettres prises en compte dans ces chiffres ont été écrites par des Américains et qu’il faut donc se
+garder de généraliser à d’autres cultures, y compris d’autres pays anglo-saxons.
+Le corpus de lettres dont il est question ici a été annoté en émotions, afin d’affiner l’analyse de ces lettres et aller au-delà
+de la simple classification entre « vraie » et « fausse » lettre de suicidé.
+2      Matériels et méthodes
+
+2.1      Création du corpus
+
+Les 1 319 lettres du corpus ont été collectées entre 1950 et 2012 par Edwin Shneidman (UCLA), et John Pestian, du
+Centre médical des enfants de l’hôpital de Cincinnati (CCHMC). La mise en place de la base de données a commencé
+5. Nous utilisons ici à dessein le terme employé par (Volant, 1990).
+
+K. B RETONNEL C OHEN , J OHN P. P ESTIAN , K ARËN F ORT
+en 2009 et a reçu l’aval des institutions (CCHMC’s Institutional Review Board). Chaque lettre a été scannée dans le
+module spécialisé (Suicide Note Module) de la plate-forme de décision clinique CHRISTINE. Les lettres ont ensuite été
+transcrites par un transcripteur professionnel et chacune a été relue par trois relecteurs en parallèle. Leurs instructions
+étaient de corriger les erreurs de transcription mais de laisser les erreurs d’origine, telles que les fautes d’orthographe, de
+grammaire, etc.
+Afin de préserver la vie privée des suicidés, les lettres ont ensuite été anonymisées. Afin qu’elles restent utilisables par
+des systèmes par apprentissage supervisé, les informations retirées ont été remplacées par des valeurs équivalentes qui
+protègent la vie privée des individus. Ainsi, tous les prénoms de femmes ont été remplacés par « Jane » et tous les prénoms
+d’hommes par « John ». Tous les noms de famille ont quant à eux été remplacés par « Johnson ». Les dates ont été
+modifiées, tout en restant dans la même année. Par exemple, le « 18 novembre 2010 » a pu être changé en « 12 mai 2010 ».
+Enfin, toutes les adresses sont devenues « 3333 Burnet Ave., Cincinnati, OH 45229 ».
+Chaque lettre du corpus d’entraînement et de test a été annotée par au moins trois annotateurs. Il leur était demandé
+d’identifier les émotions et expressions suivantes : maltraitance, colère, accusation, peur, culpabilité, désespoir, tristesse,
+pardon, joie, paix, espoir, amour, fierté, reconnaissance, instructions et informations. Une interface Web conçue spéciale-
+ment a été utilisée pour collecter, gérer et arbitrer l’activité des annotateurs. Cet outil permet des annotations au niveau
+du mot et de la phrase. Il permet d’annoter un segment avec plusieurs concepts. Cette fonctionnalité a rendu impossible
+l’utilisation d’un simple coefficient Kappa pour calculer l’accord inter-annotateurs. Celui-ci a donc été calculé à l’aide
+de l’alpha de Krippendorff (Krippendorff, 1980, 2004), avec une distance de Dice. L’accord moyen mesuré a été de 0,54
+(Pestian et al., 2012a).
+2.2    Recrutement des annotateurs
+
+Par manque de financement, les annotateurs du projet ont été recrutés par crowdsourcing bénévole. Le choix a cependant
+été fait de limiter l’appel à participation à certaines personnes (il s’agit donc de crowdsourcing limité), dont le vécu pouvait
+être vecteur de motivation.
+Ainsi, approximativement 1 500 membres de plusieurs communautés en ligne ont reçu une information concernant l’étude,
+soit directement par courriel, soit indirectement, via des pages Facebook de soutien. Les deux groupes les plus actifs
+dans ces communautés ont été les groupes de Karyl Chastain Beal Families and Friends of Suicides (Familles et amis
+de suicidés) et Parents of Suicides (Parents de suicidés), ainsi que Suicide Awareness Voices of Education (Voix pour
+l’éducation et la sensibilisation au suicide), un groupe dirigé par Dan Reidenberg, un psychiatre.
+Le message envoyé aux participants potentiels contenait des informations concernant l’étude, ses sources de financement
+et ce qui était attendu des participants. Les volontaires ont été sélectionnés en deux étapes. La première a consisté à vérifier
+qu’ils remplissaient les critères fixés : avoir au moins 21 ans (la majorité légale aux États-Unis), être de langue maternelle
+anglaise et être prêt à lire et annoter 50 lettres de suicidés.
+Dans un second temps, les participants ont reçu un courriel leur demandant de décrire leur relation à la personne suicidée,
+le temps passé depuis cette mort et si le ou la suicidé(e) avait été diagnostiqué(e) comme souffrant d’une maladie mentale.
+2.3    Formation des annotateurs
+
+Les annotateurs ont été formés par le biais d’une interface Web. Ils ont annoté 10 lettres jusqu’à atteindre une qualité
+minimale de 50 % d’accord observé avec la référence. Ils ont ensuite été invités à annoter 50 autres lettres.
+Il est important de noter qu’ils ont été informés de la possibilité d’arrêter quand ils le souhaitaient, durant la formation ou
+pendant l’annotation. Des possibilités de soutien leur ont été proposées. Un « filet de sécurité » psychologique a été mis en
+place à deux niveaux : les organisateurs ont proposé un contact auprès de l’équivalent de SOS Suicide et les communautés
+de provenance des annotateurs leur ont fourni un soutien complémentaire.
+2.4    Profils des annotateurs
+
+L’annotateur type, dans ce projet, est une femme d’âge moyen, ayant fait des études et dont un membre de la famille
+proche s’est suicidé.
+
+22ème A NNOTATION DE LETTRES DE SUICIDÉS
+Le tableau 2 détaille les informations démographiques dont nous disposons sur les annotateurs du projet.
+
+Genre                             Homme                          10 %
+Femme                          90 %
+Age                               Moyenne                       47,3 ans
+Écart type                    11,2 ans
+Extrêmes                     23–70 ans
+Niveau d’études                   Bac                            26 %
+Bac+2                          13 %
+Bac+3                          23 %
+Bac+5                          34 %
+Doctorat                        4%
+Connexion au suicide              Survivant d’une perte          70 %
+Prof. de la santé mentale      18 %
+Autre                          12 %
+Temps passé depuis le suicide     0-2 ans                        27 %
+3-5 ans                        25 %
+6-10 ans                       14 %
+11-15 ans                      13 %
+16+ ans                        12 %
+Relation au suicidé               Enfant                         31 %
+Frère/soeur                    23 %
+Époux ou partenaire            15 %
+Parent                          8%
+Autre parent                    9%
+Ami(e)                          5%
+TABLE 2 – Démographie des annotateurs
+3     Résultats
+
+3.1    Un corpus annoté unique, disponible pour la recherche
+
+Le corpus est composé de 1 319 lettres, ce qui correspond à un total de 146 739 mots. La longueur moyenne d’une lettre
+est de 102,4 mots et l’écart type est de 112,2 mots : certaines lettres sont très courtes, d’autres très longues. À notre
+connaissance, il s’agit de loin du plus gros corpus existant de lettres de suicidés écrites en anglais. À titre de comparaison,
+(Brevard et al., 1990) présente une étude de 20 lettres de suicidés et 20 lettres liées à une tentative de suicide, soit un
+total de 40 lettres. Les auteurs de (Joiner et al., 2002) ont utilisé le même nombre de lettres, alors que ceux de (O’Connor
+& Leenaars, 2004) ont eu accès à 30 lettres en provenance d’Irlande et 30 des États-Unis. En ce qui concerne l’anglais,
+l’étude la plus large à notre connaissance a concerné 224 lettres de 154 sujets (Ho et al., 1998). En ce qui concerne le
+français, 482 lettres en français ont été utilisées pour (Volant, 1990).
+3.2    Des systèmes créés, identifiant les émotions
+
+Une shared task a été organisée autour de ce corpus par le centre i2b2 (Informatics for Integrating Biology and the Bedside)
+aux États unis en 2011. Les participants ont mis au point des méthodes de TAL pour annoter les émotions exprimées dans
+les lettres. Cette shared task a regroupé 24 équipes, soit 106 scientifiques, en provenance d’Europe, d’Asie, et d’Amérique
+du nord. Ceux-ci ont présenté leurs résultats lors d’un atelier à la conférence annuelle de l’American Medical Informatics
+Association (Pestian et al., 2012b).
+Les performances s’étagent de 0,30 à 0,61 de F-mesure. Les actes de cette shared task ont été cités près de 60 fois au mo-
+ment où nous écrivons ces lignes (avril 2015). L’impact de ce corpus en termes d’applications, de produits commerciaux,
+d’articles de recherche ou de brevets reste cependant inconnu à ce jour.
+
+K. B RETONNEL C OHEN , J OHN P. P ESTIAN , K ARËN F ORT
+4     Discussion
+
+4.1    Des biais probables, difficiles à réduire
+
+Nous avons identifié un certain nombre de biais potentiels dans ce projet. Certains viennent des annotateurs, d’autres des
+chercheurs.
+En ce qui concerne les annotateurs, il est possible que les survivants d’une perte et que les professionnels de la santé
+mentale influent sur la tâche du fait de différents biais émotionnels et cognitifs.
+Ainsi, les survivants pourraient être inconsciemment motivés à trouver moins de preuves de souffrance et plus de joie
+dans les lettres de leurs parents. Les professionnels de la santé mentale pourraient eux être motivés à trouver davantage
+ou moins de preuves de l’issue fatale d’une maladie.
+Il a été noté dans (Olson, 2005) que les lettres de suicidés peuvent avoir pour but soit de réduire la souffrance des
+survivants en allégeant leur culpabilité soit, au contraire, à l’alourdir en les accusant. Il est possible que les survivants et
+les professionnels de la santé mentale annotent les lettres d’adieux à la vie de manière différente, du fait d’une tentative
+inconsciente des premiers à alléger leur propre souffrance.
+Nous n’avons malheureusement pas de réponse à ces questions, mais il est important d’avoir ces questions en tête lorsque
+l’on conçoit un tel projet d’annotation et lorsque l’on utilise le produit de ce projet.
+Ainsi, dans ce projet, des différences ont été observées entre les différents types d’annotateurs. Une analyse préliminaire
+suggère en effet que les volontaires non professionnels identifient un variété moindre d’émotions que les professionnels
+de la santé mentale.
+“We conjecture that part of this difference is due to psychological phenomenology. That is, each annota-
+tor has a psychological perspective that he/she brings to emotionally-charged data and this phenomenology
+causes a natural variation. [...] Whether our use of vested volunteers biased the interoperation, we are not
+sure. " (Pestian et al., 2012b)
+Il est également possible que les chercheurs eux-mêmes aient pu inconsciemment biaiser les résultats. Ainsi, un des
+membres du projet est lui-même un parent proche d’une personne qui s’est suicidée. Il est de ce fait difficile d’identifier
+clairement les biais introduits dans la conception et l’analyse du projet, mais la question mérite d’être posée.
+Quoi qu’il en soit, le travail en équipe participe à limiter ce type d’influence et à protéger le psychisme des uns et des
+autres, en leur permettant d’échanger sur leur ressenti et d’identifier ainsi plus facilement les biais qui en découlent.
+4.2    L’empathie en question
+
+Lire et annoter des lettres de suicidés n’est pas une tâche facile. Il est probable que pour la mener à bien les annotateurs
+doivent être amenés à faire appel à leur empathie, mais également à en réprimer une partie pour se protéger psychologi-
+quement.
+En théorie, cela ne devrait pas être différent d’autres situations où l’empathie est nécessaire, comme dans le cas de soins
+psychiatriques. Ainsi, (Capuzzi & Golden, 2013) souligne la nécessité d’une relation empathique entre le thérapeute et
+ses patients adolescents et (McLaughlin, 2007) insiste sur le rôle de l’empathie dans les réactions thérapeutiques face au
+comportement suicidaire. Cependant, dans le cas de cette campagne les annotateurs n’étaient pas formés à cela, ce qui a pu
+affecter leur capacité à gérer leurs sentiments et les effets secondaires de la campagne. Nous rappelons que les annotateurs
+pouvaient arrêter n’importe quand s’ils avaient des difficultés (cette option leur était rappelée) et que différentes options
+leur étaient proposées pour du soutien psychologique.
+Les chercheurs qui ont organisé la campagne ont également été touchés, voire bouleversés par leur contact avec ce corpus.
+De fait, les chercheurs les plus impliqués dans le projet ont l’obligation d’avoir un suivi psychiatrique ou religieux tous
+les trimestres. Par ailleurs, une rotation régulière du personnel a lieu entre les différents projets.
+
+22ème A NNOTATION DE LETTRES DE SUICIDÉS
+4.3     Des utilisations potentiellement dangereuses des données
+
+Les questions éthiques liées aux applications possibles d’un projet de recherche se posent sans doute dans tout le domaine
+informatique (Ermann et al., 1997; Friedman, 1997; Martin & Weltz, 1999), et il n’y a aucune raison de penser que le
+domaine du TAL fasse exception.
+Cependant, ce projet est particulier en ce qu’il touche à la mort et au respect de la volonté.
+Les conséquences de l’utilisation des technologies issues de ce corpus pourraient être particulièrement sévères, comme
+l’hospitalisation injustifiée, l’emprisonnement, etc. Il est en effet assez facile d’imaginer l’utilisation qui pourrait être faite
+de technologies issues de ce corpus par des gouvernements pour lesquels la psychiatrie serait un outil d’oppression des
+dissidents comme, à une certaine époque, l’Union soviétique, où l’abus de diagnostics psychiatriques était massif (British
+Medical Association, 1992).
+Les buts recherchés eux-mêmes posent question. En effet, est-ce qu’une intervention pour éviter un suicide ne porte pas
+atteinte au droit de mourir ? C’est une question connue des scientifiques travaillant (ou ayant travaillé) sur le sujet. Ainsi,
+Joiner remarque que les psychiatres avec qui il a travaillé « respectaient l’autonomie finale des personnes, y compris leur
+liberté de se donner la mort si c’était ce qu’elles souhaitaient vraiment » 6 (Joiner, 2009). L’un des chercheurs les plus
+connus du domaine (Edwin Shneidman) dit également «. . .vous me demandez, eh bien, combien de suicides vous voulez,
+je répondrais que je n’en veux aucun, mais je veux que la liberté de se suicider existe » 7 (Pestian, 2010).
+5      Conclusion
+Si nous considérons le corpus par rapport à la Charte Éthique et Big Data 8 (Couillault et al., 2014), nous constatons que
+les conditions de collecte et de distribution des données pour l’annotation sont en accord avec les suggestions éthiques
+sous-jacentes. La seule question en suspens est la section traitant des données liées aux contributeurs humains. Les trois
+sous-sections concernées sont les suivantes :
+— si un consentement a été demandé Dans notre cas, les annotateurs ont clairement consenti à ce que leurs annotations
+soient distribuées, mais ce n’est évidemment pas le cas pour les auteurs des lettres.
+— si une trace matérielle existe de ce consentement Le consentement des annotateurs a été obtenu par le biais d’une
+interaction électronique, suivie, lorsque le besoin s’en est fait sentir, de conversations téléphoniques ou d’échange
+de courriels.
+— la nature de l’information fournie afin que le consentement soit éclairé Les annotateurs ont reçu une information
+lors de la phase initiale de recrutement par courriel (pour ceux qui ont été recrutés directement), puis au cours de
+la phase de formation (pour tous les annotateurs).
+Nous avons présenté ici un certain nombre de questions éthiques liées à la construction d’un corpus de lettres de suicidés
+annoté en émotions. D’autres points pourraient encore être analysés, notamment en ce qui concerne l’expérience vécue
+par les annotateurs.
+Nous pensons qu’une des leçons les plus importantes à retenir de ce projet est que les participants en contact avec ce type
+de matériau doivent avoir accès à différents types de soutien. Ainsi, dans un travail mené actuellement sur les adolescents
+suicidaires, les transcripteurs se voient proposé un suivi.
+Enfin, la Charte Éthique et Big Data de ce corpus sera disponible prochainement.
+6. “understood people’s ultimate autonomy, including their freedom to occasion their own death if they really were committed to doing so".
+7. “. . .you say to me, well how many suicides do you want, and I say I don’t want any, but I want there to be the freedom to do it"
+8. Voir : http://wiki.ethique-big-data.org.
+
+K. B RETONNEL C OHEN , J OHN P. P ESTIAN , K ARËN F ORT
+Références
+BAUME P., C ANTOR C. H. & ROLFE A. (1997). Cybersuicide : the role of interactive suicide notes on the internet.
+Crisis : The Journal of Crisis Intervention and Suicide Prevention, 18(2), 73.
+B REVARD A., L ESTER D. & YANG B. (1990). A comparison of suicide notes written by suicide completers and suicide
+attempters. Crisis : The Journal of Crisis Intervention and Suicide Prevention.
+B RITISH M EDICAL A SSOCIATION (1992). Medicine betrayed : The participation of doctors in human rights abuses.
+Zed books.
+C APUZZI D. & G OLDEN L. (2013). Preventing adolescent suicide. Routledge.
+C HAMBERLAIN J., P OESIO M. & K RUSCHWITZ U. (2008). Phrase Detectives : a web-based collaborative annotation
+game. In Proceedings of the International Conference on Semantic Systems (I-Semantics’08).
+C OUILLAULT A., F ORT K., A DDA G. & D E M AZANCOURT H. (2014). Evaluating Corpora Documentation with
+regards to the Ethics and Big Data Charter. In International Conference on Language Resources and Evaluation (LREC),
+Reykjavik, Islande.
+C OUVET D., D EVICTOR V., J IGUET F. & J ULLIARD R. (2011). Scientific contributions of extensive biodiversity
+monitoring. C. R. Biologies, 334, 370–377.
+E RMANN M. D., W ILLIAMS M. B. & S HAUF M. S. (1997). Computers, ethics, and society. Oxford University Press.
+F ÉDÉRATION FRANÇAISE DE PSYCHIATRIE (2001). La crise suicidaire : reconnaître et prendre en charge. John Libbey
+Eurotext.
+F ORT K., A DDA G. & C OHEN K. B. (2011). Amazon Mechanical Turk : Gold mine or coal mine ? Computational
+Linguistics (editorial), 37(2), 413–420.
+F ORT K., G UILLAUME B. & C HASTANT H. (2014). Creating Zombilingo, a Game With A Purpose for dependency
+syntax annotation. In Gamification for Information Retrieval (GamifIR’14) Workshop, Amsterdam, Pays-Bas.
+F RIEDMAN B. (1997). Human values and the design of computer technology. Number 72. Cambridge University Press.
+G UPTA N., M ARTIN D., H ANRAHAN B. V. & O’N EILL J. (2014). Turk-life in india. In Proceedings of the 18th
+International Conference on Supporting Group Work, GROUP ’14, p. 1–11, New York, NY, USA : ACM.
+H O T., Y IP P. S., C HIU C. & H ALLIDAY P. (1998). Suicide notes : what do they tell us ? Acta Psychiatrica Scandina-
+vica, 98(6), 467–473.
+J OINER T. (2009). Why people die by suicide. Harvard University Press.
+J OINER T. E., P ETTIT J. W., WALKER R. L., VOELZ Z. R., C RUZ J., RUDD M. D. & L ESTER D. (2002). Perceived
+burdensomeness and suicidality : Two studies on the suicide notes of those attempting and those completing suicide.
+Journal of Social and Clinical Psychology, 21(5), 531–545.
+K RIPPENDORFF K. (1980). Content Analysis : An Introduction to Its Methodology, chapter 12. Sage : Beverly Hills,
+CA., USA.
+K RIPPENDORFF K. (2004). Content Analysis : An Introduction to Its Methodology, second edition, chapter 11. Sage :
+Thousand Oaks, CA., USA.
+L AFOURCADE M. & J OUBERT A. (2008). JeuxDeMots : un prototype ludique pour l’émergence de relations entre
+termes. In Journées internationales d’Analyse statistique des Données Textuelles (JADT), Lyon, France.
+L EENAARS A. A. (1988). Suicide notes : Predictive clues and patterns. New York : Human Sciences Press.
+M ARTIN C. D. & W ELTZ E. Y. (1999). From awareness to action : Integrating ethics and social responsibility into the
+computer science curriculum. ACM SIGCAS Computers and Society, 29(2), 6–14.
+M C L AUGHLIN C. (2007). Suicide-related behaviour : Understanding, caring and therapeutic responses. John Wiley &
+Sons.
+M ERRIAM -W EBSTER (consulté en avril 2015). Définition du terme Crowdsourcing.
+O LSON L. M. (2005). The use of suicide notes as an aid for understanding motive in completed suicides. PhD thesis,
+Department of Health Promotion and Education, University of Utah.
+O SGOOD C. E. & WALKER E. G. (1959). Motivation and language behavior : A content analysis of suicide notes. The
+Journal of Abnormal and Social Psychology, 59(1), 58.
+O’C ONNOR R. C. & L EENAARS A. A. (2004). A thematic comparison of suicide notes drawn from northern ireland
+and the united states. Current Psychology, 22(4), 339–347.
+
+22ème A NNOTATION DE LETTRES DE SUICIDÉS
+P ESTIAN J. (2010). A conversation with edwin shneidman. Suicide and Life-Threatening Behavior, 40(5), 516–523G.
+P ESTIAN J. P., M ATYKIEWICZ P. & L INN -G UST M. (2012a). What’s in a note : construction of a suicide note corpus.
+Biomedical informatics insights, 5, 1.
+P ESTIAN J. P., M ATYKIEWICZ P., L INN -G UST M., S OUTH B., U ZUNER O., W IEBE J., C OHEN K. B., H URDLE J.
+& B REW C. (2012b). Sentiment analysis of suicide notes : A shared task. Biomedical Informatics Insights, 5, 3–16.
+S AGOT B., F ORT K., A DDA G., M ARIANI J. & L ANG B. (2011). Un turc mécanique pour les ressources linguistiques :
+critique de la myriadisation du travail parcellisé. In Actes de Traitement Automatique des Langues Naturelles (TALN),
+Montpellier, France. 12 pages.
+S CHNEIDMAN E. S. (1981). Suicide notes and tragic lives. Suicide and Life-Threatening Behavior.
+S HNEIDMAN E. S. (1973). Suicide notes reconsidered. Psychiatry, 36(4), 379–394.
+S HNEIDMAN E. S. & FARBEROW N. L. (1957a). Clues to suicide, volume 56981. McGraw-Hill Companies.
+S HNEIDMAN E. S. & FARBEROW N. L. (1957b). Some comparisons between genuine and simulated suicide notes in
+terms of mowrer’s concepts of discomfort and relief. The Journal of general psychology, 56(2), 251–256.
+T UCKMAN J., K LEINER R. J. & L AVELL M. (1959). Emotional content of suicide notes. American Journal of Psy-
+chiatry, 116(1), 59–63.
+VOLANT É. (1990). Adieu, la vie... : étude des derniers messages laissés par des suicidés. Bellarmin.

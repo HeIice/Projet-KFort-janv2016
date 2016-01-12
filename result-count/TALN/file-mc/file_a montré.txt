@@ -1,1 +1,2 @@
-../articles/TALN/txt/eternal-2015-long-001.txt
+../articles/TALN/txt/eternal-2015-long-001-Maurel.txt
+../articles/TALN/txt/taln-2014-long-026-Fort.txt

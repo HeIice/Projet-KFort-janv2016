@@ -1,2 +1,2 @@
-../articles/TALN/txt/taln-1999-long-006.txt
-../articles/TALN/txt/taln-2001-long-009.txt
+../articles/TALN/txt/taln-1999-long-006-Maurel.txt
+../articles/TALN/txt/taln-2001-long-009-Maurel.txt

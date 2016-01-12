@@ -1,0 +1,2 @@
+../articles/TALN/txt/taln-2001-long-016-Maurel.txt
+../articles/TALN/txt/taln-2012-court-007-Fort.txt

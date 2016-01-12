@@ -1,0 +1,6 @@
+../articles/TALN/txt/taln-1999-long-006-Maurel.txt
+../articles/TALN/txt/taln-2001-long-009-Maurel.txt
+../articles/TALN/txt/taln-2001-long-016-Maurel.txt
+../articles/TALN/txt/taln-2011-long-012-Fort.txt
+../articles/TALN/txt/taln-2012-long-008-Fort.txt
+../articles/TALN/txt/taln-2013-court-016-Fort.txt

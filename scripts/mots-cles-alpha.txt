@@ -1,0 +1,66 @@
+[0-9][., ]\\+conclusion
+[0-9][., ]\\+résultat
+accord
+accord inter-annotateur
+accord observé
+a comparé
+a généré
+a montré
+a été montré
+a été évalué
+a évalué
+avons comparé
+avons montré
+avons pu comparer
+avons pu démontrer
+avons pu montrer
+avons évalué
+biais
+bilan
+bruit
+comparant avec
+compare
+comparer
+comparons
+compar.* résultats 
+conclure
+conclusion
+démontre
+démontrer
+démontrons
+est montré
+est évalué
+exactitude
+faussé
+fiabilité
+f-mesure
+génér*
+génèr*
+inter-annotateur
+mesure
+mesure d'\"'\"'évaluation
+montre
+montrer
+montrons
+obten*
+obtenir
+obtenons
+obtient
+ont généré
+précision
+précision de
+rappel
+rappel de
+récapitulatif
+réduction
+réduction de
+remarqu*
+remarquer
+résultat
+résumé
+score
+silence
+évaluation
+évalue
+évaluer
+évaluons

@@ -1,0 +1,2 @@
+../articles/TALN/txt/taln-2006-long-021-Maurel.txt
+../articles/TALN/txt/taln-2010-court-034-Maurel.txt
