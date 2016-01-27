@@ -1,4 +1,6 @@
 conclusion
+reconnaî*
+ANR
 [0-9][., ]\\+conclusion
 [0-9][., ]\\+résultat
 conclure
@@ -36,6 +38,11 @@ mesure
 f-mesure
 évaluation
 mesure d'\"'\"'évaluation
+amen*
+envisag*
+remarqu*
+génér*
+génèr*
 accord
 accord observé
 accord inter-annotateur
@@ -64,3 +71,9 @@ obtient
 obtenons
 obten*
 a généré
+comparaison
+performances
+réduction
+presque
+concernant
+respectivement

@@ -4,37 +4,48 @@ accord
 accord inter-annotateur
 accord observé
 a comparé
-a généré
-a montré
-a été montré
 a été évalué
+a été montré
 a évalué
+a généré
+amen*
+a montré
+ANR
 avons comparé
+avons évalué
 avons montré
 avons pu comparer
 avons pu démontrer
 avons pu montrer
-avons évalué
 biais
 bilan
 bruit
+comparaison
 comparant avec
 compare
 comparer
 comparons
 compar.* résultats 
+concernant
 conclure
 conclusion
 démontre
 démontrer
 démontrons
-est montré
+envisag*
 est évalué
+est montré
+évaluation
+évalue
+évaluer
+évaluons
 exactitude
 faussé
 fiabilité
 f-mesure
 génér*
+génér*
+génèr*
 génèr*
 inter-annotateur
 mesure
@@ -47,20 +58,22 @@ obtenir
 obtenons
 obtient
 ont généré
+performances
 précision
 précision de
+presque
 rappel
 rappel de
 récapitulatif
+reconnaî*
+réduction
 réduction
 réduction de
 remarqu*
+remarqu*
 remarquer
+respectivement
 résultat
 résumé
 score
 silence
-évaluation
-évalue
-évaluer
-évaluons

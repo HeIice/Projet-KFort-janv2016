@@ -1,0 +1,32 @@
+#Unigraph
+SIZE 1188 840
+FONT Times New Roman:  10
+OFONT Arial Unicode MS:B 12
+BCOLOR 16777215
+FCOLOR 0
+ACOLOR 13487565
+SCOLOR 16711680
+CCOLOR 255
+DBOXES y
+DFRAME n
+DDATE n
+DFILE n
+DDIR n
+DRIG n
+DRST n
+FITS 100
+PORIENT L
+#
+12
+"<E>/<RésultatPourcentage>" 23 177 3 5 8 6 
+"" 859 143 0 
+"%" 518 152 1 4 
+"<V>" 291 35 1 7 
+"<WORD>" 594 143 3 4 11 10 
+"{S}" 53 86 1 6 
+"<WORD>" 123 60 4 3 6 7 8 
+"<NB>" 382 111 1 2 
+"<NB>" 154 167 2 9 2 
+"<TOKEN>" 241 127 1 7 
+"{S}" 698 69 1 11 
+"<E>/<RésultatPourcentage>" 736 149 1 1 

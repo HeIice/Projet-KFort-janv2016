@@ -1,0 +1,32 @@
+#Unigraph
+SIZE 1188 840
+FONT Times New Roman:  10
+OFONT Arial Unicode MS:B 12
+BCOLOR 16777215
+FCOLOR 0
+ACOLOR 13487565
+SCOLOR 16711680
+CCOLOR 255
+DBOXES y
+DFRAME n
+DDATE n
+DFILE n
+DDIR n
+DRIG n
+DRST n
+FITS 100
+PORIENT L
+#
+12
+"<E>/<Titre_figure>" 44 168 1 10 
+"" 692 171 0 
+"Figure+FIGURE+Fig." 180 95 1 8 
+"Table+TABLE+Tableau" 161 237 1 8 
+"\:" 310 96 1 6 
+"-" 302 236 1 6 
+"<TOKEN>" 439 170 2 9 6 
+"<E>/</Titre_figure>" 592 168 1 1 
+"<NB>" 250 161 3 4 5 11 
+"{S}+." 544 165 1 7 
+"{S}" 96 168 2 2 3 
+"." 339 169 1 6 

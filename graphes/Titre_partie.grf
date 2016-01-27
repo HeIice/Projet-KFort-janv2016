@@ -1,0 +1,29 @@
+#Unigraph
+SIZE 1188 840
+FONT Times New Roman:  10
+OFONT Arial Unicode MS:B 12
+BCOLOR 16777215
+FCOLOR 0
+ACOLOR 13487565
+SCOLOR 16711680
+CCOLOR 255
+DBOXES y
+DFRAME n
+DDATE n
+DFILE n
+DDIR n
+DRIG n
+DRST n
+FITS 100
+PORIENT L
+#
+9
+"<E>" 70 200 1 5 
+"" 536 206 0 
+"1+2+3+4+5+6+7+8+9/<Titre_Partie>" 138 198 1 3 
+"." 178 199 1 6 
+"<E>/</Titre_Partie>" 471 206 1 1 
+"{S}" 96 199 1 2 
+"{S}" 220 203 1 8 
+"{S}" 398 207 1 4 
+":nbTok" 301 204 1 7 
