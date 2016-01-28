@@ -18,10 +18,10 @@ FITS 100
 PORIENT L
 #
 7
-"<E>" 150 192 1 5 
-"" 808 199 0 
-":adverbes-cles" 480 194 1 6 
-":noms-verbes-cles" 456 98 1 6 
-":constructions-cles" 482 287 1 6 
-"<E>/<mot-cle>" 214 149 3 3 2 4 
-"<E>/</mot-cle>" 739 176 1 1 
+"<E>" 70 200 1 4 
+"" 908 212 0 
+":mots-cles" 514 371 2 3 6 
+"<TOKEN>" 617 422 2 3 6 
+"{S}" 269 209 2 5 2 
+"<TOKEN>" 396 372 2 2 5 
+"{S}" 736 295 1 1 
