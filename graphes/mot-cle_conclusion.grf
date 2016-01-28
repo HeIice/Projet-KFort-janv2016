@@ -1,5 +1,5 @@
 #Unigraph
-SIZE 1188 840
+SIZE 1458 840
 FONT Times New Roman:  10
 OFONT Arial Unicode MS:B 12
 BCOLOR 16777215
@@ -18,10 +18,10 @@ FITS 100
 PORIENT L
 #
 7
-"<E>" 70 200 1 4 
-"" 908 212 0 
-":mots-cles" 514 371 2 3 6 
-"<WORD>+<PNC>" 617 422 2 3 6 
-"{S}" 269 209 2 5 2 
-"<TOKEN>" 396 372 2 2 5 
-"{S}" 736 295 1 1 
+"<E>" 70 200 1 2 
+"" 991 172 0 
+"conclusion" 389 279 1 4 
+":mots-cles" 684 136 2 3 5 
+"<TOKEN>" 509 272 2 3 4 
+"<TOKEN>" 799 286 2 5 6 
+"{S}" 942 286 1 1 
